@@ -1,0 +1,29 @@
+
+@import "node_modules/sweetalert/dist/sweetalert";
+@import "_variables";
+
+html {box-sizing:border-box; position:relative;	font-size:100%; -webkit-tap-highlight-color:transparent;}
+*, :after, :before {box-sizing:inherit;}
+body,div,form,h1,input,li,p,ul {padding:0; margin:0}
+input,textarea {font-family:inherit; font-size:inherit;}
+
+[v-cloak] { display: none; }
+
+html, body, .layout, .page {height: 100%;}
+
+body {background: $back-color; font: 1em/1.4 "Helvetica Neue", sans-serif;}
+
+.page {display: flex; flex-direction: column;}
+
+.header, .footer {position: fixed; z-index: 1; width: 100%; min-height: 55px; background: $dark-color;}
+
+.content {margin: 55px 0; overflow-y: scroll; -webkit-overflow-scrolling: touch;}
+
+.footer {bottom: 0; text-align: center;}
+.footer__link {display: block; line-height: 35px; padding: 10px; color: #FFF; text-decoration: none;}
+
+@media (min-width:800px) {
+	.layout {max-width: 420px; height: 90vh; margin: 5vh auto; border: 10px solid #000; border-radius: 10px;}
+	.header, .footer {width: auto; position: relative;}
+	.content {margin: 0;}
+}
