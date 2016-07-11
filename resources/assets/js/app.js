@@ -23,7 +23,7 @@ var vm = new Vue({
 
 		completedItems: function() {
 			return this.items.filter(function(item) {
-				return item.completed;
+				return item.done;
 			});
 		}
 	},

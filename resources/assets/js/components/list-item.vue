@@ -1,9 +1,9 @@
 <template>
 	<ul class="list">
-		<li :class="{'item': true, 'item--completed': item.completed}" v-for="item in items | orderBy 'completed' 'name'" track-by="id">
+		<li :class="{'item': true, 'item--done': item.done}" v-for="item in items | orderBy 'done' 'name'" track-by="id">
 			<span class="item__name">{{item.name}}</span>
 			<label class="item__toggle" v-show="onLine">
-				<input class="item__checkbox" type="checkbox" v-model="item.completed">
+				<input class="item__checkbox" type="checkbox" v-model="item.done">
 				<div class="item__indicator"></div>
 			</label>
 		</li>
@@ -29,7 +29,7 @@
 
 				if (this.onLine) {
 
-					var resource = this.$resource('api/v1/lists{/list}/items{/id}');
+					var resource = this.$resource('api/v1/items{/id}');
 
 					resource.get({'list': '123'}).then((response) => {
 						this.$set('items', response.json())
@@ -51,7 +51,7 @@
 
 	.list {list-style: none;}
 	.item {display: flex; align-items: center; background: #FFF; margin: 5px; border-radius: 5px; user-select: none;}
-	.item--completed {background: darken($back-color, 7);}
+	.item--done {background: darken($back-color, 7);}
 	.item__name {flex: 1; padding: 10px;}
 	.item__toggle {display: block; position: relative; padding-left: 15px; cursor: pointer;	font-size: 18px;}
 	.item__checkbox {opacity: 0;}
