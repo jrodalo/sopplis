@@ -15,7 +15,24 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
     return [
         'name' => $faker->name,
         'email' => $faker->safeEmail,
-        'password' => bcrypt(str_random(10)),
-        'remember_token' => str_random(10),
+    ];
+});
+
+$factory->define(App\Cart::class, function (Faker\Generator $faker) {
+    return [
+        'name' => $faker->name,
+        'slug' => str_random(10),
+    ];
+});
+
+$factory->define(App\Item::class, function (Faker\Generator $faker) {
+    return [
+    	'cart_id' => function () {
+            return factory(App\Cart::class)->create()->id;
+        },
+        'name' => $faker->name,
+        'count' => $faker->numberBetween(1,100),
+        'visible' => $faker->numberBetween(0,1),
+        'done' => $faker->numberBetween(0,1),
     ];
 });

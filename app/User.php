@@ -23,4 +23,13 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    /**
+     * The carts that belong to the user.
+     */
+    public function carts()
+    {
+        return $this->belongsToMany('App\Cart');
+    }
+
 }
