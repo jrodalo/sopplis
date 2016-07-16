@@ -146,4 +146,28 @@ class ItemTest extends TestCase
                  'name' => 'test',
             ]);
     }
+
+    public function test_un_producto_es_favorito_cuando_se_ha_comprado_mas_de_dos_veces()
+    {
+        $user = factory(App\User::class)->create();
+        $cart = factory(App\Cart::class)->create();
+        $cart->users()->attach($user);
+        $item = factory(App\Item::class)->create([
+            'cart_id' => $cart->id,
+            'name' => 'test normal',
+            'count' => 2,
+        ]);
+        $item = factory(App\Item::class)->create([
+            'cart_id' => $cart->id,
+            'name' => 'test fav',
+            'count' => 3,
+        ]);
+
+        $this->actingAs($user)
+             ->json('GET', "/api/v1/lists/$cart->id/items", ['favorite' => true])
+             ->assertResponseOk()
+             ->dontSeeJson([
+                 'name' => 'test normal',
+            ]);
+    }
 }

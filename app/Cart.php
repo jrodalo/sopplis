@@ -29,7 +29,7 @@ class Cart extends Model
      */
     public function scopeVisibleItems()
     {
-        return $this->items()->where('visible', true);
+        return $this->items()->where('visible', true)->orderBy('done', 'asc')->orderBy('name', 'asc');
     }
 
     /**
@@ -37,7 +37,7 @@ class Cart extends Model
      */
     public function scopeFavoriteItems()
     {
-        return $this->items()->where('count', '>', 2);
+        return $this->items()->where('count', '>', 2)->orderBy('name', 'asc');
     }
 
     /**
