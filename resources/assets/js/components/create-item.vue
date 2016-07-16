@@ -4,6 +4,7 @@
 					autofocus
 					autocomplete="off"
 					placeholder="¿Qué necesitas comprar?"
+					maxlength="100"
 					v-model="newItem">
 		<i class="form__menu">☰</i>
 	</form>
@@ -34,18 +35,16 @@
 				var value = this.newItem && this.newItem.trim();
 				if (!value) { return; }
 
-				var parts = value.split(',');
+				var resource = this.$resource('api/v1/lists/12/items');
+				var self = this;
 
-				for (var i = 0; i < parts.length; i++) {
-
-					var item = { 'id': new Date().getTime(), 'name': parts[i], 'completed': false };
-
-					this.items.push(item);
-				}
-
-				this.newItem = '';
-
-				localStorage.setItem('SOPPLIS_ITEMS', JSON.stringify(this.items));
+				resource.save({name: value}).then((response) => {
+					self.items.push(response.json().item);
+					self.newItem = '';
+					localStorage.setItem('SOPPLIS_ITEMS', JSON.stringify(self.items));
+				}, (response) => {
+					console.log('error' + response);
+				});
 			}
 		}
 

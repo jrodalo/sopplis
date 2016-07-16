@@ -3,7 +3,7 @@
 		<li :class="{'item': true, 'item--done': item.done}" v-for="item in items | orderBy 'done' 'name'" track-by="id">
 			<span class="item__name">{{item.name}}</span>
 			<label class="item__toggle" v-show="onLine">
-				<input class="item__checkbox" type="checkbox" v-model="item.done">
+				<input class="item__checkbox" type="checkbox" v-model="item.done" v-on:click="toggleItem(item)">
 				<div class="item__indicator"></div>
 			</label>
 		</li>
@@ -29,16 +29,30 @@
 
 				if (this.onLine) {
 
-					var resource = this.$resource('api/v1/items{/id}');
+					var resource = this.$resource('api/v1/lists/12/items{/id}');
 
-					resource.get({'list': '123'}).then((response) => {
-						this.$set('items', response.json())
+					resource.get().then((response) => {
+						this.$set('items', response.json().items);
 						localStorage.setItem('SOPPLIS_ITEMS', JSON.stringify(this.items));
-					});
+					}, (response) => {
+          				sweetAlert('Oops...', 'No he podido leer la lista... vuelve a intentarlo :(', 'error');
+          				this.$set('items',  JSON.parse(localStorage.getItem('SOPPLIS_ITEMS')));
+      				});
 
 				} else {
 					this.$set('items',  JSON.parse(localStorage.getItem('SOPPLIS_ITEMS')));
 				}
+			},
+
+			toggleItem: function(item) {
+
+				var resource = this.$resource('api/v1/lists/12/items{/id}');
+
+				resource.update({id: item.id}, {done: ! item.done}).then((response) => {
+					console.log(response.ok);
+				}, (response) => {
+					console.log('error' + response);
+				});
 			}
 		}
 	};

@@ -15,6 +15,7 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
     return [
         'name' => $faker->name,
         'email' => $faker->safeEmail,
+        'api_token' => str_random(60),
     ];
 });
 
@@ -27,9 +28,6 @@ $factory->define(App\Cart::class, function (Faker\Generator $faker) {
 
 $factory->define(App\Item::class, function (Faker\Generator $faker) {
     return [
-    	'cart_id' => function () {
-            return factory(App\Cart::class)->create()->id;
-        },
         'name' => $faker->name,
         'count' => $faker->numberBetween(1,100),
         'visible' => $faker->numberBetween(0,1),

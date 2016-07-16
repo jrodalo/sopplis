@@ -4,6 +4,7 @@ import SweetAlert from 'sweetalert';
 
 Vue.use(VueResource);
 Vue.http.headers.common['X-CSRF-TOKEN'] = document.querySelector('#token').getAttribute('content');
+Vue.http.headers.common['Authorization'] = 'Bearer JQPR5gg6KSIKNFv3NyvUwKzEvSc7m6jNidRzViXmt6qsO9xR9SeDbGl2abY9';
 
 var vm = new Vue({
 

@@ -12,24 +12,13 @@ Route::get('cache.manifest', function() {
 });
 
 
-Route::get('/{list_slug}', function ($list_slug) {
-    return view('list')->with('list_slug', $list_slug);
+Route::group(['middleware' => ['api'], 'prefix' => 'api/v1'], function () {
+    Route::get('lists/{cart}/items', 'ItemController@index');
+    Route::post('lists/{cart}/items', 'ItemController@store');
+    Route::put('lists/{cart}/items/{item}', 'ItemController@update');
 });
 
 
-Route::get('/api/v1/lists/{list_slug}/items', function($list_slug) {
-	return [
-		['id' => 1, 'name' => 'tomates', 'completed' => false],
-		['id' => 2, 'name' => 'leche', 'completed' => false],
-		['id' => 3, 'name' => 'yogures', 'completed' => false],
-		['id' => 4, 'name' => 'galletas de chocolate', 'completed' => false],
-		['id' => 5, 'name' => 'cepillo de dientes', 'completed' => false],
-		['id' => 6, 'name' => 'helados', 'completed' => false],
-		['id' => 7, 'name' => 'aceite', 'completed' => false],
-		['id' => 8, 'name' => 'aguacates', 'completed' => false],
-		['id' => 9, 'name' => 'kiwis', 'completed' => false],
-		['id' => 10, 'name' => 'agua', 'completed' => false],
-		['id' => 11, 'name' => 'plátanos', 'completed' => false],
-		['id' => 12, 'name' => 'papas', 'completed' => true]
-	];
+Route::get('/{list_slug}', function ($list_slug) {
+    return view('list')->with('list_slug', $list_slug);
 });
