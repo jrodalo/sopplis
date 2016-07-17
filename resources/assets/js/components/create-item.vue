@@ -35,11 +35,13 @@
 				var value = this.newItem && this.newItem.trim();
 				if (!value) { return; }
 
-				var resource = this.$resource('api/v1/lists/12/items');
+				var slug = document.querySelector('#slug').getAttribute('content');
+				var resource = this.$resource('api/v1/lists/' + slug + '/items');
 				var self = this;
 
 				resource.save({name: value}).then((response) => {
-					self.items.push(response.json().item);
+					this.$get('items').push(response.json().item);
+					//self.items.push(response.json().item);
 					self.newItem = '';
 					localStorage.setItem('SOPPLIS_ITEMS', JSON.stringify(self.items));
 				}, (response) => {

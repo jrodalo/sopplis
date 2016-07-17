@@ -27,31 +27,35 @@
 
 			loadItems: function() {
 
-				if (this.onLine) {
-
-					var resource = this.$resource('api/v1/lists/12/items{/id}');
-
-					resource.get().then((response) => {
-						this.$set('items', response.json().items);
-						localStorage.setItem('SOPPLIS_ITEMS', JSON.stringify(this.items));
-					}, (response) => {
-          				sweetAlert('Oops...', 'No he podido leer la lista... vuelve a intentarlo :(', 'error');
-          				this.$set('items',  JSON.parse(localStorage.getItem('SOPPLIS_ITEMS')));
-      				});
-
-				} else {
+				if ( ! this.onLine) {
 					this.$set('items',  JSON.parse(localStorage.getItem('SOPPLIS_ITEMS')));
 				}
+
+				var slug = document.querySelector('#slug').getAttribute('content');
+				var resource = this.$resource('api/v1/lists/' + slug + '/items{/id}');
+
+				resource.get().then((response) => {
+
+					if (response.ok) {
+						this.$set('items', response.json().items);
+						localStorage.setItem('SOPPLIS_ITEMS', JSON.stringify(this.items));
+					}
+
+				}, (response) => {
+      				sweetAlert('Oops...', 'No he podido leer la lista... vuelve a intentarlo :(', 'error');
+      				this.$set('items',  JSON.parse(localStorage.getItem('SOPPLIS_ITEMS')));
+  				});
 			},
 
 			toggleItem: function(item) {
 
-				var resource = this.$resource('api/v1/lists/12/items{/id}');
+				var slug = document.querySelector('#slug').getAttribute('content');
+				var resource = this.$resource('api/v1/lists/' + slug + '/items{/id}');
 
 				resource.update({id: item.id}, {done: ! item.done}).then((response) => {
-					console.log(response.ok);
+
 				}, (response) => {
-					console.log('error' + response);
+
 				});
 			}
 		}
