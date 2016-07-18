@@ -9,6 +9,7 @@
     <meta name="_list" content="{{ $list_slug }}" id="slug">
     <link rel="stylesheet" type="text/css" href="css/app.css">
     <link rel="shortcut icon" href="favicon.png">
+    <link rel="apple-touch-icon" href="favicon-touch.png">
     <title>Sopplis</title>
 </head>
 <body>
