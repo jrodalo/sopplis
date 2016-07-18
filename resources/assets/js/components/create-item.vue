@@ -1,7 +1,6 @@
 <template>
 	<form class="form" v-on:submit.prevent="addItem" v-show="onLine">
 		<input class="form__input"
-					autofocus
 					autocomplete="off"
 					placeholder="¿Qué necesitas comprar?"
 					maxlength="100"
