@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "sweetalert": "^1.1.3",
-    "vue-resource": "^0.9.3"
+    "vue-resource": "^0.9.3",
+    "vue-router": "^0.7.13"
   }
 }

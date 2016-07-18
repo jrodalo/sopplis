@@ -17,6 +17,7 @@
 	export default {
 
 		props: {
+			slug: { required: true },
 			items: { required: true, type: Array },
 			onLine: { required: true, type: Boolean}
 		},
@@ -34,8 +35,7 @@
 				var value = this.newItem && this.newItem.trim();
 				if (!value) { return; }
 
-				var slug = document.querySelector('#slug').getAttribute('content');
-				var resource = this.$resource('api/v1/lists/' + slug + '/items');
+				var resource = this.$resource('/api/v1/lists/' + this.slug + '/items');
 				var self = this;
 
 				resource.save({name: value}).then((response) => {

@@ -15,6 +15,7 @@
 	export default {
 
 		props: {
+			slug: { required: true },
 			items: { required: true, type: Array },
 			onLine: { required: true, type: Boolean }
 		},
@@ -28,29 +29,27 @@
 			loadItems: function() {
 
 				if ( ! this.onLine) {
-					this.$set('items',  JSON.parse(localStorage.getItem('SOPPLIS_ITEMS')));
+					this.$set('items',  JSON.parse(localStorage.getItem('SOPPLIS_ITEMS_' + this.slug)));
 				}
 
-				var slug = document.querySelector('#slug').getAttribute('content');
-				var resource = this.$resource('api/v1/lists/' + slug + '/items{/id}');
+				var resource = this.$resource('/api/v1/lists/' + this.slug + '/items{/id}');
 
 				resource.get().then((response) => {
 
 					if (response.ok) {
 						this.$set('items', response.json().items);
-						localStorage.setItem('SOPPLIS_ITEMS', JSON.stringify(this.items));
+						localStorage.setItem('SOPPLIS_ITEMS_' + this.slug, JSON.stringify(this.items));
 					}
 
 				}, (response) => {
       				sweetAlert('Oops...', 'No he podido leer la lista... vuelve a intentarlo :(', 'error');
-      				this.$set('items',  JSON.parse(localStorage.getItem('SOPPLIS_ITEMS')));
+      				this.$set('items',  JSON.parse(localStorage.getItem('SOPPLIS_ITEMS_' + this.slug)));
   				});
 			},
 
 			toggleItem: function(item) {
 
-				var slug = document.querySelector('#slug').getAttribute('content');
-				var resource = this.$resource('api/v1/lists/' + slug + '/items{/id}');
+				var resource = this.$resource('/api/v1/lists/' + this.slug + '/items{/id}');
 
 				resource.update({id: item.id}, {done: ! item.done}).then((response) => {
 
