@@ -17,7 +17,7 @@ class ItemTest extends TestCase
             'visible' => true,
         ]);
 
-        $this->json('GET', "/api/v1/lists/$cart->id/items")
+        $this->json('GET', "/api/v1/lists/$cart->slug/items")
              ->assertResponseStatus(401);
     }
 
@@ -33,7 +33,7 @@ class ItemTest extends TestCase
         ]);
 
         $this->actingAs($user)
-             ->json('GET', "/api/v1/lists/$cart->id/items")
+             ->json('GET', "/api/v1/lists/$cart->slug/items")
              ->assertResponseOk()
              ->seeJson([
                  'name' => 'test',
@@ -53,7 +53,7 @@ class ItemTest extends TestCase
         ]);
 
         $this->actingAs($other_user)
-             ->json('GET', "/api/v1/lists/$cart->id/items")
+             ->json('GET', "/api/v1/lists/$cart->slug/items")
              ->assertResponseStatus(403)
              ->dontSeeJson([
                  'name' => 'test',
@@ -67,7 +67,7 @@ class ItemTest extends TestCase
         $cart->users()->attach($user);
 
     	$this->actingAs($user)
-             ->post("/api/v1/lists/$cart->id/items", ['name' => 'test'])
+             ->post("/api/v1/lists/$cart->slug/items", ['name' => 'test'])
              ->assertResponseOk()
              ->seeJson([
                  'success' => true,
@@ -82,7 +82,7 @@ class ItemTest extends TestCase
         $cart->users()->attach($user);
 
         $this->actingAs($other_user)
-             ->post("/api/v1/lists/$cart->id/items", ['name' => 'test'])
+             ->post("/api/v1/lists/$cart->slug/items", ['name' => 'test'])
              ->assertResponseStatus(403);
     }
 
@@ -99,7 +99,7 @@ class ItemTest extends TestCase
         ]);
 
         $this->actingAs($user)
-             ->json('PUT', "/api/v1/lists/$cart->id/items/$item->id", ['done' => true])
+             ->json('PUT', "/api/v1/lists/$cart->slug/items/$item->id", ['done' => true])
              ->assertResponseOk()
              ->seeJson([
                  'success' => true,
@@ -121,7 +121,7 @@ class ItemTest extends TestCase
         ]);
 
         $this->actingAs($other_user)
-             ->json('PUT', "/api/v1/lists/$cart->id/items/$item->id", ['done' => true])
+             ->json('PUT', "/api/v1/lists/$cart->slug/items/$item->id", ['done' => true])
              ->assertResponseStatus(403)
              ->seeJson([
                  'success' => false,
@@ -140,7 +140,7 @@ class ItemTest extends TestCase
         ]);
 
         $this->actingAs($user)
-             ->json('GET', "/api/v1/lists/$cart->id/items")
+             ->json('GET', "/api/v1/lists/$cart->slug/items")
              ->assertResponseOk()
              ->dontSeeJson([
                  'name' => 'test',
@@ -164,7 +164,7 @@ class ItemTest extends TestCase
         ]);
 
         $this->actingAs($user)
-             ->json('GET', "/api/v1/lists/$cart->id/items", ['favorite' => true])
+             ->json('GET', "/api/v1/lists/$cart->slug/items", ['favorite' => true])
              ->assertResponseOk()
              ->dontSeeJson([
                  'name' => 'test normal',
