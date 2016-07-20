@@ -30,7 +30,7 @@ class Cart extends Model
      */
     public function isVisibleBy(User $user)
     {
-        return $this->users()->where('id', $user->id)->count() > 0;
+        return $this->users()->where('id', $user->id)->exists();
     }
 
     /**
