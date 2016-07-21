@@ -2,13 +2,16 @@
 
 	<section id="lists" class="page">
 		<header class="header">
-			listas
+			<div class="header__content">
+				<h1 class="header__title">Mis listas</h1>
+				<a href="#" class="header__button">+</a>
+			</div>
 		</header>
 
-		<div class="content">
+		<div :class="{'content': true, 'content--loading': $loadingRouteData}">
 			<ul class="list">
 				<li v-for="list in lists" class="item">
-					<a v-link="{ name: 'items', params: { slug: list.slug }}">{{ list.name }}</a>
+					<a v-link="{ name: 'items', params: { slug: list.slug, name: list.name }}">{{ list.name }}</a>
 				</li>
 			</ul>
 		</div>
@@ -26,6 +29,27 @@
 
 	export default {
 
+		route: {
+
+			data: function (transition) {
+
+				return this.$http.get('/api/v1/lists/').then((response) => {
+
+					return {
+						lists: response.json().lists
+					};
+
+				}, (response) => {
+					sweetAlert('Oops...', 'No he podido leer tus listas... vuelve a intentarlo :(', 'error');
+
+					return {
+						lists: JSON.parse(localStorage.getItem('SOPPLIS_LISTS'))
+					};
+
+				});
+			}
+		},
+
 		data: function() {
 			return {
 				lists: [],
@@ -33,16 +57,10 @@
 			}
 		},
 
-		components: {
-
-		},
-
-		computed: {
-
-		},
-
-		methods: {
-
+		watch: {
+			lists: function(lists) {
+				localStorage.setItem('SOPPLIS_LISTS', JSON.stringify(lists));
+			}
 		},
 
 		created: function() {
@@ -53,21 +71,6 @@
 			window.addEventListener('offline',  function(){
 			    vm.onLine = false;
 			});
-
-
-			var resource = this.$resource('/api/v1/lists/');
-
-			resource.get().then((response) => {
-
-				if (response.ok) {
-					this.$set('lists', response.json().lists);
-					localStorage.setItem('SOPPLIS_LISTS', JSON.stringify(this.lists));
-				}
-
-			}, (response) => {
-  				sweetAlert('Oops...', 'No he podido leer la lista... vuelve a intentarlo :(', 'error');
-  				this.$set('lists',  JSON.parse(localStorage.getItem('SOPPLIS_LISTS')));
-				});
 		}
 	};
 

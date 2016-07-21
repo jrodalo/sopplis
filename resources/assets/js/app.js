@@ -11,8 +11,7 @@ Vue.http.headers.common['Authorization'] = 'Bearer JQPR5gg6KSIKNFv3NyvUwKzEvSc7m
 var App = Vue.extend({});
 
 var router = new VueRouter({
-	history: true,
-	hashbang: false
+	history: true
 });
 
 router.map({

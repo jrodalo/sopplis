@@ -20,32 +20,7 @@
 			onLine: { required: true, type: Boolean }
 		},
 
-		ready: function () {
-			this.loadItems();
-		},
-
 		methods: {
-
-			loadItems: function() {
-
-				if ( ! this.onLine) {
-					this.$set('items',  JSON.parse(localStorage.getItem('SOPPLIS_ITEMS_' + this.slug)));
-				}
-
-				var resource = this.$resource('/api/v1/lists/' + this.slug + '/items{/id}');
-
-				resource.get().then((response) => {
-
-					if (response.ok) {
-						this.$set('items', response.json().items);
-						localStorage.setItem('SOPPLIS_ITEMS_' + this.slug, JSON.stringify(this.items));
-					}
-
-				}, (response) => {
-      				sweetAlert('Oops...', 'No he podido leer la lista... vuelve a intentarlo :(', 'error');
-      				this.$set('items',  JSON.parse(localStorage.getItem('SOPPLIS_ITEMS_' + this.slug)));
-  				});
-			},
 
 			toggleItem: function(item) {
 

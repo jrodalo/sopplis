@@ -2,10 +2,11 @@
 
 	<section id="active-items" class="page">
 		<header class="header">
-			<create-item :slug="slug" :items.sync="items" :on-line="onLine"></create-item>
+			<create-item :slug="slug" :items.sync="items" v-if="onLine"></create-item>
+			<h1 class="header__title" v-else>No hay conexión a internet :(</h1>
 		</header>
 
-		<div class="content">
+		<div :class="{'content': true, 'content--loading': $loadingRouteData}">
 			<list-item :slug="slug" :items.sync="items" :on-line="onLine"></list-item>
 		</div>
 
@@ -22,11 +23,38 @@
 
 	export default {
 
+		route: {
+
+			data: function (transition) {
+
+				return this.$http.get('/api/v1/lists/' + this.$route.params.slug + '/items').then((response) => {
+
+					return {
+						items: response.json().items
+					};
+
+				}, (response) => {
+					sweetAlert('Oops...', 'No he podido leer tu lista... vuelve a intentarlo :(', 'error');
+
+					return {
+						items: JSON.parse(localStorage.getItem('SOPPLIS_ITEMS_' + this.$route.params.slug))
+					};
+
+				});
+			}
+		},
+
 		data: function() {
 			return {
 				items: [],
 				onLine: navigator.onLine,
 				slug: this.$route.params.slug
+			}
+		},
+
+		watch: {
+			items: function(items) {
+				localStorage.setItem('SOPPLIS_ITEMS_' + this.$route.params.slug, JSON.stringify(items));
 			}
 		},
 

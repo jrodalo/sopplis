@@ -15,12 +15,16 @@ body {background: $back-color; color: #242424; font: 1em/1.4 -apple-system, Blin
 
 .page {display: flex; flex-direction: column;}
 
-.header, .footer {position: fixed; z-index: 1; width: 100%; min-height: 55px; background: $dark-color;}
+.header, .footer {position: fixed; z-index: 1; width: 100%; background: $dark-color;}
+.header__title {flex: 1; color: #FFF; text-align: center; font-size: 1em;}
+.header__button {padding: 5px 15px; text-align: center; background: lighten($light-color, 12); border-radius: 3px; font-style: normal; text-decoration: none;}
+
+.header__content {display: flex; align-items: center; margin: 10px;}
 
 .content {margin: 55px 0; overflow-y: scroll; -webkit-overflow-scrolling: touch;}
 
 .footer {bottom: 0; text-align: center;}
-.footer__link {display: block; line-height: 35px; padding: 10px; color: #FFF; text-decoration: none;}
+.footer__link {display: block; padding: 10px; color: #FFF; text-decoration: none;}
 
 @media (min-width:800px) {
 	.layout {max-width: 420px; height: 90vh; margin: 5vh auto; border: 10px solid #000; border-radius: 10px;}
