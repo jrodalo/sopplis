@@ -40,10 +40,19 @@ class UserController extends Controller
             'email' => 'required|email',
         ]);
 
-        $user = new User;
-        $user->email = $request->email;
-        $user->api_token = str_random(60);
+        $user = User::where('email', $request->email)->first();
+
+        if (is_null($user)) {
+            $user = new User;
+            $user->email = $request->email;
+            $user->name = strstr($request->email, '@', true);
+            $user->api_token = str_random(60);
+        }
+
+        $user->remember_token = str_random(60);
         $user->save();
+
+        // send emails
 
         return ['success' => true];
     }

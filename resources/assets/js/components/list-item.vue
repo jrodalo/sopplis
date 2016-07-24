@@ -24,7 +24,7 @@
 
 			toggleItem: function(item) {
 
-				var resource = this.$resource('/api/v1/lists/' + this.slug + '/items{/id}');
+				var resource = this.$resource('lists/' + this.slug + '/items{/id}');
 
 				resource.update({id: item.id}, {done: ! item.done}).then((response) => {
 

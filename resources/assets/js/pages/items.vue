@@ -27,19 +27,19 @@
 
 			data: function (transition) {
 
-				return this.$http.get('/api/v1/lists/' + this.$route.params.slug + '/items').then((response) => {
+				return this.$http.get('lists/' + this.$route.params.slug + '/items').then((response) => {
 
 					return {
 						items: response.json().items
 					};
 
 				}, (response) => {
+
 					sweetAlert('Oops...', 'No he podido leer tu lista... vuelve a intentarlo :(', 'error');
 
 					return {
 						items: JSON.parse(localStorage.getItem('SOPPLIS_ITEMS_' + this.$route.params.slug))
 					};
-
 				});
 			}
 		},

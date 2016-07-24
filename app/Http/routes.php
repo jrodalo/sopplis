@@ -22,6 +22,7 @@ Route::group(['prefix' => 'api/v1'], function () {
 	Route::group(['middleware' => ['throttle:5,1']], function() {
 
     	Route::get('users', 'UserController@readToken');
+    	Route::post('users', 'UserController@store');
 	});
 });
 

@@ -48,7 +48,7 @@
 				var value = this.newItem && this.newItem.trim();
 				if (!value) { return; }
 
-				var resource = this.$resource('/api/v1/lists/' + this.slug + '/items');
+				var resource = this.$resource('lists/' + this.slug + '/items');
 				var self = this;
 
 				resource.save({name: value}).then((response) => {
