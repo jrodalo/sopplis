@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use Auth;
+use Event;
 use App\User;
 use App\Http\Requests;
+use App\Events\UserWasCreated;
 
 class UserController extends Controller
 {
@@ -52,7 +54,7 @@ class UserController extends Controller
         $user->remember_token = str_random(60);
         $user->save();
 
-        // send emails
+        Event::fire(new UserWasCreated($user));
 
         return ['success' => true];
     }

@@ -57,4 +57,15 @@ class UserTest extends TestCase
         $this->dontSeeInDatabase('users', ['remember_token' => 'valid_remember_token']);
     }
 
+    public function test_se_produce_un_evento_al_registrar_un_usuario()
+    {
+        $this->expectsEvents(App\Events\UserWasCreated::class);
+
+        $this->post("/api/v1/users", ['email' => 'jrodalo@gmail.com'])
+             ->assertResponseOk()
+             ->seeJson([
+                'success' => true,
+            ]);
+    }
+
 }
