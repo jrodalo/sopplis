@@ -80,6 +80,8 @@
 						return false;
 					}
 
+					var self = this;
+
 					sweetAlert({
 						  title: '¿Finalizar la compra?',
 						  text: 'Se eliminarán los productos que hayas seleccionado',
@@ -92,15 +94,23 @@
 						},
 						function() {
 
-							setTimeout(function() {
+							var ids = self.completedItems.map(function(item) {
+								return item.id;
+							}).join(',');
+
+							self.$http.delete('lists/' + self.slug + '/items', {params: {items: ids}}).then((response) => {
+
 								sweetAlert({
 									title: '¡Finalizada!',
 									timer: 2000,
 									type: 'success',
 		  							showConfirmButton: false});
 
-								vm.items = [];
-							}, 2000);
+								//self.items = [];
+
+							}, (response) => {
+								sweetAlert('Oops...', 'No he podido finalizar la compra... vuelve a intentarlo :(', 'error');
+							});
 						}
 					);
 				}

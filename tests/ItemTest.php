@@ -192,4 +192,25 @@ class ItemTest extends TestCase
     }
 
 
+    public function test_al_eliminar_items_completados_dejan_de_estar_visibles()
+    {
+        $user = factory(App\User::class)->create();
+        $cart = factory(App\Cart::class)->create();
+        $cart->users()->attach($user);
+        $item = factory(App\Item::class)->create([
+            'cart_id' => $cart->id,
+            'name' => 'test',
+            'done' => true,
+            'visible' => true,
+        ]);
+
+        $this->actingAs($user)
+             ->delete("/api/v1/lists/$cart->slug/items", ['items' => "$item->id"])
+             ->assertResponseOk()
+             ->seeJson([
+                 'success' => true
+               ]);
+
+        $this->seeInDatabase('items', ['id' => $item->id, 'visible' => false]);
+    }
 }

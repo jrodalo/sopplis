@@ -85,4 +85,29 @@ class ItemController extends Controller
         return ['success' => true, 'item' => $item];
     }
 
+    /**
+     * Remove the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  App\Cart  $cart
+     * @return \Illuminate\Http\Response
+     */
+    public function delete(Request $request, Cart $cart)
+    {
+        if (Auth::user()->cant('write', $cart)) {
+            return response()->json(['success' => false], 403);
+        }
+
+        $this->validate($request, [
+            'items' => 'required',
+        ]);
+
+        $cart->items()
+             ->where('done', true)
+             ->whereIn('id', explode(',', $request->items))
+             ->update(['visible' => false]);
+
+        return ['success' => true];
+    }
+
 }

@@ -13,6 +13,7 @@ Route::group(['prefix' => 'api/v1'], function () {
 
 	    Route::get('lists/{cart}/items', 'ItemController@index');
 	    Route::post('lists/{cart}/items', 'ItemController@store');
+	    Route::delete('lists/{cart}/items', 'ItemController@delete');
 	    Route::put('lists/{cart}/items/{item}', 'ItemController@update');
 
 	    Route::get('lists', 'CartController@index');
