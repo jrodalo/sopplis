@@ -47,11 +47,18 @@ class ItemController extends Controller
             'name' => 'required|max:100',
         ]);
 
-        $item = new Item;
+        $item = $cart->items()->where('name', 'LIKE', $request->name)->first();
+
+        if (is_null($item)) {
+            $item = new Item;
+            $item->cart_id = $cart->id;
+            $item->count = 0;
+        }
+
         $item->name = $request->name;
         $item->done = false;
         $item->visible = true;
-        $item->cart_id = $cart->id;
+        $item->count = $item->count + 1;
         $item->save();
 
         return ['success' => true, 'item' => $item];

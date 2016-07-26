@@ -12,7 +12,7 @@ class Item extends Model
      * @var array
      */
     protected $hidden = [
-        'cart_id', 'count', 'visible', 'created_at', 'updated_at',
+        'cart_id', 'visible', 'created_at', 'updated_at',
     ];
 
 

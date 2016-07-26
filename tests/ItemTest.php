@@ -170,4 +170,26 @@ class ItemTest extends TestCase
                  'name' => 'test normal',
             ]);
     }
+
+    public function test_al_insertar_un_item_existente_aumenta_su_contador()
+    {
+        $user = factory(App\User::class)->create();
+        $cart = factory(App\Cart::class)->create();
+        $cart->users()->attach($user);
+        $item = factory(App\Item::class)->create([
+            'cart_id' => $cart->id,
+            'name' => 'test',
+            'count' => 1,
+        ]);
+
+        $this->actingAs($user)
+             ->post("/api/v1/lists/$cart->slug/items", ['name' => 'TEST'])
+             ->assertResponseOk()
+             ->seeJson([
+                 'success' => true,
+                 'count' => 2,
+               ]);
+    }
+
+
 }
