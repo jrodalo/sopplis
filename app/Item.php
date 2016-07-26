@@ -15,6 +15,14 @@ class Item extends Model
         'cart_id', 'visible', 'created_at', 'updated_at',
     ];
 
+    /**
+     * The attributes that should be casted to native types.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'done' => 'boolean',
+    ];
 
     /**
      * Get the cart that owns the item.

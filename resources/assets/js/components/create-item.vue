@@ -48,14 +48,15 @@
 				var value = this.newItem && this.newItem.trim();
 				if (!value) { return; }
 
-				var resource = this.$resource('lists/' + this.slug + '/items');
-				var self = this;
+//				var self = this;
 
-				resource.save({name: value}).then((response) => {
+				this.$http.post('lists/' + this.slug + '/items', {name: value}).then((response) => {
+
 					this.$get('items').push(response.json().item);
 					//self.items.push(response.json().item);
-					self.newItem = '';
-					localStorage.setItem('SOPPLIS_ITEMS', JSON.stringify(self.items));
+					this.newItem = '';
+					localStorage.setItem('SOPPLIS_ITEMS', JSON.stringify(this.items));
+
 				}, (response) => {
 					console.log('error' + response);
 				});

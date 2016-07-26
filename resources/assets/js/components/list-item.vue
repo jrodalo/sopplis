@@ -3,7 +3,7 @@
 		<li :class="{'item': true, 'item--done': item.done}" v-for="item in items | orderBy 'done' 'name'" track-by="id">
 			<span class="item__name">{{item.name}}</span>
 			<label class="item__toggle" v-show="onLine">
-				<input class="item__checkbox" type="checkbox" v-model="item.done" v-on:click="toggleItem(item)">
+				<input class="item__checkbox" type="checkbox" :checked="item.done" v-on:click="toggleItem(item)">
 				<div class="item__indicator"></div>
 			</label>
 		</li>
@@ -24,9 +24,9 @@
 
 			toggleItem: function(item) {
 
-				var resource = this.$resource('lists/' + this.slug + '/items{/id}');
+				item.done = !item.done;
 
-				resource.update({id: item.id}, {done: ! item.done}).then((response) => {
+				this.$http.put('lists/' + this.slug + '/items/' + item.id, {done: item.done}).then((response) => {
 
 				}, (response) => {
 
