@@ -31,7 +31,7 @@ router.map({
 		auth: true
 	},
 
-	'/lists/:slug': {
+	'/lists/:list': {
 		name: 'items',
 		component: require('./pages/items.vue'),
 		auth: true

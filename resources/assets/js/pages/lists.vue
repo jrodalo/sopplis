@@ -8,17 +8,14 @@
 			</div>
 		</header>
 
-		<div :class="{'content': true, 'content--loading': $loadingRouteData}">
+		<div class="content">
 			<ul class="list">
-				<li v-for="list in lists" class="item">
-					<a v-link="{ name: 'items', params: { slug: list.slug }}">{{ list.name }}</a>
+				<li v-for="list in state.lists" class="item">
+					<a class="item__name" v-link="{ name: 'items', params: { list: list.slug }}">{{ list.name }}</a>
 				</li>
 			</ul>
+			<loading v-show="$loadingRouteData"></loading>
 		</div>
-
-		<footer class="footer">
-
-		</footer>
 	</section>
 
 </template>
@@ -27,41 +24,25 @@
 
 	import SweetAlert from 'sweetalert';
 	import User from '../user';
+	import ListStore from '../liststore'
 
 	export default {
 
 		route: {
 
 			data: function (transition) {
-
-				return this.$http.get('lists').then((response) => {
-
-					return {
-						lists: response.json().lists
-					};
-
-				}, (response) => {
-					sweetAlert('Oops...', 'No he podido leer tus listas... vuelve a intentarlo :(', 'error');
-
-					return {
-						lists: JSON.parse(localStorage.getItem('SOPPLIS_LISTS'))
-					};
-
-				});
+				return ListStore.readLists();
 			}
 		},
 
 		data: function() {
 			return {
-				lists: [],
-				onLine: navigator.onLine
+				state: ListStore.state
 			}
 		},
 
-		watch: {
-			lists: function(lists) {
-				localStorage.setItem('SOPPLIS_LISTS', JSON.stringify(lists));
-			}
+		components: {
+			loading: require('../components/loading.vue')
 		},
 
 		methods: {
@@ -69,16 +50,6 @@
 			salir: function() {
 				User.logout();
 			}
-		},
-
-		created: function() {
-			window.addEventListener('online',  function(){
-			    vm.onLine = true;
-			});
-
-			window.addEventListener('offline',  function(){
-			    vm.onLine = false;
-			});
 		}
 	};
 

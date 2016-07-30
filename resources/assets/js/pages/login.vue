@@ -3,11 +3,7 @@
 	<section id="login" class="page">
 
 		<div class="content content--centered">
-			<div class="la-ball-fall loading">
-				<div></div>
-				<div></div>
-				<div></div>
-			</div>
+			<loading></loading>
 		</div>
 
 	</section>
@@ -45,6 +41,10 @@
 					transition.redirect('/');
 
 				});
+			},
+
+			components: {
+				loading: require('../components/loading.vue')
 			}
 		}
 

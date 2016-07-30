@@ -19,11 +19,12 @@
 
 <script>
 
+	import ItemStore from '../itemstore';
+
 	export default {
 
 		props: {
-			slug: { required: true },
-			items: { required: true, type: Array }
+			list: { required: true }
 		},
 
 		data: function() {
@@ -48,18 +49,11 @@
 				var value = this.newItem && this.newItem.trim();
 				if (!value) { return; }
 
-//				var self = this;
+				var item = {name: value};
 
-				this.$http.post('lists/' + this.slug + '/items', {name: value}).then((response) => {
+				ItemStore.insertItem(this.list, item);
 
-					this.$get('items').push(response.json().item);
-					//self.items.push(response.json().item);
-					this.newItem = '';
-					localStorage.setItem('SOPPLIS_ITEMS', JSON.stringify(this.items));
-
-				}, (response) => {
-					console.log('error' + response);
-				});
+				this.newItem = '';
 			}
 		}
 
