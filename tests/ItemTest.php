@@ -192,6 +192,49 @@ class ItemTest extends TestCase
     }
 
 
+    public function test_un_usuario_puede_eliminar_items_en_sus_listas()
+    {
+        $user = factory(App\User::class)->create();
+        $cart = factory(App\Cart::class)->create();
+        $cart->users()->attach($user);
+        $item = factory(App\Item::class)->create([
+            'cart_id' => $cart->id,
+            'name' => 'test',
+            'done' => true,
+            'visible' => true,
+        ]);
+
+        $this->actingAs($user)
+             ->json('DELETE', "/api/v1/lists/$cart->slug/items?items=$item->id")
+             ->assertResponseOk()
+             ->seeJson([
+                 'success' => true,
+               ]);
+    }
+
+
+    public function test_un_usuario_no_puede_eliminar_items_en_otras_listas()
+    {
+        $user = factory(App\User::class)->create();
+        $other_user = factory(App\User::class)->create();
+        $cart = factory(App\Cart::class)->create();
+        $cart->users()->attach($user);
+        $item = factory(App\Item::class)->create([
+            'cart_id' => $cart->id,
+            'name' => 'test',
+            'done' => false,
+            'visible' => true,
+        ]);
+
+        $this->actingAs($other_user)
+             ->json('DELETE', "/api/v1/lists/$cart->slug/items?items=$item->id")
+             ->assertResponseStatus(403)
+             ->seeJson([
+                 'success' => false,
+               ]);
+    }
+
+
     public function test_al_eliminar_items_completados_dejan_de_estar_visibles()
     {
         $user = factory(App\User::class)->create();
