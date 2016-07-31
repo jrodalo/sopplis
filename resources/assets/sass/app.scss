@@ -14,6 +14,7 @@ html, body, .layout, .page {height: 100%;}
 body {background: $back-color; color: #242424; font: 1em/1.4 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";}
 a {text-decoration: none; color: darken($dark-color, 40%);}
 
+.layout {background: $back-color;}
 .page {display: flex; flex-direction: column;}
 
 .header, .footer {position: fixed; z-index: 1; width: 100%; height: 45px; background: $dark-color;}
@@ -36,7 +37,7 @@ a {text-decoration: none; color: darken($dark-color, 40%);}
 }
 
 @media (min-width:800px) {
-	.layout {max-width: 420px; height: 90vh; margin: 5vh auto; border: 10px solid #000; border-radius: 10px;}
-	.header, .footer {width: auto; position: relative;}
-	.content {margin: 0;}
+	body {background: #324657;}
+	.layout {position: relative; overflow: hidden; max-width: 420px; height: 90vh; margin: 5vh auto; border: 5px solid #263441; border-radius: 10px;}
+	.header, .footer {width: 100%; position: absolute;}
 }
