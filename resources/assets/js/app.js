@@ -58,7 +58,9 @@ router.beforeEach(function (transition) {
 Vue.http.options.root = '/api/v1';
 Vue.http.interceptors.push((request, next) => {
 
-	request.headers['Authorization'] = 'Bearer ' + User.token();
+	if (User.isAuthenticated()) {
+		request.headers['Authorization'] = 'Bearer ' + User.token();
+	}
 
     next();
 });

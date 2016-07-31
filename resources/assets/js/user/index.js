@@ -1,4 +1,4 @@
-var user = {
+var User = {
 
 	isAuthenticated: function() {
 		return this.token().length > 0;
@@ -18,4 +18,4 @@ var user = {
 
 }
 
-module.exports = user;
+module.exports = User;
