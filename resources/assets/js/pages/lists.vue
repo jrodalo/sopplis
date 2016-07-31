@@ -12,7 +12,10 @@
 		<div class="content">
 			<ul class="list">
 				<li v-for="list in state.lists" class="item">
-					<a class="item__name" v-link="{ name: 'items', params: { list: list.slug }}">{{ list.name }}</a>
+					<a class="item__name" v-link="{ name: 'items', params: { list: list.slug }}">
+						<span>{{ list.name }}</span>
+						<i v-show="true">⚭</i>
+					</a>
 				</li>
 			</ul>
 			<loading v-show="$loadingRouteData"></loading>
@@ -67,3 +70,10 @@
 	};
 
 </script>
+
+<style lang="sass">
+
+	.item__name {display: flex;}
+	.item__name span {flex: 1;}
+
+</style>
