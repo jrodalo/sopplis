@@ -13,7 +13,7 @@ var user = {
 	},
 
 	logout: function() {
-		localStorage.removeItem('SOPPLIS_TOKEN');
+		localStorage.clear();
 	}
 
 }

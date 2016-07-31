@@ -6,31 +6,35 @@ var ItemStore = {
 		items: []
 	},
 
+	readCache: function(list) {
+		return JSON.parse(localStorage.getItem('SOPPLIS_' + list + '_ITEMS')) || [];
+	},
+
+	writeCache: function(list, items) {
+		localStorage.setItem('SOPPLIS_' + list + '_ITEMS', JSON.stringify(items));
+	},
 
 	readItems: function(list) {
+
+		ItemStore.state.items = ItemStore.readCache(list);
 
 		return Vue.http.get('lists/' + list + '/items').then((response) => {
 
 			ItemStore.state.items = response.json().items;
+			ItemStore.writeCache(list, ItemStore.state.items);
 
 		}, (response) => {
-
 			sweetAlert('Oops...', 'No he podido leer tu lista... vuelve a intentarlo :(', 'error');
-
-			ItemStore.state.items = JSON.parse(localStorage.getItem('SOPPLIS_ITEMS_' + list));
 		});
 	},
 
-
 	readActiveItems: function() {
-
 		return ItemStore.state.items.filter(function(item) {
 			return ! item.done;
 		});
 	},
 
 	readCompletedItems: function() {
-
 		return ItemStore.state.items.filter(function(item) {
 			return item.done;
 		});
@@ -41,7 +45,7 @@ var ItemStore = {
 		Vue.http.post('lists/' + list + '/items', item).then((response) => {
 
 			ItemStore.state.items.push(response.json().item);
-			//localStorage.setItem('SOPPLIS_ITEMS', JSON.stringify(this.items));
+			ItemStore.writeCache(list, ItemStore.state.items);
 
 		}, (response) => {
 			console.log('error' + response);
@@ -51,7 +55,7 @@ var ItemStore = {
 	updateItem: function(list, item) {
 
 		Vue.http.put('lists/' + list + '/items/' + item.id, {done: item.done}).then((response) => {
-
+			ItemStore.writeCache(list, ItemStore.state.items);
 		}, (response) => {
 
 		});
@@ -68,6 +72,7 @@ var ItemStore = {
 				showConfirmButton: false});
 
 			ItemStore.state.items = ItemStore.readActiveItems();
+			ItemStore.writeCache(list, ItemStore.state.items);
 
 		}, (response) => {
 			sweetAlert('Oops...', 'No he podido finalizar la compra... vuelve a intentarlo :(', 'error');

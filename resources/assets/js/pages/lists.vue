@@ -18,7 +18,6 @@
 					</a>
 				</li>
 			</ul>
-			<loading v-show="$loadingRouteData"></loading>
 		</div>
 	</section>
 
@@ -43,10 +42,6 @@
 			return {
 				state: ListStore.state
 			}
-		},
-
-		components: {
-			loading: require('../components/loading.vue')
 		},
 
 		methods: {
