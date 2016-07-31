@@ -7,7 +7,7 @@
 			<h1 class="title">Sopplis</h1>
 
 			<form class="form" v-on:submit.prevent="sendData" v-show=" ! submited">
-				<p><input type="text" id="email" name="email" placeholder="Email" v-model="email" class="" required autofocus></p>
+				<p><input type="email" id="email" name="email" placeholder="Email" v-model="email" required autofocus></p>
 				<p><input type="submit" value="Entrar"></p>
 			</form>
 
