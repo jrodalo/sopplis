@@ -3,6 +3,7 @@
 	<section id="lists" class="page">
 		<header class="header">
 			<div class="header__content">
+				<a href="#" class="header__button" v-on:click="salir">×</a>
 				<h1 class="header__title">Mis listas</h1>
 				<a href="#" class="header__button" v-on:click="salir">+</a>
 			</div>
@@ -48,7 +49,19 @@
 		methods: {
 
 			salir: function() {
-				User.logout();
+
+				sweetAlert({
+					  title: '¿Quieres salir de Sopplis?',
+					  type: 'info',
+					  showCancelButton: true,
+					  confirmButtonText: 'Si',
+					  cancelButtonText: 'No',
+					  closeOnConfirm: true
+					},
+					function() {
+						User.logout();
+					}
+				);
 			}
 		}
 	};
