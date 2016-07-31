@@ -12,13 +12,15 @@
 				placeholder="¿Qué necesitas comprar?"
 				maxlength="100"
 				v-model="newItem"
-				v-on:blur="toggleCreateItem">
+				v-on:blur="toggleCreateItem"
+				v-el:item-input>
 		<a href="#" class="header__button header__button--side">☰</a>
 	</form>
 </template>
 
 <script>
 
+	import Vue from 'vue';
 	import ItemStore from '../itemstore';
 
 	export default {
@@ -40,7 +42,10 @@
 				this.editing = ! this.editing;
 
 				if (this.editing) {
-					document.querySelectorAll('.form__input')[0].focus();
+					var self = this;
+					Vue.nextTick(function () {
+						self.$els.itemInput.focus();
+					});
 				}
 			},
 
