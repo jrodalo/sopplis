@@ -16,6 +16,13 @@ class Cart extends Model
     ];
 
     /**
+     * The accessors to append to the model's array form.
+     *
+     * @var array
+     */
+    protected $appends = ['shared'];
+
+    /**
      * Get the route key for the model.
      *
      * @return string
@@ -47,6 +54,16 @@ class Cart extends Model
     public function scopeFavoriteItems()
     {
         return $this->items()->where('count', '>', 2)->orderBy('name', 'asc');
+    }
+
+    /**
+     * Get the shared flag for the cart.
+     *
+     * @return bool
+     */
+    public function getSharedAttribute()
+    {
+        return $this->users()->count() > 1;
     }
 
     /**

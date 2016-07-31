@@ -14,7 +14,7 @@
 				<li v-for="list in state.lists" class="item">
 					<a class="item__name" v-link="{ name: 'items', params: { list: list.slug }}">
 						<span>{{ list.name }}</span>
-						<i v-show="true">⚭</i>
+						<i v-show="list.shared" title="Lista compartida">⚭</i>
 					</a>
 				</li>
 			</ul>
