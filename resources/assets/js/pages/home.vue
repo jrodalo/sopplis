@@ -8,7 +8,7 @@
 
 			<form class="form" v-on:submit.prevent="sendData" v-show=" ! submited">
 				<p><input type="text" id="email" name="email" placeholder="Email" v-model="email" class="" required autofocus></p>
-				<p><input type="submit" value="Entrar" ></p>
+				<p><input type="submit" value="Entrar"></p>
 			</form>
 
 			<p v-show="submited">Se ha enviado un correo con la llave para entrar <a href="{{ mailServer }}">ir</a></p>

@@ -1,7 +1,7 @@
 <template>
 
 	<div class="header__content" v-show="!editing">
-		<a v-link="{ name: 'lists' }" class="header__button">❰</a>
+		<a v-link="{ name: 'lists' }" class="header__button">«</a>
 		<h1 class="header__title">Lista de la compra</h1>
 		<a href="#" class="header__button" v-on:click.prevent="toggleCreateItem">+</a>
 	</div>
@@ -70,11 +70,9 @@
 
 	@import "resources/assets/sass/_variables";
 
-	.form {display: flex; margin: 10px;}
-	.form__input {border: 0; border-radius: 3px 0 0 3px; font-size: 1em; padding: 0 10px; background: $light-color; color: #FFF; flex: 1;}
+	.form {display: flex;}
+	.form__input {border: 0; font-size: 1em; padding: 0 10px; background: $light-color; color: darken($dark-color, 40%); flex: 1; border-radius: 0;}
 	.form__input::placeholder {color: #FFF; opacity: 1; text-align: center;}
 	.form__input:focus {outline: 0;}
-
-	.header__button--side {border-radius: 0 3px 3px 0;}
 
 </style>

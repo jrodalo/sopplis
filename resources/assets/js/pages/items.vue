@@ -6,12 +6,19 @@
 		</header>
 
 		<div class="content">
-			<list-item :list="list"></list-item>
-			<loading v-show="$loadingRouteData"></loading>
+			<div v-show="state.items.length">
+				<list-item :list="list"></list-item>
+			</div>
+			<div class="empty" v-show="!state.items.length && !$loadingRouteData">
+				<strong>Esta lista está vacía :(</strong>
+				<p>Añade algo para empezar</p>
+			</div>
 		</div>
 
-		<footer class="footer">
-			<a href="#completed-items" class="footer__link" v-on:click.prevent="finalize">{{ completedItems.length }}</a>
+		<footer class="footer" v-show="state.items.length">
+			<a href="#completed-items" :class="{footer__link: true, completed: allDone}" v-on:click.prevent="finalize" transition="fade">
+				{{ completedItems.length }} de {{ state.items.length }}
+			</a>
 		</footer>
 	</section>
 
@@ -48,12 +55,20 @@
 
 			completedItems: function() {
 				return ItemStore.readCompletedItems();
+			},
+
+			allDone: function() {
+				return this.state.items.length > 0 && (this.completedItems.length == this.state.items.length);
 			}
 		},
 
 		methods: {
 
 			finalize: function() {
+
+				if ( ! this.completedItems.length) {
+					return;
+				}
 
 				var self = this;
 
@@ -81,3 +96,9 @@
 	};
 
 </script>
+
+<style lang="sass">
+
+	.completed {background: green;}
+
+</style>

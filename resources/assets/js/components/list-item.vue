@@ -35,7 +35,7 @@
 
 	@import "resources/assets/sass/_variables";
 
-	.list {list-style: none;}
+	.list {list-style: none; margin: 10px 0;}
 	.item {display: flex; align-items: center; background: #FFF; margin: 5px; border-radius: 5px; user-select: none;}
 	.item--done {background: darken($back-color, 7);}
 	.item__name {flex: 1; padding: 10px;}
