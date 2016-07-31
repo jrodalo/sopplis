@@ -1,6 +1,6 @@
 <?php
 
-Route::get('cache.manifest', function() {
+Route::get('manifest.appcache', function() {
 	return response()
 		->view('cache')
 		->header('Content-Type', 'text/cache-manifest');

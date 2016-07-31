@@ -7,4 +7,4 @@ CACHE:
 /favicon.png
 
 NETWORK:
-{{ url('') }}/api/
+*
