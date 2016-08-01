@@ -48,6 +48,8 @@
 
 			salir: function() {
 
+				var self = this;
+
 				sweetAlert({
 					  title: '¿Quieres salir de Sopplis?',
 					  type: 'info',
@@ -58,6 +60,7 @@
 					},
 					function() {
 						User.logout();
+						self.$router.go({ name: 'home' });
 					}
 				);
 			}

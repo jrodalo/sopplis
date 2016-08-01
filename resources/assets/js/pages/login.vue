@@ -21,7 +21,7 @@
 			activate: function(transition) {
 
 				if (User.isAuthenticated()) {
-					transition.redirect('lists');
+					transition.redirect({ name: 'lists', query: {} });
 				}
 
 				transition.next();
@@ -33,21 +33,20 @@
 
 					if (response.ok) {
 						User.login(response.json().token);
-						transition.redirect('lists');
+						transition.redirect({ name: 'lists', query: {} });
 					}
 
 				}, (response) => {
 
-					transition.redirect('/');
+					transition.redirect({ name: 'home' });
 
 				});
-			},
-
-			components: {
-				loading: require('../components/loading.vue')
 			}
-		}
+		},
 
+		components: {
+			loading: require('../components/loading.vue')
+		}
 	};
 
 </script>
