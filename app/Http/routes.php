@@ -1,12 +1,5 @@
 <?php
 
-Route::get('manifest.appcache', function() {
-	return response()
-		->view('cache')
-		->header('Content-Type', 'text/cache-manifest');
-});
-
-
 Route::group(['prefix' => 'api/v1'], function () {
 
 	Route::group(['middleware' => ['throttle:100,1', 'auth:api']], function() {

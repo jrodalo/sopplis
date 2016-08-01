@@ -6,3 +6,4 @@ Homestead.json
 .env
 /public/css/*
 /public/js/*
+/public/manifest.appcache
