@@ -6,10 +6,6 @@
 
 @section('content')
 
-	<div id="app" class="layout" v-cloak>
-
-		<router-view></router-view>
-
-	</div>
+	<div id="app"></div>
 
 @endsection

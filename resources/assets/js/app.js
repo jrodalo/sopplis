@@ -7,7 +7,16 @@ import SweetAlert from 'sweetalert';
 Vue.use(VueRouter);
 Vue.use(VueResource);
 
-var App = Vue.extend({});
+Vue.config.debug = true;
+Vue.http.options.root = '/api/v1';
+Vue.http.interceptors.push((request, next) => {
+
+	if (User.isAuthenticated()) {
+		request.headers['Authorization'] = 'Bearer ' + User.token();
+	}
+
+    next();
+});
 
 var router = new VueRouter({
 	history: true
@@ -54,15 +63,6 @@ router.beforeEach(function (transition) {
 	}
 });
 
-
-Vue.http.options.root = '/api/v1';
-Vue.http.interceptors.push((request, next) => {
-
-	if (User.isAuthenticated()) {
-		request.headers['Authorization'] = 'Bearer ' + User.token();
-	}
-
-    next();
-});
+var App = require('./pages/main.vue');
 
 router.start(App, '#app');

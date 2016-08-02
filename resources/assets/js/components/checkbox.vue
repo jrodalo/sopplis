@@ -1,5 +1,5 @@
 <template>
-	<label class="item__toggle">
+	<label class="item__toggle" v-show="online">
 		<input class="item__checkbox" type="checkbox" v-model="item.done">
 		<div class="item__indicator"></div>
 	</label>
@@ -16,9 +16,21 @@
 			item: { required: true }
 		},
 
+		data: function() {
+			return {
+				online: true
+			}
+		},
+
 		watch: {
 			'item.done': function() {
 				ItemStore.updateItem(this.list, this.item);
+			}
+		},
+
+		events: {
+			online: function(online) {
+				this.online = online;
 			}
 		}
 	};
