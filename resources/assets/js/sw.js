@@ -38,7 +38,7 @@ self.addEventListener('activate', event => {
 self.addEventListener('fetch', event => {
 
 	var request = event.request;
-console.log(request.url);
+
 	if (request.url.indexOf('/api/') > -1) {
 
 		event.respondWith(
