@@ -39,13 +39,7 @@ self.addEventListener('fetch', event => {
 
 	var request = event.request;
 
-	if (request.url.indexOf('/api/') > -1) {
-
-		event.respondWith(
-			fetch(event.request)
-		);
-
-	} else {
+	if (request.url.indexOf('/api/') < 0) {
 
 		if (request.headers.get('accept').includes('text/html')) {
 			request = '/'; // SPA
