@@ -15,7 +15,7 @@ class CreateCartsTable extends Migration
         Schema::create('carts', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name', 100);
-            $table->string('slug')->unique();
+            $table->string('slug', 10)->unique();
             $table->timestamps();
         });
     }
