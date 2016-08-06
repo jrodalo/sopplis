@@ -9,9 +9,9 @@
 			<div v-show="state.items.length">
 				<list-item :list="list"></list-item>
 			</div>
-			<div class="empty" v-show="!state.items.length && !$loadingRouteData">
-				<strong>Esta lista está vacía :(</strong>
-				<p>Añade algo para empezar</p>
+			<div class="content--centered message--empty" v-show="!state.items.length && !$loadingRouteData">
+				<h1 class="message__title">Esta lista está vacía :(</h1>
+				<p>Añade los productos que quieres comprar pulsando el botón <b>+</b></p>
 			</div>
 		</div>
 
