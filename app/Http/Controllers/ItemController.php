@@ -23,9 +23,7 @@ class ItemController extends Controller
             return response()->json(['success' => false], 403);
         }
 
-        $items = $request->favorite === true ?
-                 $cart->favoriteItems()->get() :
-                 $cart->visibleItems()->get();
+        $items = $cart->visibleItems()->get();
 
         return response()->json(['success' => true, 'items' => $items]);
     }
@@ -105,7 +103,7 @@ class ItemController extends Controller
         $cart->items()
              ->where('done', true)
              ->whereIn('id', explode(',', $request->items))
-             ->update(['visible' => false]);
+             ->update(['visible' => false, 'done' => false]);
 
         return ['success' => true];
     }

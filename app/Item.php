@@ -25,6 +25,15 @@ class Item extends Model
     ];
 
     /**
+     * Appends the selected attribute used by favorite page
+     */
+    protected $appends = ['selected'];
+    public function getSelectedAttribute()
+    {
+        return false;
+    }
+
+    /**
      * Get the cart that owns the item.
      */
     public function cart()

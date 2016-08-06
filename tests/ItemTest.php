@@ -156,16 +156,21 @@ class ItemTest extends TestCase
             'cart_id' => $cart->id,
             'name' => 'test normal',
             'count' => 2,
+            'visible' => true,
         ]);
         $item = factory(App\Item::class)->create([
             'cart_id' => $cart->id,
             'name' => 'test fav',
             'count' => 3,
+            'visible' => false,
         ]);
 
         $this->actingAs($user)
-             ->json('GET', "/api/v1/lists/$cart->slug/items", ['favorite' => true])
+             ->json('GET', "/api/v1/lists/$cart->slug/favorite")
              ->assertResponseOk()
+             ->seeJson([
+                'name' => 'test fav'
+            ])
              ->dontSeeJson([
                  'name' => 'test normal',
             ]);
@@ -254,6 +259,6 @@ class ItemTest extends TestCase
                  'success' => true
                ]);
 
-        $this->seeInDatabase('items', ['id' => $item->id, 'visible' => false]);
+        $this->seeInDatabase('items', ['id' => $item->id, 'visible' => false, 'done' => false]);
     }
 }

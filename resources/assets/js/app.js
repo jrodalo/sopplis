@@ -46,6 +46,12 @@ router.map({
 		auth: true
 	},
 
+	'/lists/:list/favs': {
+		name: 'favs',
+		component: require('./pages/favs.vue'),
+		auth: true
+	},
+
 	'*': {
 		name: '404',
 		component: require('./pages/404.vue')

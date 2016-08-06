@@ -6,3 +6,7 @@
 
 .item__name {display: flex;}
 .item__name span {flex: 1;}
+
+.list--favs {display: flex; flex-flow: wrap; align-items: center;}
+.item--selected {background: #ACD08F; box-shadow: inset 1px 1px 5px rgba(0,0,0,0.2);}
+.item--fav {flex: auto; text-align: center; display: inline-block; padding: 10px; cursor: pointer;}

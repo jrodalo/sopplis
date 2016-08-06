@@ -3,15 +3,22 @@ import Vue from 'vue';
 var ItemStore = {
 
 	state: {
-		items: []
+		items: [],
+		favorites: []
 	},
 
-	readCache: function(list) {
-		return JSON.parse(localStorage.getItem('SOPPLIS_' + list + '_ITEMS')) || [];
+	readCache: function(list, isFavorites) {
+
+		var type = isFavorites ? '_FAVS' : '_ITEMS';
+
+		return JSON.parse(localStorage.getItem('SOPPLIS_' + list + type)) || [];
 	},
 
-	writeCache: function(list, items) {
-		localStorage.setItem('SOPPLIS_' + list + '_ITEMS', JSON.stringify(items));
+	writeCache: function(list, items, isFavorites) {
+
+		var type = isFavorites ? '_FAVS' : '_ITEMS';
+
+		localStorage.setItem('SOPPLIS_' + list + type, JSON.stringify(items));
 	},
 
 	readItems: function(list) {
@@ -25,6 +32,20 @@ var ItemStore = {
 
 		}, (response) => {
 			sweetAlert('Oops...', 'No he podido leer tu lista... vuelve a intentarlo :(', 'error');
+		});
+	},
+
+	readFavorites: function(list) {
+
+		ItemStore.state.favorites = ItemStore.readCache(list, true);
+
+		return Vue.http.get('lists/' + list + '/favorite').then((response) => {
+
+			ItemStore.state.favorites = response.json().items;
+			ItemStore.writeCache(list, ItemStore.state.favorites, true);
+
+		}, (response) => {
+			sweetAlert('Oops...', 'No he podido leer tus productos frecuentes... vuelve a intentarlo :(', 'error');
 		});
 	},
 
@@ -63,7 +84,9 @@ var ItemStore = {
 
 	deleteItems: function(list, items) {
 
-		Vue.http.delete('lists/' + list + '/items', {params: {items: items}}).then((response) => {
+		var ids = ItemStore.extractIds(items);
+
+		Vue.http.delete('lists/' + list + '/items', {params: {items: ids}}).then((response) => {
 
 			sweetAlert({
 				title: '¡Finalizada!',
@@ -77,6 +100,17 @@ var ItemStore = {
 		}, (response) => {
 			sweetAlert('Oops...', 'No he podido finalizar la compra... vuelve a intentarlo :(', 'error');
 		});
+	},
+
+	addItems: function(list, items) {
+
+		var ids = ItemStore.extractIds(items);
+
+		return Vue.http.put('lists/' + list + '/favorite', {items: ids});
+	},
+
+	extractIds: function(items) {
+		return items.map(function(item) {return item.id;}).join(',');
 	}
 
 }

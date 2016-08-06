@@ -83,12 +83,7 @@
 					  showLoaderOnConfirm: true
 					},
 					function() {
-
-						var ids = self.completedItems.map(function(item) {
-							return item.id;
-						}).join(',');
-
-						ItemStore.deleteItems(self.list, ids);
+						ItemStore.deleteItems(self.list, self.completedItems);
 					}
 				);
 			}

@@ -3,7 +3,7 @@
 	<div class="header__content" v-show="!editing">
 		<a v-link="{ name: 'lists' }" class="header__button">«</a>
 		<h1 class="header__title">Lista de la compra</h1>
-		<a href="#" class="header__button" v-on:click.prevent="toggleCreateItem">+</a>
+		<a href="#" class="header__button" v-on:click.prevent="showForm">+</a>
 	</div>
 
 	<form class="form" v-on:submit.prevent="addItem" v-show="editing">
@@ -12,9 +12,9 @@
 				placeholder="¿Qué necesitas comprar?"
 				maxlength="100"
 				v-model="newItem"
-				v-on:blur="toggleCreateItem"
+				v-on:blur="hideForm"
 				v-el:item-input>
-		<a href="#" class="header__button header__button--side">☰</a>
+		<a v-link="{ name: 'favs', params: {list: list} }" class="header__button header__button--side">☰</a>
 	</form>
 </template>
 
@@ -38,15 +38,18 @@
 
 		methods: {
 
-			toggleCreateItem: function() {
-				this.editing = ! this.editing;
+			showForm: function() {
+				this.editing = true;
+				var self = this;
+				Vue.nextTick(function () {
+					self.$els.itemInput.focus();
+				});
+			},
 
-				if (this.editing) {
-					var self = this;
-					Vue.nextTick(function () {
-						self.$els.itemInput.focus();
-					});
-				}
+			hideForm: function() {
+				setTimeout(function() {
+					this.editing = false;
+				}.bind(this), 500);
 			},
 
 			addItem: function () {
