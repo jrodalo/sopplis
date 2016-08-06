@@ -7,7 +7,16 @@
 			<div class="login__form" v-show=" ! submited">
 				<h1 class="title">Sopplis</h1>
 				<form v-on:submit.prevent="sendData">
-					<p><input type="email" class="login__input" id="email" name="email" placeholder="¿Cuál es tu email?" v-model="email" required autofocus></p>
+					<p><input
+							type="email"
+							id="email"
+							name="email"
+							autocomplete="email"
+							class="login__input"
+							placeholder="¿Cuál es tu email?"
+							v-model="email"
+							required
+							autofocus></p>
 					<p><input type="submit" class="login__button" value="Entrar"></p>
 				</form>
 			</div>
