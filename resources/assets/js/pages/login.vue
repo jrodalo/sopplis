@@ -2,7 +2,7 @@
 
 	<section id="login" class="page">
 
-		<div class="content content--centered">
+		<div class="content loading--centered">
 			<loading></loading>
 		</div>
 
@@ -38,7 +38,7 @@
 
 				}, (response) => {
 
-					transition.redirect({ name: 'home' });
+					transition.redirect({ name: 'home', query: {} });
 
 				});
 			}
@@ -55,7 +55,7 @@
 
 	@import "resources/assets/sass/_variables";
 
-	.content--centered {margin: 100px auto;}
+	.loading--centered {margin: 100px auto;}
 	.loading {color: $dark-color;}
 
 </style>

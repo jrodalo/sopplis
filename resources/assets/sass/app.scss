@@ -26,6 +26,7 @@ a {text-decoration: none; color: darken($dark-color, 40%);}
 .header__content {display: flex; align-items: center;}
 
 .content {margin: 45px 0; overflow-y: scroll; -webkit-overflow-scrolling: touch;}
+.content--centered {text-align: center;}
 
 .empty {color: darken($back-color, 35%); text-align: center; margin-top: 100px;}
 
@@ -38,6 +39,6 @@ a {text-decoration: none; color: darken($dark-color, 40%);}
 
 @media (min-width:800px) {
 	body {background: #324657;}
-	.layout {position: relative; overflow: hidden; max-width: 420px; height: 90vh; margin: 5vh auto; border: 5px solid #263441; border-radius: 10px;}
+	.layout {position: absolute; left: 0; right: 0; top: 0; bottom: 0; overflow: hidden; max-width: 420px; max-height: 80%; margin: auto; border: 5px solid #263441; border-radius: 10px;}
 	.header, .footer {width: 100%; position: absolute;}
 }
