@@ -2,11 +2,13 @@
 
 	<section id="login" class="page">
 
-		<div class="content">
+		<div class="content content--centered">
 
-			<h1 class="title">Sopplis</h1>
+			<h1 class="title">Upss!</h1>
 
-			No encontrado
+			<p>Parece que la página que buscas no existe o ha cambiado de sitio...</p>
+
+			<p><a v-link="{ name: 'home', params: {}}">Volver al inicio</a></p>
 
 		</div>
 

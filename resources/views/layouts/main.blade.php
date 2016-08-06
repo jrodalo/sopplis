@@ -12,6 +12,7 @@
         <title>Sopplis</title>
     </head>
 <body>
+
     @yield('content')
     @yield('scripts')
 

@@ -2,16 +2,21 @@
 
 	<section id="login" class="page">
 
-		<div class="content">
+		<div class="content content--centered">
 
-			<h1 class="title">Sopplis</h1>
+			<div class="login__form" v-show=" ! submited">
+				<h1 class="title">Sopplis</h1>
+				<form v-on:submit.prevent="sendData">
+					<p><input type="email" class="login__input" id="email" name="email" placeholder="¿Cuál es tu email?" v-model="email" required autofocus></p>
+					<p><input type="submit" class="login__button" value="Entrar"></p>
+				</form>
+			</div>
 
-			<form class="form" v-on:submit.prevent="sendData" v-show=" ! submited">
-				<p><input type="email" id="email" name="email" placeholder="Email" v-model="email" required autofocus></p>
-				<p><input type="submit" value="Entrar"></p>
-			</form>
+			<div class="login__form" v-show="submited">
+				<h2>¡Gracias!</h2>
+				<p>Te he enviado <a href="{{ mailServer }}">un correo</a> con la llave que necesitas para entrar en Sopplis.</p>
+			</div>
 
-			<p v-show="submited">Se ha enviado un correo con la llave para entrar <a href="{{ mailServer }}">ir</a></p>
 		</div>
 
 	</section>
@@ -65,8 +70,6 @@
 
 				}, (response) => {
 
-					console.log(response);
-
 				});
 			}
 		}
@@ -78,6 +81,12 @@
 <style lang="sass">
 
 .title {margin: 30px 0;}
-.form {}
+.login__form {margin: 20px;}
+.login__input {padding: 5px 10px; width: 100%; max-width: 400px; border: 1px solid #CCC; border-radius: 3px;}
+.login__input:focus {outline: 0;}
+.login__input::placeholder {text-align: center;}
+.login__button {margin-top: 20px; background: rgb(66, 184, 221); border-radius: 3px; border: 1px solid transparent; padding: .5em 1em; color: #FFF; text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);}
+.login__button:active {box-shadow: 0 0 0 1px rgba(0,0,0,.15) inset,0 0 6px rgba(0,0,0,.2) inset; outline: 0;}
+.login__button:focus {outline: 0; border: 1px solid #2c7e98;}
 
 </style>
