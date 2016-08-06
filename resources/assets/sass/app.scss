@@ -27,7 +27,7 @@ p {margin: 1em 0;}
 .header {box-shadow: 0 -1px 10px rgba(darken($dark-color, 50%), 0.4);}
 .footer {box-shadow: 0 0 5px rgba(darken($dark-color, 50%), 0.4);}
 .header__title {flex: 1; color: #FFF; text-align: center; font-size: 1em; font-weight: 400;}
-.header__button {width: 45px; height: 45px; line-height: 45px; text-align: center; background: lighten($light-color, 12); color: darken($dark-color, 40%);}
+.header__button {width: 45px; height: 45px; font-size: 1.5em; line-height: 45px; text-align: center; background: lighten($light-color, 12); color: darken($dark-color, 40%);}
 
 .header__content {display: flex; align-items: center;}
 
