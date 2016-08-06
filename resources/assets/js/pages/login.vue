@@ -50,12 +50,3 @@
 	};
 
 </script>
-
-<style lang="sass">
-
-	@import "resources/assets/sass/_variables";
-
-	.loading--centered {margin: 100px auto;}
-	.loading {color: $dark-color;}
-
-</style>

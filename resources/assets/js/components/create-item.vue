@@ -65,14 +65,3 @@
 	};
 
 </script>
-
-<style lang="sass">
-
-	@import "resources/assets/sass/_variables";
-
-	.form {display: flex;}
-	.form__input {border: 0; font-size: 1em; padding: 0 10px; background: $light-color; color: darken($dark-color, 40%); flex: 1; border-radius: 0;}
-	.form__input::placeholder {color: #FFF; opacity: 1; text-align: center;}
-	.form__input:focus {outline: 0;}
-
-</style>

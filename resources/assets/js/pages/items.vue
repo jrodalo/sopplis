@@ -96,9 +96,3 @@
 	};
 
 </script>
-
-<style lang="sass">
-
-	.completed {background: green;}
-
-</style>

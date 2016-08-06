@@ -68,10 +68,3 @@
 	};
 
 </script>
-
-<style lang="sass">
-
-	.item__name {display: flex;}
-	.item__name span {flex: 1;}
-
-</style>

@@ -1,0 +1,24 @@
+
+/**
+ * Checkbox.vue
+ */
+
+.checkbox {display: block; position: relative; padding-left: 15px; cursor: pointer;	font-size: 18px;}
+.checkbox__input {opacity: 0;}
+.checkbox__tick {position: absolute; top: 2px; left: 0; height: 20px; width: 20px; background: #FFF; border: 1px solid darken($back-color, 7); border-radius: 3px;}
+.checkbox__input:checked ~ .checkbox__tick {background: $dark-color; border: 0;}
+.checkbox__input:active ~ .checkbox__tick {background: $dark-color;}
+.checkbox__input:focus ~ .checkbox__tick {border-color: $dark-color;}
+.checkbox__input:checked ~ .checkbox__tick::after {display: block;}
+.checkbox__tick::after {
+	content: '';
+	position: absolute;
+	display: none;
+	left: 7px;
+	top: 4px;
+	width: 5px;
+	height: 10px;
+	border: solid #FFF;
+	border-width: 0 2px 2px 0;
+	transform: rotate(45deg);
+}

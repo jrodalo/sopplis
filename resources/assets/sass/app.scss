@@ -2,6 +2,11 @@
 @import "node_modules/sweetalert/dist/sweetalert";
 @import "_variables";
 
+@import "components/_checkbox";
+@import "components/_form";
+@import "components/_items";
+@import "components/_loading";
+
 html {box-sizing:border-box; position:relative;	font-size:100%; -webkit-tap-highlight-color:transparent;}
 *, :after, :before {box-sizing:inherit;}
 body,div,form,h1,input,li,p,ul {padding:0; margin:0}
@@ -32,6 +37,8 @@ a {text-decoration: none; color: darken($dark-color, 40%);}
 
 .footer {bottom: 0; text-align: center;}
 .footer__link {display: block; line-height: 45px; color: #FFF; text-decoration: none;}
+
+.completed {background: green;}
 
 .fade-transition {
 	transition: all 0.2s linear;
