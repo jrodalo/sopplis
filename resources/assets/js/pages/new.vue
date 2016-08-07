@@ -12,11 +12,27 @@
 			<form class="form" v-on:submit.prevent="addList">
 				<p>
 					<label for="name">Nombre de la lista:</label>
-					<input type="text" id="name" name="name" v-model="name" class="form__input" :placeholder="placeholder" required autofocus>
+					<input
+							type="text"
+							id="name"
+							name="name"
+							v-model="name"
+							class="form__input"
+							:placeholder="placeholder"
+							autocomplete="off"
+							required
+							autofocus>
 				</p>
 				<p>
 					<label for="emails">Compartir con <b>{{ mailCount }}</b> {{ mailCount | pluralize 'persona' }}:</label>
-					<textarea id="emails" name="emails" v-model="emails" class="form__input" rows="4" placeholder="Escribe un email por línea (máximo 5)"></textarea>
+					<textarea
+							id="emails"
+							name="emails"
+							v-model="emails"
+							class="form__input"
+							rows="4"
+							autocapitalize="none"
+							placeholder="Escribe un email por línea (máximo 5)"></textarea>
 					<span class="form__note">Se enviará un email a cada dirección con la llave para entrar</span>
 				</p>
 				<p><input type="submit" value="Guardar" class="form__button"></p>
