@@ -9,8 +9,8 @@
 			</div>
 		</header>
 
-		<div class="content content--centered">
-			<h1 class="title">Upss!</h1>
+		<div class="content content--centered message">
+			<h1 class="message__title">Upss!</h1>
 			<p>Parece que la página que buscas no existe o ha cambiado de sitio...</p>
 		</div>
 

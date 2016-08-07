@@ -8,9 +8,9 @@
 			</div>
 		</header>
 
-		<div class="content">
+		<div class="content content--withfooter">
 			<div v-show="state.favorites.length">
-				<ul class="list list--favs">
+				<ul class="list list--flex">
 					<li
 						v-for="item in state.favorites"
 						v-on:click="select(item)"
@@ -18,7 +18,7 @@
 						>{{ item.name }}</span></li>
 				</ul>
 			</div>
-			<div class="content--centered message--empty" v-show="!state.favorites.length && !$loadingRouteData">
+			<div class="content--centered message message--empty" v-show="!state.favorites.length && !$loadingRouteData">
 				<h1 class="message__title">No hay productos frecuentes</h1>
 				<p>Los productos frequentes son aquellos que has comprado varias veces. Sigue utilizando Sopplis para que aparezcan aquí los productos que más compras.</p>
 			</div>

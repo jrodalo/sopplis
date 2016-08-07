@@ -10,8 +10,8 @@
 		</header>
 
 		<div class="content">
-			<ul class="list">
-				<li v-for="list in state.lists" class="item">
+			<ul class="list list--flex">
+				<li v-for="list in state.lists" class="item item--taller">
 					<a class="item__name" v-link="{ name: 'items', params: { list: list.slug }}">
 						<span>{{ list.name }}</span>
 						<i v-show="list.shared" title="Lista compartida">⚭</i>

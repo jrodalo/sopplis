@@ -5,11 +5,11 @@
 			<create-item :list="list"></create-item>
 		</header>
 
-		<div class="content">
+		<div class="content content--withfooter">
 			<div v-show="state.items.length">
 				<list-item :list="list"></list-item>
 			</div>
-			<div class="content--centered message--empty" v-show="!state.items.length && !$loadingRouteData">
+			<div class="content--centered message message--empty" v-show="!state.items.length && !$loadingRouteData">
 				<h1 class="message__title">Esta lista está vacía :(</h1>
 				<p>Añade los productos que quieres comprar pulsando el botón <b>+</b></p>
 			</div>

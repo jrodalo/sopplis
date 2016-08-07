@@ -33,7 +33,6 @@
 							rows="4"
 							autocapitalize="none"
 							placeholder="Escribe un email por línea (máximo 5)"></textarea>
-					<span class="form__note">Se enviará un email a cada dirección con la llave para entrar</span>
 				</p>
 				<p><input type="submit" value="Guardar" class="form__button"></p>
 			</form>

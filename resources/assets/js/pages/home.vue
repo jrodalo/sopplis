@@ -24,6 +24,7 @@
 			<div class="form" v-show="submited">
 				<h2>¡Gracias!</h2>
 				<p>Te he enviado <a href="{{ mailServer }}">un correo</a> con la llave que necesitas para entrar en Sopplis.</p>
+				<p>Revisa la carpeta de Spam si el correo no te llega en los próximos minutos.</p>
 			</div>
 
 		</div>
