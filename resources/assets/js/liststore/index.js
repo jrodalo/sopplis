@@ -28,16 +28,16 @@ var ListStore = {
 		});
 	},
 
-	insertList: function(list) {
+	addList: function(list) {
+		return Vue.http.post('lists', list);
+	},
 
-		Vue.http.post('lists', list).then((response) => {
-
-			ListStore.state.lists.push(response.json().list);
-			ListStore.writeCache(ListStore.state.lists);
-
-		}, (response) => {
-			sweetAlert('Oops...', 'No he podido crear tu lista... vuelve a intentarlo :(', 'error');
-		});
+	splitEmails: function(emails) {
+		return (emails || '')
+					.split(/\r*\n/)
+					.filter(function(line) {
+						return line && /^.*@.*\.[A-z]{2,3}$/.test(line);
+					});
 	}
 
 }

@@ -40,6 +40,12 @@ router.map({
 		auth: true
 	},
 
+	'/lists/new': {
+		name: 'new',
+		component: require('./pages/new.vue'),
+		auth: true
+	},
+
 	'/lists/:list': {
 		name: 'items',
 		component: require('./pages/items.vue'),

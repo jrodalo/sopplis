@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use Mail;
 use Auth;
 use App\Cart;
 use App\User;
@@ -31,12 +32,41 @@ class CartController extends Controller
     {
         $this->validate($request, [
             'name' => 'required|max:100',
+            'emails' => 'array|max:5',
+            'emails.*' => 'email',
         ]);
 
         $cart = new Cart;
         $cart->name = $request->name;
+        $cart->slug = str_random(6);
         $cart->save();
-        $cart->users()->attach(Auth::user());
+        $cart->users()->attach(Auth::user(), ['role' => 'owner']);
+
+        foreach($request->emails as $email)
+        {
+            if ($email == Auth::user()->email) {
+                continue;
+            }
+
+            $guest = User::where('email', $email)->first();
+
+            if (is_null($guest)) {
+                $guest = new User;
+                $guest->email = $email;
+                $guest->name = strstr($email, '@', true);
+                $guest->api_token = str_random(60);
+            }
+
+            $guest->remember_token = str_random(60);
+            $guest->save();
+
+            $cart->users()->attach($guest, ['role' => 'guest']);
+
+            Mail::queue('emails.guests', ['user' => Auth::user(), 'guest' => $guest, 'cart' => $cart], function ($message) use ($guest) {
+                $message->to($guest->email);
+                $message->subject('Te han invitado a una lista compartida en Sopplis');
+            });
+        }
 
         return ['success' => true, 'cart' => $cart];
     }

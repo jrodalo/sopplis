@@ -4,7 +4,7 @@
 
 		<div class="content content--centered">
 
-			<div class="login__form" v-show=" ! submited">
+			<div class="form" v-show=" ! submited">
 				<h1 class="title">Sopplis</h1>
 				<form v-on:submit.prevent="sendData">
 					<p><input
@@ -12,16 +12,16 @@
 							id="email"
 							name="email"
 							autocomplete="email"
-							class="login__input"
+							class="form__input"
 							placeholder="¿Cuál es tu email?"
 							v-model="email"
 							required
 							autofocus></p>
-					<p><input type="submit" class="login__button" value="Entrar"></p>
+					<p><input type="submit" class="form__button" value="Entrar"></p>
 				</form>
 			</div>
 
-			<div class="login__form" v-show="submited">
+			<div class="form" v-show="submited">
 				<h2>¡Gracias!</h2>
 				<p>Te he enviado <a href="{{ mailServer }}">un correo</a> con la llave que necesitas para entrar en Sopplis.</p>
 			</div>

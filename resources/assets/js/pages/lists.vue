@@ -5,7 +5,7 @@
 			<div class="header__content">
 				<a href="#" class="header__button" v-on:click="salir">×</a>
 				<h1 class="header__title">Mis listas</h1>
-				<a href="#" class="header__button" v-on:click="salir">+</a>
+				<a v-link="{ name: 'new' }" class="header__button">+</a>
 			</div>
 		</header>
 

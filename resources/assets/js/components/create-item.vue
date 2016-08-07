@@ -6,8 +6,8 @@
 		<a href="#" class="header__button" v-on:click.prevent="showForm">+</a>
 	</div>
 
-	<form class="form" v-on:submit.prevent="addItem" v-show="editing">
-		<input class="form__input"
+	<form class="header-form" v-on:submit.prevent="addItem" v-show="editing">
+		<input class="header-form__input"
 				autocomplete="off"
 				placeholder="¿Qué necesitas comprar?"
 				maxlength="100"
