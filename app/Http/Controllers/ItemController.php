@@ -25,7 +25,7 @@ class ItemController extends Controller
 
         $items = $cart->visibleItems()->get();
 
-        return response()->json(['success' => true, 'items' => $items]);
+        return response()->json(['success' => true, 'list' => $cart, 'items' => $items]);
     }
 
     /**

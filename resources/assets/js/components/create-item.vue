@@ -2,7 +2,7 @@
 
 	<div class="header__content" v-show="!editing">
 		<a v-link="{ name: 'lists' }" class="header__button">«</a>
-		<h1 class="header__title">Lista de la compra</h1>
+		<h1 class="header__title" v-text="state.list.name"></h1>
 		<a href="#" class="header__button" v-on:click.prevent="showForm">+</a>
 	</div>
 
@@ -32,7 +32,8 @@
 		data: function() {
 			return {
 				newItem: '',
-				editing: false
+				editing: false,
+				state: ItemStore.state
 			};
 		},
 

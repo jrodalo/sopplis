@@ -3,8 +3,13 @@ import Vue from 'vue';
 var ItemStore = {
 
 	state: {
+		list: {},
 		items: [],
 		favorites: []
+	},
+
+	currentList: function(list) {
+		ItemStore.state.list = list;
 	},
 
 	readCache: function(list, isFavorites) {
@@ -27,7 +32,9 @@ var ItemStore = {
 
 		return Vue.http.get('lists/' + list + '/items').then((response) => {
 
-			ItemStore.state.items = response.json().items;
+			var json = response.json();
+			ItemStore.state.items = json.items;
+			ItemStore.state.list = json.list;
 			ItemStore.writeCache(list, ItemStore.state.items);
 
 		}, (response) => {

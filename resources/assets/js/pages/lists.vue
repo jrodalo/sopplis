@@ -12,7 +12,7 @@
 		<div class="content">
 			<ul class="list list--flex">
 				<li v-for="list in state.lists" class="item item--taller">
-					<a class="item__name" v-link="{ name: 'items', params: { list: list.slug }}">
+					<a class="item__name" v-on:click.prevent="openList(list)">
 						<span>{{ list.name }}</span>
 						<i v-show="list.shared" title="Lista compartida">⚭</i>
 					</a>
@@ -27,7 +27,8 @@
 
 	import SweetAlert from 'sweetalert';
 	import User from '../user';
-	import ListStore from '../liststore'
+	import ListStore from '../liststore';
+	import ItemStore from '../itemstore';
 
 	export default {
 
@@ -45,6 +46,11 @@
 		},
 
 		methods: {
+
+			openList: function(list) {
+				ItemStore.currentList(list);
+				this.$router.go({ name: 'items', params: { list: list.slug }});
+			},
 
 			salir: function() {
 
