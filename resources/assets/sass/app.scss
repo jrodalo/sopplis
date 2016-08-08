@@ -44,10 +44,9 @@ p {margin: 1em 0;}
 .footer__link {display: block; line-height: 45px; color: #FFF; text-decoration: none;}
 
 .completed {background: green;}
+.hidden {opacity: 0;}
 
-.fade-transition {
-	transition: all 0.2s linear;
-}
+.fade-transition {transition: all 0.2s linear;}
 
 @media (min-width:800px) {
 	body {background: #324657;}
