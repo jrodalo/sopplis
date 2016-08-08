@@ -2,7 +2,7 @@
 
 	<div class="header__content" v-show="!editing">
 		<a v-link="{ name: 'lists' }" class="header__button">«</a>
-		<h1 class="header__title" v-text="state.list.name"></h1>
+		<h1 :class="{'header__title': true, 'hidden': ! state.list.name}" v-text="state.list.name" transition="fade"></h1>
 		<a href="#" class="header__button" v-on:click.prevent="showForm">+</a>
 	</div>
 

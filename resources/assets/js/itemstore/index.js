@@ -8,10 +8,6 @@ var ItemStore = {
 		favorites: []
 	},
 
-	currentList: function(list) {
-		ItemStore.state.list = list;
-	},
-
 	readCache: function(list, isFavorites) {
 
 		var type = isFavorites ? '_FAVS' : '_ITEMS';
@@ -28,6 +24,7 @@ var ItemStore = {
 
 	readItems: function(list) {
 
+		ItemStore.state.list = {};
 		ItemStore.state.items = ItemStore.readCache(list);
 
 		return Vue.http.get('lists/' + list + '/items').then((response) => {
