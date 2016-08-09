@@ -33,7 +33,6 @@ class FavoriteController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  App\Cart  $cart
-     * @param  App\Item  $item
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Cart $cart)
@@ -49,6 +48,31 @@ class FavoriteController extends Controller
         $cart->items()
              ->whereIn('id', explode(',', $request->items))
              ->update(['visible' => true]);
+
+        return ['success' => true];
+    }
+
+
+    /**
+     * Remove the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  App\Cart  $cart
+     * @return \Illuminate\Http\Response
+     */
+    public function delete(Request $request, Cart $cart)
+    {
+        if (Auth::user()->cant('write', $cart)) {
+            return response()->json(['success' => false], 403);
+        }
+
+        $this->validate($request, [
+            'items' => 'required',
+        ]);
+
+        $cart->items()
+             ->whereIn('id', explode(',', $request->items))
+             ->update(['count' => 0]);
 
         return ['success' => true];
     }

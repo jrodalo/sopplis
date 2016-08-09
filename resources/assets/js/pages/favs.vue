@@ -5,11 +5,12 @@
 			<div class="header__content">
 				<a v-link="{ name: 'items' }" class="header__button">«</a>
 				<h1 class="header__title">Productos frequentes</h1>
+				<a v-on:click="changeMode" :class="{'header__button': true, 'header__button--pressed': mode == 'remove'}">✎</a>
 			</div>
 		</header>
 
 		<div class="content content--withfooter">
-			<div v-show="state.favorites.length">
+			<div v-show="state.favorites.length" :class="{remove: mode == 'remove', add: mode == 'add'}">
 				<ul class="list list--flex">
 					<li
 						v-for="item in state.favorites"
@@ -25,10 +26,18 @@
 		</div>
 
 		<footer class="footer" v-show="state.favorites.length">
-			<a href="#fav-items" :class="{footer__link: true}" v-show="selected.length" v-on:click.prevent="addSelected">
-				Añadir {{ selected.length}} {{ selected.length | pluralize 'producto' }}
-			</a>
-			<a class="footer__link" v-else>Selecciona los que quieras añadir</a>
+			<div v-show="mode=='add'">
+				<a class="footer__link" v-on:click.prevent="addSelected">
+					<span v-show="selected.length">Añadir {{ selected.length}} {{ selected.length | pluralize 'producto' }}</span>
+					<span v-else>Selecciona los que quieras añadir</span>
+				</a>
+			</div>
+			<div v-else>
+				<a class="footer__link footer__link--red" v-on:click.prevent="removeSelected">
+					<span v-show="selected.length">Eliminar {{ selected.length}} {{ selected.length | pluralize 'producto' }}</span>
+					<span v-else>Selecciona los que quieras eliminar</span>
+				</a>
+			</div>
 		</footer>
 
 	</section>
@@ -51,7 +60,8 @@
 		data: function() {
 			return {
 				state: ItemStore.state,
-				list: this.$route.params.list
+				list: this.$route.params.list,
+				mode: 'add'
 			}
 		},
 
@@ -64,14 +74,40 @@
 		},
 
 		methods: {
+
+			changeMode: function() {
+				this.mode = (this.mode == 'add') ? 'remove' : 'add';
+			},
+
 			select: function(item) {
 				item.selected = ! item.selected;
 			},
 
 			addSelected: function() {
-				ItemStore.addItems(this.list, this.selected)
-				.then(response => {
+
+				var itemsSelected = this.selected;
+
+				if ( ! itemsSelected.length) {
+					return;
+				}
+
+				ItemStore.addFavorites(this.list, itemsSelected).then(response => {
 					this.$router.go({ name: 'items', params: {list: this.list} })
+				}, response => {
+
+				});
+			},
+
+			removeSelected: function() {
+
+				var itemsSelected = this.selected;
+
+				if ( ! itemsSelected.length) {
+					return;
+				}
+
+				ItemStore.deleteFavorites(this.list, itemsSelected).then(response => {
+					this.mode = 'add';
 				}, response => {
 
 				});

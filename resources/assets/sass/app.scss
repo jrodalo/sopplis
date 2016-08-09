@@ -27,8 +27,9 @@ p {margin: 1em 0;}
 .header, .footer {position: fixed; z-index: 1; width: 100%; height: 45px; background: $dark-color;}
 .header {box-shadow: 0 -1px 10px rgba(darken($dark-color, 50%), 0.4);}
 .footer {box-shadow: 0 0 5px rgba(darken($dark-color, 50%), 0.4);}
-.header__title {flex: 1; color: #FFF; text-align: center; font-size: 1em; font-weight: 400;}
+.header__title {flex: 1; color: #FFF; text-align: center; font-size: 1em; font-weight: 400; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; padding: 0 5px;}
 .header__button {width: 45px; height: 45px; font-size: 1.5em; line-height: 45px; text-align: center; background: lighten($light-color, 12); color: darken($dark-color, 40%);}
+.header__button--pressed {box-shadow: inset 0 0 10px 0 #779EA9;}
 
 .header__content {display: flex; align-items: center;}
 
@@ -42,8 +43,9 @@ p {margin: 1em 0;}
 
 .footer {bottom: 0; text-align: center;}
 .footer__link {display: block; line-height: 45px; color: #FFF; text-decoration: none;}
+.footer__link--green {background: #429242;}
+.footer__link--red {background: #D04B4B;}
 
-.completed {background: green;}
 .hidden {opacity: 0;}
 
 .fade-transition {transition: all 0.2s linear;}

@@ -14,6 +14,7 @@ Route::group(['prefix' => 'api/v1'], function () {
 
 		Route::get('lists/{cart}/favorite', 'FavoriteController@index');
 		Route::put('lists/{cart}/favorite', 'FavoriteController@update');
+		Route::delete('lists/{cart}/favorite', 'FavoriteController@delete');
 	});
 
 	Route::group(['middleware' => ['throttle:5,1']], function() {

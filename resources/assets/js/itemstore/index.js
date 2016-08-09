@@ -106,7 +106,19 @@ var ItemStore = {
 		});
 	},
 
-	addItems: function(list, items) {
+	deleteFavorites: function(list, items) {
+
+		var ids = ItemStore.extractIds(items);
+
+		return Vue.http.delete('lists/' + list + '/favorite', {params: {items: ids}}).then(response => {
+			ItemStore.state.favorites = ItemStore.state.favorites.filter(function(item) {
+				return ! item.selected;
+			});
+			ItemStore.writeCache(list, ItemStore.state.favorites, true);
+		});
+	},
+
+	addFavorites: function(list, items) {
 
 		var ids = ItemStore.extractIds(items);
 
