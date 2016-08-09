@@ -73,7 +73,7 @@
 				var self = this;
 
 				sweetAlert({
-					  title: '¿Finalizar la compra?',
+					  title: '¿Has terminado?',
 					  text: 'Se eliminarán los productos que hayas seleccionado',
 					  type: 'info',
 					  showCancelButton: true,
