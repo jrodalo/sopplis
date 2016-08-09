@@ -69,8 +69,11 @@
 		},
 
 		methods: {
+
 			changePlaceholder: function() {
-				this.placeholder = this.placeholders[Math.floor(Math.random()*this.placeholders.length)];
+				var position = this.placeholders.indexOf(this.placeholder) + 1;
+				position = position >= this.placeholders.length ? 0 : position;
+				this.placeholder = this.placeholders[position];
 			},
 
 			addList: function() {
