@@ -19,8 +19,7 @@
 							class="form__input"
 							placeholder="Email"
 							v-model="email"
-							required
-							autofocus></p>
+							required></p>
 					<p><input type="submit" class="form__button" value="Entrar en Sopplis"></p>
 				</form>
 			</div>
