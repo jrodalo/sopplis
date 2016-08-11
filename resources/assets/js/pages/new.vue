@@ -77,6 +77,7 @@
 			},
 
 			addList: function() {
+
 				ListStore.addList({name: this.name, emails: ListStore.splitEmails(this.emails)}).then((response) => {
 					this.$router.go({ name: 'lists' });
 				}, (response) => {

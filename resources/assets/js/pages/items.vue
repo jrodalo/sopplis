@@ -76,6 +76,7 @@
 					  title: '¿Has terminado?',
 					  text: 'Se eliminarán los productos que hayas seleccionado',
 					  type: 'info',
+					  animation: 'slide-from-bottom',
 					  showCancelButton: true,
 					  confirmButtonText: 'Si',
 					  cancelButtonText: 'No',
@@ -83,7 +84,15 @@
 					  showLoaderOnConfirm: true
 					},
 					function() {
-						ItemStore.deleteItems(self.list, self.completedItems);
+						ItemStore.deleteItems(self.list, self.completedItems).then(response => {
+							sweetAlert({
+								title: '¡Genial!',
+								timer: 2000,
+								type: 'success',
+								showConfirmButton: false});
+						}, (response) => {
+							sweetAlert('Oops...', 'No he podido finalizar la compra... vuelve a intentarlo :(', 'error');
+						});
 					}
 				);
 			}

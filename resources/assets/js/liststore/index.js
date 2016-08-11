@@ -19,12 +19,8 @@ var ListStore = {
 		ListStore.state.lists = ListStore.readCache();
 
 		return Vue.http.get('lists').then((response) => {
-
 			ListStore.state.lists = response.json().lists;
 			ListStore.writeCache(ListStore.state.lists);
-
-		}, (response) => {
-			sweetAlert('Oops...', 'No he podido leer tus listas... vuelve a intentarlo :(', 'error');
 		});
 	},
 

@@ -68,7 +68,11 @@ router.map({
 router.beforeEach(function (transition) {
 
 	if (transition.to.auth && ! User.isAuthenticated()) {
-		sweetAlert('¿Quién eres?', 'Lo siento, no recuerdo quien eres... tienes que volver a entrar', 'error');
+		sweetAlert({
+					  title: '¿Quién eres?',
+					  text: 'Lo siento, no recuerdo quien eres... tienes que volver a entrar',
+					  type: 'error',
+					  animation: 'slide-from-bottom'});
 		transition.redirect('/');
 	} else {
 		transition.next();

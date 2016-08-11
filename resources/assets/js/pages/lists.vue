@@ -53,6 +53,7 @@
 				sweetAlert({
 					  title: '¿Quieres salir de Sopplis?',
 					  type: 'info',
+					  animation: 'slide-from-bottom',
 					  showCancelButton: true,
 					  confirmButtonText: 'Si',
 					  cancelButtonText: 'No',

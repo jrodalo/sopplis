@@ -5,7 +5,7 @@
 			<div class="header__content">
 				<a v-link="{ name: 'items' }" class="header__button">«</a>
 				<h1 class="header__title">Productos frequentes</h1>
-				<a v-on:click="changeMode" :class="{'header__button': true, 'header__button--pressed': mode == 'remove'}">✎</a>
+				<a v-show="state.favorites.length" v-on:click="changeMode" :class="{'header__button': true, 'header__button--pressed': mode == 'remove'}">✎</a>
 			</div>
 		</header>
 
