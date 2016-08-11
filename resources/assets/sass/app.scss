@@ -32,7 +32,7 @@ p {margin: 1em 0;}
 .header__button--pressed {box-shadow: inset 0 0 10px 0 #779EA9;}
 .header__content {display: flex; align-items: center;}
 
-.content {margin: 45px 0 0; overflow-y: scroll; -webkit-overflow-scrolling: touch;}
+.content {margin: 45px 0 0; overflow-y: auto; -webkit-overflow-scrolling: touch;}
 .content--withfooter {margin: 45px 0;}
 .content--centered {text-align: center;}
 
