@@ -10,14 +10,20 @@
 		</header>
 
 		<div class="content">
-			<ul class="list list--flex">
-				<li v-for="list in state.lists" class="item item--taller">
-					<a class="item__name--flex" v-link="{ name: 'items', params: { list: list.slug }}">
-						<span>{{ list.name }}</span>
-						<i v-show="list.shared" title="Lista compartida">⚭</i>
-					</a>
-				</li>
-			</ul>
+			<div v-show="state.lists.length">
+				<ul class="list list--flex">
+					<li v-for="list in state.lists" class="item item--taller">
+						<a class="item__name--flex" v-link="{ name: 'items', params: { list: list.slug }}">
+							<span>{{ list.name }}</span>
+							<i v-show="list.shared" title="Lista compartida">⚭</i>
+						</a>
+					</li>
+				</ul>
+			</div>
+			<div class="content--centered message message--empty" v-show="!state.lists.length && !$loadingRouteData">
+				<h1 class="message__title">Esto está vacío :(</h1>
+				<p>Es hora de crear tu primera lista pulsando el botón <b>+</b></p>
+			</div>
 		</div>
 	</section>
 

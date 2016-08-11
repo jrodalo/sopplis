@@ -5,7 +5,11 @@
 		<div class="content content--centered">
 
 			<div class="form" v-show=" ! submited">
+
+				<img src="/favicon-touch.png" alt="Logo" class="logo" width="80" height="80">
 				<h1 class="title">Sopplis</h1>
+				<h2 class="subtitle">Hacer listas de la compra en papel es cosa del pasado</h2>
+
 				<form v-on:submit.prevent="sendData">
 					<p><input
 							type="email"
@@ -13,18 +17,18 @@
 							name="email"
 							autocomplete="email"
 							class="form__input"
-							placeholder="¿Cuál es tu email?"
+							placeholder="Email"
 							v-model="email"
 							required
 							autofocus></p>
-					<p><input type="submit" class="form__button" value="Entrar"></p>
+					<p><input type="submit" class="form__button" value="Entrar en Sopplis"></p>
 				</form>
 			</div>
 
 			<div class="form" v-show="submited">
-				<h2>¡Gracias!</h2>
+				<h1>¡Perfecto!</h1>
 				<p>Te he enviado <a href="{{ mailServer }}">un correo</a> con la llave que necesitas para entrar en Sopplis.</p>
-				<p>Revisa la carpeta de Spam si el correo no te llega en los próximos minutos.</p>
+				<p class="form__note">Revisa la carpeta de Spam si el correo no te llega en los próximos minutos.</p>
 			</div>
 
 		</div>
@@ -74,7 +78,7 @@
 
 				this.$http.post('users', {email: email}).then((response) => {
 
-					if (response.ok) {
+					if (response.ok && response.json().success === true) {
 						this.submited = true;
 					}
 

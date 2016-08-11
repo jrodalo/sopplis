@@ -30,7 +30,6 @@ p {margin: 1em 0;}
 .header__title {flex: 1; color: #FFF; text-align: center; font-size: 1em; font-weight: 400; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; padding: 0 5px;}
 .header__button {width: 45px; height: 45px; font-size: 1.5em; line-height: 45px; text-align: center; background: lighten($light-color, 12); color: darken($dark-color, 40%);}
 .header__button--pressed {box-shadow: inset 0 0 10px 0 #779EA9;}
-
 .header__content {display: flex; align-items: center;}
 
 .content {margin: 45px 0 0; overflow-y: scroll; -webkit-overflow-scrolling: touch;}
@@ -47,6 +46,10 @@ p {margin: 1em 0;}
 .footer__link--red {background: #D04B4B;}
 
 .hidden {opacity: 0;}
+
+.logo {border-radius: 10px;}
+.title {}
+.subtitle {font-size: 0.95em; font-weight: normal; margin: 0 0 30px; color: #666;}
 
 .fade-transition {transition: all 0.2s linear;}
 

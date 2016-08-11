@@ -8,7 +8,7 @@
 			</div>
 		</header>
 
-		<div class="content content--centered">
+		<div class="content">
 			<form class="form" v-on:submit.prevent="addList">
 				<p>
 					<label for="name">Nombre de la lista:</label>
@@ -20,8 +20,7 @@
 							class="form__input"
 							:placeholder="placeholder"
 							autocomplete="off"
-							required
-							autofocus>
+							required>
 				</p>
 				<p>
 					<label for="emails">Compartir con <b>{{ mailCount }}</b> {{ mailCount | pluralize 'persona' }}:</label>
@@ -77,6 +76,10 @@
 			},
 
 			addList: function() {
+
+				if (! this.name) {
+					return;
+				}
 
 				ListStore.addList({name: this.name, emails: ListStore.splitEmails(this.emails)}).then((response) => {
 					this.$router.go({ name: 'lists' });
