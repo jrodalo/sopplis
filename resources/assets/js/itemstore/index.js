@@ -61,12 +61,14 @@ var ItemStore = {
 		return Vue.http.post('lists/' + list + '/items', item).then(response => {
 			ItemStore.state.items.push(response.json().item);
 			ItemStore.writeCache(list, ItemStore.state.items);
+			return response;
 		});
 	},
 
 	updateItem: function(list, item) {
 		return Vue.http.put('lists/' + list + '/items/' + item.id, {done: item.done}).then(response => {
 			ItemStore.writeCache(list, ItemStore.state.items);
+			return response;
 		});
 	},
 
@@ -77,6 +79,7 @@ var ItemStore = {
 		return Vue.http.delete('lists/' + list + '/items', {params: {items: ids}}).then(response => {
 			ItemStore.state.items = ItemStore.readActiveItems();
 			ItemStore.writeCache(list, ItemStore.state.items);
+			return response;
 		});
 	},
 
@@ -89,6 +92,7 @@ var ItemStore = {
 				return ! item.selected;
 			});
 			ItemStore.writeCache(list, ItemStore.state.favorites, true);
+			return response;
 		});
 	},
 

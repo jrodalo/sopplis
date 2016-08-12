@@ -86,7 +86,7 @@
 					function() {
 						ItemStore.deleteItems(self.list, self.completedItems).then(response => {
 							sweetAlert({
-								title: '¡Genial!',
+								title: response.json().message || '¡Genial!',
 								timer: 2000,
 								type: 'success',
 								showConfirmButton: false});

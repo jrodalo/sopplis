@@ -8,6 +8,7 @@ use Auth;
 use App\Cart;
 use App\Item;
 use App\Http\Requests;
+use Illuminate\Support\Collection;
 
 class ItemController extends Controller
 {
@@ -105,7 +106,22 @@ class ItemController extends Controller
              ->whereIn('id', explode(',', $request->items))
              ->update(['visible' => false, 'done' => false]);
 
-        return ['success' => true];
+        return ['success' => true, 'message' => $this->randomSuccessMessage()];
+    }
+
+    /**
+     * Get a random success message
+     *
+     * @return string
+     */
+    public static function randomSuccessMessage()
+    {
+        return Collection::make([
+            '¡Genial!',
+            '¡Perfecto!',
+            '¡Por fin! :)',
+            '¡A casa!',
+        ])->random();
     }
 
 }
