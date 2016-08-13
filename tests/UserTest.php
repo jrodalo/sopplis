@@ -7,6 +7,7 @@ use Illuminate\Foundation\Testing\DatabaseTransactions;
 class UserTest extends TestCase
 {
     use DatabaseTransactions;
+    use WithoutMiddleware;
 
     public function test_se_retorna_la_api_key_cuando_se_presenta_un_token_valido()
     {
@@ -61,7 +62,7 @@ class UserTest extends TestCase
     {
         $this->expectsEvents(App\Events\UserWasCreated::class);
 
-        $this->post("/api/v1/users", ['email' => 'jrodalo@gmail.com'])
+        $this->post("/api/v1/users", ['email' => 'jrodalo@sopplis.com'])
              ->assertResponseOk()
              ->seeJson([
                 'success' => true,

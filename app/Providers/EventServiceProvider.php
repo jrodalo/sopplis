@@ -14,7 +14,10 @@ class EventServiceProvider extends ServiceProvider
      */
     protected $listen = [
         'App\Events\UserWasCreated' => [
-            'App\Listeners\EmailUserConfirmation',
+            'App\Listeners\EmailUserWelcome',
+        ],
+        'App\Events\UserReturned' => [
+            'App\Listeners\EmailUserKey',
         ],
     ];
 

@@ -8,6 +8,7 @@ use Auth;
 use Event;
 use App\User;
 use App\Http\Requests;
+use App\Events\UserReturned;
 use App\Events\UserWasCreated;
 
 class UserController extends Controller
@@ -49,12 +50,18 @@ class UserController extends Controller
             $user->email = $request->email;
             $user->name = strstr($request->email, '@', true);
             $user->api_token = str_random(60);
+            $user->remember_token = str_random(24);
+            $user->save();
+
+            Event::fire(new UserWasCreated($user));
+
+        } else {
+
+            $user->remember_token = str_random(24);
+            $user->save();
+
+            Event::fire(new UserReturned($user));
         }
-
-        $user->remember_token = str_random(60);
-        $user->save();
-
-        Event::fire(new UserWasCreated($user));
 
         return ['success' => true];
     }

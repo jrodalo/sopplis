@@ -21,7 +21,7 @@
 				</ul>
 			</div>
 			<div class="content--centered message message--empty" v-show="!state.lists.length && !$loadingRouteData">
-				<h1 class="message__title">Esto está vacío :(</h1>
+				<h1 class="message__title">No tienes ninguna lista :(</h1>
 				<p>Es hora de crear tu primera lista pulsando el botón <b>+</b></p>
 			</div>
 		</div>

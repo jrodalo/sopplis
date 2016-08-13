@@ -7,7 +7,7 @@ use App\Events\UserWasCreated;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
-class EmailUserConfirmation
+class EmailUserWelcome
 {
     /**
      * Create the event listener.
@@ -16,7 +16,7 @@ class EmailUserConfirmation
      */
     public function __construct()
     {
-
+        //
     }
 
     /**
