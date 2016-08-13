@@ -34,7 +34,9 @@
 		route: {
 
 			data: function (transition) {
-				return ItemStore.readItems(this.list);
+				return ItemStore.readItems(this.list).catch(() => {
+					this.$router.go({ path: '/404' });
+				});
 			}
 		},
 
