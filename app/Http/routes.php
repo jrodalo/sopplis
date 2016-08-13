@@ -21,6 +21,7 @@ Route::group(['prefix' => 'api/v1'], function () {
 
     	Route::get('users', 'UserController@readToken');
     	Route::post('users', 'UserController@store');
+    	Route::put('users', 'UserController@update');
 	});
 });
 

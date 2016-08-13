@@ -7,6 +7,12 @@ import SweetAlert from 'sweetalert';
 Vue.use(VueRouter);
 Vue.use(VueResource);
 
+SweetAlert.setDefaults({
+	confirmButtonText: 'Si',
+	cancelButtonText: 'No',
+	animation: 'slide-from-bottom',
+});
+
 Vue.config.debug = true;
 Vue.http.options.root = '/api/v1';
 Vue.http.interceptors.push((request, next) => {
@@ -58,6 +64,12 @@ router.map({
 		auth: true
 	},
 
+	'/config': {
+		name: 'config',
+		component: require('./pages/config.vue'),
+		auth: true
+	},
+
 	'*': {
 		name: '404',
 		component: require('./pages/404.vue')
@@ -70,9 +82,11 @@ router.beforeEach(function (transition) {
 	if (transition.to.auth && ! User.isAuthenticated()) {
 		sweetAlert({
 					  title: '¿Quién eres?',
-					  text: 'Lo siento, no recuerdo quien eres... tienes que volver a entrar',
-					  type: 'error',
-					  animation: 'slide-from-bottom'});
+					  text: 'Lo siento, no recuerdo quien eres... tienes que volver a entrar.',
+					  confirmButtonText: 'Ok',
+					  type: 'error'
+					});
+		User.logout();
 		transition.redirect('/');
 	} else {
 		transition.next();

@@ -14,7 +14,7 @@
 				v-model="newItem"
 				v-on:blur="hideForm"
 				v-el:item-input>
-		<a v-link="{ name: 'favs', params: {list: list} }" class="header__button header__button--side">☰</a>
+		<a v-link="{ name: 'favs', params: {list: list} }" class="header__button header__button--side">★</a>
 	</form>
 </template>
 

@@ -27,7 +27,7 @@ class UserController extends Controller
         $user->remember_token = '';
         $user->save();
 
-        return response()->json(['success' => true, 'token' => $user->api_token]);
+        return response()->json(['success' => true, 'name' => $user->name, 'token' => $user->api_token]);
     }
 
     /**
@@ -59,4 +59,22 @@ class UserController extends Controller
         return ['success' => true];
     }
 
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request)
+    {
+        $this->validate($request, [
+            'name' => 'required|max:100',
+        ]);
+
+        $user = Auth::user();
+        $user->name = $request->name;
+        $user->save();
+
+        return ['success' => true];
+    }
 }

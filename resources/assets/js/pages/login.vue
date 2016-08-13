@@ -32,7 +32,10 @@
 				return this.$http.get('users?token=' + this.$route.query.token).then((response) => {
 
 					if (response.ok) {
-						User.login(response.json().token);
+
+						var data = response.json();
+
+						User.login(data.name, data.token);
 						transition.redirect({ name: 'lists', query: {} });
 					}
 

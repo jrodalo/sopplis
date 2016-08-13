@@ -78,10 +78,7 @@
 					  title: '¿Has terminado?',
 					  text: 'Se eliminarán los productos que hayas seleccionado',
 					  type: 'info',
-					  animation: 'slide-from-bottom',
 					  showCancelButton: true,
-					  confirmButtonText: 'Si',
-					  cancelButtonText: 'No',
 					  closeOnConfirm: false,
 					  showLoaderOnConfirm: true
 					},

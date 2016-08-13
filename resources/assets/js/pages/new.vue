@@ -20,6 +20,7 @@
 							class="form__input"
 							:placeholder="placeholder"
 							autocomplete="off"
+							maxlenght="100"
 							required>
 				</p>
 				<p>
