@@ -20,6 +20,7 @@
 							v-model="name"
 							class="form__input"
 							autocomplete="off"
+							autocapitalize="words"
 							maxlength="100"
 							required>
 					<p class="form__note">Cuando compartas una lista, la otra persona verá este nombre en lugar de tu dirección de correo.</p>
