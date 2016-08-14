@@ -8,7 +8,7 @@
 
 				<img src="/favicon-touch.png" alt="Logo" class="logo" width="80" height="80">
 				<h1 class="title">Sopplis</h1>
-				<h2 class="subtitle">Hacer listas de la compra en papel es cosa del pasado</h2>
+				<h2 class="subtitle">Hacer la lista de la compra en papel es cosa del pasado</h2>
 
 				<form v-on:submit.prevent="sendData">
 					<p><input
