@@ -16,7 +16,7 @@
 		</div>
 
 		<footer class="footer" v-show="state.items.length">
-			<a href="#completed-items" :class="{'footer__link': true, 'footer__link--green': allDone}" v-on:click.prevent="finalize" transition="fade">
+			<a href="#active-items" :class="{'footer__link': true, 'footer__link--green': allDone}" v-on:click.prevent="finalize" transition="fade">
 				{{ completedItems.length }} de {{ state.items.length }}
 			</a>
 		</footer>

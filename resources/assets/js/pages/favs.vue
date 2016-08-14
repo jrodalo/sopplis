@@ -4,7 +4,7 @@
 		<header class="header">
 			<div class="header__content">
 				<a v-link="{ name: 'items' }" class="header__button">«</a>
-				<h1 class="header__title">Productos frequentes</h1>
+				<h1 class="header__title">Productos frecuentes</h1>
 				<a v-show="state.favorites.length" v-on:click="changeMode" :class="{'header__button': true, 'header__button--pressed': mode == 'remove'}">✎</a>
 			</div>
 		</header>
@@ -21,19 +21,19 @@
 			</div>
 			<div class="content--centered message message--empty" v-show="!state.favorites.length && !$loadingRouteData">
 				<h1 class="message__title">No hay productos frecuentes</h1>
-				<p>Los productos frequentes son aquellos que has comprado varias veces. Sigue utilizando Sopplis para que aparezcan aquí los productos que más compras.</p>
+				<p>Los productos frecuentes son aquellos que has comprado varias veces. Sigue utilizando Sopplis para que aparezcan aquí los productos que más compras.</p>
 			</div>
 		</div>
 
 		<footer class="footer" v-show="state.favorites.length">
 			<div v-show="mode=='add'">
-				<a class="footer__link" v-on:click.prevent="addSelected">
+				<a href="#fav-items" class="footer__link" v-on:click.prevent="addSelected">
 					<span v-show="selected.length">Añadir {{ selected.length}} {{ selected.length | pluralize 'producto' }}</span>
 					<span v-else>Selecciona los que quieras añadir</span>
 				</a>
 			</div>
 			<div v-else>
-				<a class="footer__link footer__link--red" v-on:click.prevent="removeSelected">
+				<a href="#fav-items" class="footer__link footer__link--red" v-on:click.prevent="removeSelected">
 					<span v-show="selected.length">Eliminar {{ selected.length}} {{ selected.length | pluralize 'producto' }}</span>
 					<span v-else>Selecciona los que quieras eliminar</span>
 				</a>

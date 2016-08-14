@@ -55,6 +55,6 @@ p {margin: 1em 0;}
 
 @media (min-width:800px) {
 	body {background: #324657;}
-	.layout {position: absolute; left: 0; right: 0; top: 0; bottom: 0; overflow: hidden; max-width: 420px; max-height: 80%; margin: auto; border: 5px solid #263441; border-radius: 10px;}
+	.layout {position: absolute; left: 0; right: 0; top: 0; bottom: 0; overflow: hidden; max-width: 480px; max-height: 80%; margin: auto; border-radius: 10px;}
 	.header, .footer {width: 100%; position: absolute;}
 }

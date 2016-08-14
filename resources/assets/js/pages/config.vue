@@ -29,7 +29,7 @@
 		</div>
 
 		<footer class="footer">
-			<a href="#" v-on:click="salir" class="footer__link footer__link--red">Salir de Sopplis</a>
+			<a href="#config" v-on:click.prevent="salir" class="footer__link footer__link--red">Salir de Sopplis</a>
 		</footer>
 	</section>
 
