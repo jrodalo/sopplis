@@ -45,34 +45,25 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $e)
     {
-        // If the request wants JSON (AJAX doesn't always want JSON)
         if ($request->wantsJson())
         {
-            // Define the response
             $response = [
                 'success' => false
             ];
-
-            // If the app is in debug mode
-            if (config('app.debug'))
-            {
-                // Add the exception class name, message and stack trace to response
-                $response['exception'] = get_class($e); // Reflection might be better here
-                $response['message'] = $e->getMessage();
-                $response['trace'] = $e->getTrace()[0];
-            }
-
-            // Default response of 400
             $status = 400;
 
-            // If this exception is an instance of HttpException
-            if ($this->isHttpException($e))
+            if ($e instanceof ModelNotFoundException)
             {
-                // Grab the HTTP status code from the Exception
-                $status = $e->getStatusCode();
+                $response['message'] = 'Record not found';
+                $status = 404;
             }
 
-            // Return a JSON response with the response array and status code
+            if ($e instanceof ValidationException)
+            {
+                $response['message'] = $e->validator->messages();
+                $status = 422;
+            }
+
             return response()->json($response, $status);
         }
 

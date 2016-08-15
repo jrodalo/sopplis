@@ -33,7 +33,7 @@ class UserTest extends TestCase
             ]);
 
         $this->json('GET', "/api/v1/users", ['token' => 'invalid_remember_token'])
-             ->assertResponseStatus(400)
+             ->assertResponseStatus(404)
              ->dontSeeJson([
                     'success' => true,
                     'token' => 'valid_api_token',
