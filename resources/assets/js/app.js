@@ -7,23 +7,6 @@ import SweetAlert from 'sweetalert';
 Vue.use(VueRouter);
 Vue.use(VueResource);
 
-SweetAlert.setDefaults({
-	confirmButtonText: 'Si',
-	cancelButtonText: 'No',
-	animation: 'slide-from-bottom',
-});
-
-Vue.config.debug = true;
-Vue.http.options.root = '/api/v1';
-Vue.http.interceptors.push((request, next) => {
-
-	if (User.isAuthenticated()) {
-		request.headers['Authorization'] = 'Bearer ' + User.token();
-	}
-
-    next();
-});
-
 var router = new VueRouter({
 	history: true
 });
@@ -70,9 +53,14 @@ router.map({
 		auth: true
 	},
 
+	'/error': {
+		name: 'error',
+		component: require('./pages/error/500.vue')
+	},
+
 	'*': {
 		name: '404',
-		component: require('./pages/404.vue')
+		component: require('./pages/error/404.vue')
 	}
 
 });

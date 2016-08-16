@@ -40,9 +40,7 @@
 		route: {
 
 			data: function (transition) {
-				return ListStore.readLists().catch(() => {
-					this.$router.go({ path: '/404' });
-				});
+				return ListStore.readLists();
 			}
 		},
 

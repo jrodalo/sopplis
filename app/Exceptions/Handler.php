@@ -50,7 +50,7 @@ class Handler extends ExceptionHandler
             $response = [
                 'success' => false
             ];
-            $status = 400;
+            $status = $this->isHttpException($e) ? $e->getStatusCode() : 500;
 
             if ($e instanceof ModelNotFoundException)
             {

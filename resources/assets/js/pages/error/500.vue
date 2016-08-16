@@ -1,0 +1,20 @@
+<template>
+
+	<section id="notfound" class="page">
+
+		<header class="header">
+			<div class="header__content">
+				<a v-link="{ name: 'home', params: {} }" class="header__button">«</a>
+				<h1 class="header__title">Algo ha fallado :(</h1>
+			</div>
+		</header>
+
+		<div class="content content--centered message message--empty">
+			<h1 class="message__title">¡Vaya!</h1>
+			<p>Parece que ha fallado algo que no debía fallar...</p>
+			<p>Por favor, vuelve a intentarlo en otro momento.</p>
+		</div>
+
+	</section>
+
+</template>
