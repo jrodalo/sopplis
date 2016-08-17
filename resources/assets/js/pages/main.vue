@@ -27,7 +27,7 @@
 			Vue.http.interceptors.push((request, next) => {
 
 				if (User.isAuthenticated()) {
-					request.headers['Authorization'] = 'Bearer ' + User.token();
+					request.headers['Authorization'] = 'Bearer ' + User.data().token;
 				}
 
 			    next();

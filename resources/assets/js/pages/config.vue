@@ -43,7 +43,7 @@
 
 		data: function() {
 			return {
-				name: User.name()
+				name: User.data().name || ''
 			}
 		},
 

@@ -17,15 +17,14 @@ Route::group(['prefix' => 'api/v1'], function () {
 		Route::delete('lists/{cart}/favorite', 'FavoriteController@delete');
 	});
 
-	Route::group(['middleware' => ['throttle:5,1']], function() {
+	Route::group(['middleware' => ['throttle:10,1']], function() {
 
-    	Route::get('users', 'UserController@readToken');
-    	Route::post('users', 'UserController@store');
-    	Route::put('users', 'UserController@update');
+		Route::post('users', 'UserController@store');
+		Route::put('users', 'UserController@update');
 	});
 });
 
 
 Route::get('/{vue_capture?}', function () {
-    return view('app');
+	return view('app');
 })->where('vue_capture', '(?!_debugbar)(.*)');

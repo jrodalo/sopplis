@@ -18,11 +18,6 @@ router.map({
 		component: require('./pages/home.vue')
 	},
 
-	'/login': {
-		name: 'login',
-		component: require('./pages/login.vue')
-	},
-
 	'/lists': {
 		name: 'lists',
 		component: require('./pages/lists.vue'),

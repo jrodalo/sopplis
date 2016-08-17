@@ -4,13 +4,13 @@
 
 		<div class="content content--centered">
 
-			<div class="form" v-show=" ! submited">
+			<div class="form">
 
 				<img src="/favicon-touch.png" alt="Logo" class="logo" width="80" height="80">
 				<h1 class="title">Sopplis</h1>
 				<h2 class="subtitle">Hacer la lista de la compra en papel es cosa del pasado</h2>
 
-				<form v-on:submit.prevent="sendData">
+				<form v-on:submit.prevent="login">
 					<p><input
 							type="email"
 							id="email"
@@ -18,16 +18,20 @@
 							autocomplete="email"
 							class="form__input"
 							placeholder="Email"
+							maxlength="100"
 							v-model="email"
+							required></p>
+					<p><input
+							type="password"
+							id="password"
+							name="password"
+							class="form__input"
+							placeholder="Password"
+							maxlength="100"
+							v-model="password"
 							required></p>
 					<p><input type="submit" class="form__button" value="Entrar en Sopplis"></p>
 				</form>
-			</div>
-
-			<div class="form" v-show="submited">
-				<h1>¡Perfecto!</h1>
-				<p>Te he enviado <a href="{{ mailServer }}">un correo</a> con la llave que necesitas para entrar en Sopplis.</p>
-				<p class="form__note">Revisa la carpeta de Spam si el correo no te llega en los próximos minutos.</p>
 			</div>
 
 		</div>
@@ -57,32 +61,32 @@
 		data: function() {
 			return {
 				email: '',
-				submited: false
-			}
-		},
-
-		computed: {
-			mailServer: function() {
-				return 'http://' + this.email.split('@')[1];
+				password: ''
 			}
 		},
 
 		methods: {
 
-			sendData: function() {
+			login: function() {
 
 				var email = this.email && this.email.trim();
+				var password = this.password;
 
-				if ( ! email) {	return;	}
+				if ( ! email || ! password) { return; }
 
-				this.$http.post('users', {email: email}).then((response) => {
+				User.login({email: email, password: password}).then((response) => {
 
 					if (response.ok && response.json().success === true) {
-						this.submited = true;
+						this.$router.go({ path: '/lists' });
 					}
 
-				}, (response) => {
-
+				}).catch((response) => {
+					sweetAlert({
+						title: 'Usuario no válido',
+						text: 'Parece que el usuario o contraseña que has puesto no son válidos.',
+						type: 'error',
+						confirmButtonText: 'Vale'
+					});
 				});
 			}
 		}

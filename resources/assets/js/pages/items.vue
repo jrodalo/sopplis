@@ -72,7 +72,7 @@
 
 				var self = this;
 
-				sweetAlert({
+				SweetAlert({
 					  title: '¿Has terminado?',
 					  text: 'Se eliminarán los productos que hayas seleccionado',
 					  type: 'info',

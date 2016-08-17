@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use Auth;
+use Hash;
 use Event;
 use App\User;
 use App\Http\Requests;
@@ -41,29 +42,29 @@ class UserController extends Controller
     {
         $this->validate($request, [
             'email' => 'required|email',
+            'password' => 'required',
         ]);
 
         $user = User::where('email', $request->email)->first();
 
-        if (is_null($user)) {
+        if (is_null($user))
+        {
             $user = new User;
             $user->email = $request->email;
+            $user->password = Hash::make($request->password);
             $user->name = strstr($request->email, '@', true);
             $user->api_token = str_random(60);
-            $user->remember_token = str_random(24);
             $user->save();
-
-            Event::fire(new UserWasCreated($user));
 
         } else {
 
-            $user->remember_token = str_random(24);
-            $user->save();
-
-            Event::fire(new UserReturned($user));
+            if ( ! Hash::check($request->password, $user->password))
+            {
+                return response()->json(['success' => false], 400);
+            }
         }
 
-        return ['success' => true];
+        return ['success' => true, 'name' => $user->name, 'token' => $user->api_token];
     }
 
     /**
