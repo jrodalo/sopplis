@@ -7,10 +7,10 @@
 @import "components/_items";
 @import "components/_loading";
 
-html {box-sizing:border-box; position:relative;	font-size:100%; -webkit-tap-highlight-color:transparent;}
+html {box-sizing: border-box; position: relative; font-size: 100%; -webkit-tap-highlight-color: transparent;}
 *, :after, :before {box-sizing:inherit;}
-body,div,form,h1,input,li,p,ul {padding:0; margin:0}
-input,textarea {font-family:inherit; font-size:inherit;}
+body, div, form, h1, input, li, p, ul {padding:0; margin:0}
+input, textarea {font-family:inherit; font-size:inherit;}
 
 [v-cloak] { display: none; }
 
