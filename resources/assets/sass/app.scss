@@ -34,7 +34,7 @@ p {margin: 1em 0;}
 
 .content {margin: 45px 0 0; overflow-y: auto; -webkit-overflow-scrolling: touch;}
 .content--withfooter {margin: 45px 0;}
-.content--centered {text-align: center;}
+.content--centered {text-align: center; max-width: 450px; margin-left: auto; margin-right: auto;}
 
 .message {padding: 0 20px; margin-top: 100px;}
 .message--empty {color: darken($back-color, 35%);}
@@ -54,7 +54,7 @@ p {margin: 1em 0;}
 .fade-transition {transition: all 0.2s linear;}
 
 @media (min-width:800px) {
-	body {background: #324657;}
-	.layout {position: absolute; left: 0; right: 0; top: 0; bottom: 0; overflow: hidden; max-width: 480px; max-height: 80%; margin: auto; border-radius: 10px;}
+	.layout {background: #272C31;}
+	.page {background: $back-color; position: absolute; left: 0; right: 0; top: 0; bottom: 0; overflow: hidden; max-width: 480px; max-height: 80%; margin: auto; border-radius: 10px;}
 	.header, .footer {width: 100%; position: absolute;}
 }
