@@ -9,7 +9,8 @@
         "laravel/framework": "5.2.*",
         "barryvdh/laravel-debugbar": "^2.2",
         "guzzlehttp/guzzle": "~5.3|~6.0",
-        "bugsnag/bugsnag-laravel": "^2.0"
+        "bugsnag/bugsnag-laravel": "^2.0",
+        "spatie/laravel-backup": "^3.10"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

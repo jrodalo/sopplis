@@ -163,6 +163,9 @@ return [
 
         // Bugsnag
         Bugsnag\BugsnagLaravel\BugsnagServiceProvider::class,
+
+        // Laravel Backup
+        Spatie\Backup\BackupServiceProvider::class,
     ],
 
     /*
