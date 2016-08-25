@@ -11,6 +11,7 @@ use App\User;
 use App\Http\Requests;
 use App\Events\UserReturned;
 use App\Events\UserWasCreated;
+use Illuminate\Auth\AuthenticationException;
 
 class UserController extends Controller
 {
@@ -60,7 +61,7 @@ class UserController extends Controller
 
             if ( ! Hash::check($request->password, $user->password))
             {
-                return response()->json(['success' => false], 400);
+                throw new AuthenticationException();
             }
         }
 

@@ -1,6 +1,6 @@
 <?php
 
-use Hash;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
@@ -18,7 +18,7 @@ class UserTest extends TestCase
                 'api_token' => 'valid_api_token',
             ]);
 
-        $this->post("/api/v1/users", ['email' => $user->email, 'password' => 'test'])
+        $this->json('POST', '/api/v1/users', ['email' => $user->email, 'password' => 'test'])
              ->assertResponseOk()
              ->seeJson([
                     'success' => true,
@@ -35,11 +35,10 @@ class UserTest extends TestCase
                 'api_token' => 'valid_api_token',
             ]);
 
-        $this->post("/api/v1/users", ['email' => 'valid@sopplis.com', 'password' => 'invalid_password'])
-             ->assertResponseStatus(400)
-             ->dontSeeJson([
-                    'success' => true,
-                    'token' => 'valid_api_token',
+        $this->json('POST', '/api/v1/users', ['email' => 'valid@sopplis.com', 'password' => 'invalid_password'])
+             ->assertResponseStatus(401)
+             ->seeJson([
+                    'success' => false,
                 ]);
     }
 }

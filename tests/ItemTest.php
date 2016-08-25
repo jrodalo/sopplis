@@ -67,7 +67,7 @@ class ItemTest extends TestCase
         $cart->users()->attach($user);
 
     	$this->actingAs($user)
-             ->post("/api/v1/lists/$cart->slug/items", ['name' => 'test'])
+             ->json('POST', "/api/v1/lists/$cart->slug/items", ['name' => 'test'])
              ->assertResponseOk()
              ->seeJson([
                  'success' => true,
@@ -82,7 +82,7 @@ class ItemTest extends TestCase
         $cart->users()->attach($user);
 
         $this->actingAs($other_user)
-             ->post("/api/v1/lists/$cart->slug/items", ['name' => 'test'])
+             ->json('POST', "/api/v1/lists/$cart->slug/items", ['name' => 'test'])
              ->assertResponseStatus(403);
     }
 
@@ -188,7 +188,7 @@ class ItemTest extends TestCase
         ]);
 
         $this->actingAs($user)
-             ->post("/api/v1/lists/$cart->slug/items", ['name' => 'TEST'])
+             ->json('POST', "/api/v1/lists/$cart->slug/items", ['name' => 'TEST'])
              ->assertResponseOk()
              ->seeJson([
                  'success' => true,
