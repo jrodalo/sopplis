@@ -24,7 +24,9 @@
 							required>
 				</p>
 				<p>
-					<label for="emails">Compartir con <b>{{ mailCount }}</b> {{ mailCount | pluralize 'persona' }}:</label>
+					<label for="emails">
+						Compartir con<span v-show="mailCount > 0"> <b>{{ mailCount }}</b> {{ mailCount | pluralize 'persona' }}</span>:
+					</label>
 					<textarea
 							id="emails"
 							name="emails"
