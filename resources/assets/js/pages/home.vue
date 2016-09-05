@@ -8,30 +8,8 @@
 
 				<img src="/favicon-touch.png" alt="Logo" class="logo" width="80" height="80">
 				<h1 class="title">Sopplis</h1>
-				<h2 class="subtitle">Hacer la lista de la compra en papel es cosa del pasado</h2>
+				<h2 class="subtitle">Próximamente</h2>
 
-				<form v-on:submit.prevent="login">
-					<p><input
-							type="email"
-							id="email"
-							name="email"
-							autocomplete="email"
-							class="form__input"
-							placeholder="Email"
-							maxlength="100"
-							v-model="email"
-							required></p>
-					<p><input
-							type="password"
-							id="password"
-							name="password"
-							class="form__input"
-							placeholder="Password"
-							maxlength="100"
-							v-model="password"
-							required></p>
-					<p><input type="submit" class="form__button" value="Entrar en Sopplis"></p>
-				</form>
 			</div>
 
 		</div>
