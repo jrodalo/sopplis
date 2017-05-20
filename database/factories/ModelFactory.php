@@ -34,3 +34,4 @@ $factory->define(App\Item::class, function (Faker\Generator $faker) {
         'done' => $faker->numberBetween(0,1),
     ];
 });
+

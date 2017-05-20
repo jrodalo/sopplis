@@ -4,7 +4,7 @@
 
 		<header class="header">
 			<div class="header__content">
-				<a v-link="{ name: 'home', params: {} }" class="header__button">«</a>
+				<router-link :to="{ name: 'home', params: {} }" class="header__button">«</router-link>
 				<h1 class="header__title">Página no encontrada</h1>
 			</div>
 		</header>

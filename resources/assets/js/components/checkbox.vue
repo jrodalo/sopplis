@@ -7,7 +7,7 @@
 
 <script>
 
-	import ItemStore from '../itemstore';
+	import Item from '../models/Item';
 
 	export default {
 
@@ -24,7 +24,7 @@
 
 		watch: {
 			'item.done': function() {
-				ItemStore.updateItem(this.list, this.item);
+				Item.updateItem(this.list, this.item);
 			}
 		},
 

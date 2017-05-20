@@ -1,81 +1,66 @@
-import Vue from 'vue';
-import VueResource from 'vue-resource';
-import VueRouter from 'vue-router';
-import User from './user';
-import SweetAlert from 'sweetalert';
+import Vue from 'vue'
+import VueRouter from 'vue-router'
+import User from './models/User'
+
+window.axios = require('axios');
+window.axios.defaults.baseURL='/api/v1';
+window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+
+if (User.isAuthenticated()) {
+    window.axios.defaults.headers.common['Authorization'] = 'Bearer ' + User.data().token;
+}
+
+window.sweetAlert = require('sweetalert');
+window.sweetAlert.setDefaults({
+                confirmButtonText: 'Si',
+                cancelButtonText: 'No',
+                animation: 'slide-from-bottom',
+            });
+
 
 Vue.use(VueRouter);
-Vue.use(VueResource);
 
-var router = new VueRouter({
-	history: true
-});
+const router = new VueRouter({
+    mode: 'history',
+    routes: [
+        {
+            path: '/',
+            name: 'home',
+            component: require('./views/Home.vue')
+        },
 
-router.map({
+        {
+            path: '/lists',
+            name: 'lists',
+            component: require('./views/Lists.vue')
+        },
 
-	'/': {
-		name: 'home',
-		component: require('./pages/home.vue')
-	},
+        {
+            path: '/config',
+            name: 'config',
+            component: require('./views/Config.vue')
+        },
 
-	'/lists': {
-		name: 'lists',
-		component: require('./pages/lists.vue'),
-		auth: true
-	},
+        {
+            path: '/new',
+            name: 'new',
+            component: require('./views/New.vue')
+        },
 
-	'/lists/new': {
-		name: 'new',
-		component: require('./pages/new.vue'),
-		auth: true
-	},
+        {
+            path: '/lists/:list',
+            name: 'items',
+            component: require('./views/Items.vue')
+        },
 
-	'/lists/:list': {
-		name: 'items',
-		component: require('./pages/items.vue'),
-		auth: true
-	},
+        {
+            path: '/lists/:list/favs',
+            name: 'favs',
+            component: require('./views/Favs.vue')
+        }
+    ]
+})
 
-	'/lists/:list/favs': {
-		name: 'favs',
-		component: require('./pages/favs.vue'),
-		auth: true
-	},
-
-	'/config': {
-		name: 'config',
-		component: require('./pages/config.vue'),
-		auth: true
-	},
-
-	'/error': {
-		name: 'error',
-		component: require('./pages/error/500.vue')
-	},
-
-	'*': {
-		name: '404',
-		component: require('./pages/error/404.vue')
-	}
-
-});
-
-router.beforeEach(function (transition) {
-
-	if (transition.to.auth && ! User.isAuthenticated()) {
-		sweetAlert({
-					  title: '¿Quién eres?',
-					  text: 'Lo siento, no recuerdo quien eres... tienes que volver a entrar.',
-					  confirmButtonText: 'Ok',
-					  type: 'error'
-					});
-		User.logout();
-		transition.redirect('/');
-	} else {
-		transition.next();
-	}
-});
-
-var App = require('./pages/main.vue');
-
-router.start(App, '#app');
+const app = new Vue({
+  router
+}).$mount('#app')

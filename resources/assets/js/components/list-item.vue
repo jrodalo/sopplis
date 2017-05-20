@@ -1,6 +1,6 @@
 <template>
 	<ul class="list">
-		<li :class="{'item': true, 'item--done': item.done}" v-for="item in state.items | orderBy 'done' 'name'" track-by="id">
+		<li :class="{'item': true, 'item--done': item.done}" v-for="item in orderedItems" v-bind:key="item.id">
 			<span class="item__name">{{item.name}}</span>
 			<checkbox :list="list" :item="item"></checkbox>
 		</li>
@@ -9,7 +9,7 @@
 
 <script>
 
-	import ItemStore from '../itemstore';
+	import Item from '../models/Item';
 
 	export default {
 
@@ -17,9 +17,16 @@
 			list: { required: true }
 		},
 
-		data: function() {
+		data () {
 			return {
-				state: ItemStore.state
+				state: Item.state
+			}
+		},
+
+		computed: {
+
+			orderedItems () {
+				return _.orderBy(this.state.items, ['done', item => item.name.toLowerCase()], ['asc', 'asc']);
 			}
 		},
 

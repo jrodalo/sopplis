@@ -2,11 +2,9 @@
 
 namespace App\Providers;
 
-use App\Item;
 use App\Cart;
-use App\Policies\ItemPolicy;
 use App\Policies\CartPolicy;
-use Illuminate\Contracts\Auth\Access\Gate as GateContract;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 
 class AuthServiceProvider extends ServiceProvider

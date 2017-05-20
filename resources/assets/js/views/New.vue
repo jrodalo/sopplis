@@ -3,7 +3,7 @@
 	<section id="lists" class="page">
 		<header class="header">
 			<div class="header__content">
-				<a v-link="{ name: 'lists' }" class="header__button">«</a>
+				<router-link :to="{ name: 'lists' }" class="header__button">«</router-link>
 				<h1 class="header__title">Nueva lista</h1>
 			</div>
 		</header>
@@ -25,7 +25,7 @@
 				</p>
 				<p>
 					<label for="emails">
-						Compartir con<span v-show="mailCount > 0"> <b>{{ mailCount }}</b> {{ mailCount | pluralize 'persona' }}</span>:
+						Compartir con<span v-show="mailCount > 0"> <b>{{ mailCount }}</b> personas</span>:
 					</label>
 					<textarea
 							id="emails"
@@ -45,16 +45,15 @@
 
 <script>
 
-	import SweetAlert from 'sweetalert';
-	import ListStore from '../liststore'
+	import List from '../models/List'
 
 	export default {
 
-		ready: function() {
+		mounted () {
 			this.changePlaceholder() & setInterval(this.changePlaceholder, 3000);
 		},
 
-		data: function() {
+		data () {
 			return {
 				placeholders: ['Lista de la compra', 'Cumpleaños de Elisa', 'Comida para fin de año', 'Fiesta de despedida'],
 				placeholder: '',
@@ -65,27 +64,27 @@
 
 		computed: {
 
-			mailCount: function() {
-				return ListStore.splitEmails(this.emails).length;
+			mailCount () {
+				return List.splitEmails(this.emails).length;
 			}
 		},
 
 		methods: {
 
-			changePlaceholder: function() {
+			changePlaceholder () {
 				var position = this.placeholders.indexOf(this.placeholder) + 1;
 				position = position >= this.placeholders.length ? 0 : position;
 				this.placeholder = this.placeholders[position];
 			},
 
-			addList: function() {
+			addList () {
 
 				if (! this.name) {
 					return;
 				}
 
-				ListStore.addList({name: this.name, emails: ListStore.splitEmails(this.emails)}).then((response) => {
-					this.$router.go({ name: 'lists' });
+				List.addList({name: this.name, emails: List.splitEmails(this.emails)}).then((response) => {
+					this.$router.push({ name: 'lists' });
 				}, (response) => {
 					sweetAlert('Oops...', 'No he podido crear tu lista... vuelve a intentarlo :(', 'error');
 				});

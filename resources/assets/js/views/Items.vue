@@ -9,16 +9,18 @@
 			<div v-show="state.items.length">
 				<list-item :list="list"></list-item>
 			</div>
-			<div class="content--centered message message--empty" v-show="!state.items.length && !$loadingRouteData">
+			<div class="content--centered message message--empty" v-show="!state.items.length">
 				<h1 class="message__title">Esta lista está vacía :(</h1>
 				<p>Añade los productos que quieres comprar pulsando el botón <b>+</b></p>
 			</div>
 		</div>
 
 		<footer class="footer" v-show="state.items.length">
-			<a href="#active-items" :class="{'footer__link': true, 'footer__link--green': allDone}" v-on:click.prevent="finalize" transition="fade">
-				{{ completedItems.length }} de {{ state.items.length }}
-			</a>
+			<transition name="fade">
+				<a href="#active-items" :class="{'footer__link': true, 'footer__link--green': allDone}" v-on:click.prevent="finalize">
+					{{ completedItems.length }} de {{ state.items.length }}
+				</a>
+			</transition>
 		</footer>
 	</section>
 
@@ -26,21 +28,17 @@
 
 <script>
 
-	import SweetAlert from 'sweetalert';
-	import ItemStore from '../itemstore';
+	import Item from '../models/Item';
 
 	export default {
 
-		route: {
-
-			data: function (transition) {
-				return ItemStore.readItems(this.list);
-			}
+		created () {
+			this.fetchData()
 		},
 
-		data: function() {
+		data () {
 			return {
-				state: ItemStore.state,
+				state: Item.state,
 				list: this.$route.params.list
 			}
 		},
@@ -53,18 +51,22 @@
 
 		computed: {
 
-			completedItems: function() {
-				return ItemStore.readCompletedItems();
+			completedItems () {
+				return Item.readCompletedItems();
 			},
 
-			allDone: function() {
+			allDone () {
 				return this.state.items.length > 0 && (this.completedItems.length == this.state.items.length);
 			}
 		},
 
 		methods: {
 
-			finalize: function() {
+			fetchData (transition) {
+				return Item.readItems(this.list);
+			},
+
+			finalize () {
 
 				if ( ! this.completedItems.length) {
 					return;
@@ -72,7 +74,7 @@
 
 				var self = this;
 
-				SweetAlert({
+				sweetAlert({
 					  title: '¿Has terminado?',
 					  text: 'Se eliminarán los productos que hayas seleccionado',
 					  type: 'info',
@@ -81,9 +83,9 @@
 					  showLoaderOnConfirm: true
 					},
 					function() {
-						ItemStore.deleteItems(self.list, self.completedItems).then(response => {
+						Item.deleteItems(self.list, self.completedItems).then(response => {
 							sweetAlert({
-								title: response.json().message || '¡Genial!',
+								title: response.data.message || '¡Genial!',
 								timer: 2000,
 								type: 'success',
 								showConfirmButton: false});
