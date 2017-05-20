@@ -11,7 +11,8 @@ var User = {
 
     updateUser: function(name) {
         return axios.put('users', {name: name}).then(response => {
-            if (response.ok) {
+
+            if (response.data.success === true) {
                 var user = User.data();
                 user.name = name;
                 localStorage.setItem('SOPPLIS_USER', JSON.stringify(user));
