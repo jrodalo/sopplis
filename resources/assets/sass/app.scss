@@ -34,7 +34,7 @@ p {margin: 1em 0;}
 
 .content {margin: 45px 0 0; overflow-y: auto; -webkit-overflow-scrolling: touch;}
 .content--withfooter {margin: 45px 0;}
-.content--centered {text-align: center; max-width: 450px; margin-left: auto; margin-right: auto;}
+.content--centered {text-align: center; width: 100%; max-width: 450px; margin-left: auto; margin-right: auto;}
 
 .message {padding: 0 20px; margin-top: 100px;}
 .message--empty {color: darken($back-color, 35%);}

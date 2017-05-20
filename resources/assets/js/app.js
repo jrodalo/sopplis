@@ -25,41 +25,75 @@ const router = new VueRouter({
     routes: [
         {
             path: '/',
-            name: 'home',
-            component: require('./views/Home.vue')
+            name: 'login',
+            component: require('./views/Login.vue'),
+            beforeEnter: (to, from, next) => {
+                if (User.isAuthenticated()) {
+                    next({ name: 'lists' });
+                } else {
+                    next();
+                }
+            }
         },
 
         {
             path: '/lists',
             name: 'lists',
-            component: require('./views/Lists.vue')
+            component: require('./views/Lists.vue'),
+            meta: { requiresAuth: true }
         },
 
         {
             path: '/config',
             name: 'config',
-            component: require('./views/Config.vue')
+            component: require('./views/Config.vue'),
+            meta: { requiresAuth: true }
         },
 
         {
             path: '/new',
             name: 'new',
-            component: require('./views/New.vue')
+            component: require('./views/New.vue'),
+            meta: { requiresAuth: true }
         },
 
         {
             path: '/lists/:list',
             name: 'items',
-            component: require('./views/Items.vue')
+            component: require('./views/Items.vue'),
+            meta: { requiresAuth: true }
         },
 
         {
             path: '/lists/:list/favs',
             name: 'favs',
-            component: require('./views/Favs.vue')
+            component: require('./views/Favs.vue'),
+            meta: { requiresAuth: true }
+        },
+
+        {
+            path: '*',
+            name: '404',
+            component: require('./views/error/404.vue')
         }
     ]
-})
+});
+
+router.beforeEach((to, from, next) => {
+
+    if (to.matched.some(record => record.meta.requiresAuth)) {
+        if ( ! User.isAuthenticated()) {
+            next({
+                name: 'login',
+                query: { redirect: to.fullPath }
+            })
+        } else {
+            next()
+        }
+    } else {
+        next() // make sure to always call next()!
+    }
+});
 
 const app = new Vue({
   router

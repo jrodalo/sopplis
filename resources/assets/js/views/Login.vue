@@ -32,6 +32,10 @@
                 </form>
 
             </div>
+
+            <div class="copyright">
+                Hecho por <a href="https://twitter.com/jrodalo" rel="author">@jrodalo</a>
+            </div>
         </div>
     </section>
 
@@ -62,7 +66,8 @@
                 User.login({email: email, password: password}).then((response) => {
 
                     if (response.data.success === true) {
-                        this.$router.push({ name: 'lists' });
+                        const next = this.$route.query.redirect ? { path: this.$route.query.redirect } : { name: 'lists' };
+                        this.$router.push(next);
                     }
 
                 }).catch((response) => {
@@ -82,5 +87,8 @@
 </script>
 
 <style lang="sass">
+
+    .copyright {margin: 85px 0 20px; color: #AAA; font-size: 0.8em;}
+    .copyright a {color: inherit;}
 
 </style>
