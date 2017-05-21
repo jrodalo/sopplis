@@ -69,17 +69,15 @@
 
 			logout () {
 
-				var self = this;
-
 				sweetAlert({
 					  title: '¿Quieres salir de Sopplis?',
 					  type: 'info',
 					  showCancelButton: true,
 					  closeOnConfirm: true
 					},
-					function() {
+					() => {
 						User.logout();
-						self.$router.push({ name: 'login' });
+						this.$router.push({ name: 'login' });
 					}
 				);
 			}

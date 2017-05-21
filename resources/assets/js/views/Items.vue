@@ -72,8 +72,6 @@
 					return;
 				}
 
-				var self = this;
-
 				sweetAlert({
 					  title: '¿Has terminado?',
 					  text: 'Se eliminarán los productos que hayas seleccionado',
@@ -82,8 +80,8 @@
 					  closeOnConfirm: false,
 					  showLoaderOnConfirm: true
 					},
-					function() {
-						Item.deleteItems(self.list, self.completedItems).then(response => {
+					() => {
+						Item.deleteItems(this.list, this.completedItems).then(response => {
 							sweetAlert({
 								title: response.data.message || '¡Genial!',
 								timer: 2000,
