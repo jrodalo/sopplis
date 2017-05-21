@@ -1,20 +1,19 @@
-import Vue from 'vue';
 
-let List = {
+const List = {
 
     state: {
         lists: []
     },
 
-    readCache: function() {
+    readCache () {
         return JSON.parse(localStorage.getItem('SOPPLIS_LISTS')) || [];
     },
 
-    writeCache: function(lists) {
+    writeCache (lists) {
         localStorage.setItem('SOPPLIS_LISTS', JSON.stringify(lists));
     },
 
-    readLists: function() {
+    readLists () {
 
         List.state.lists = List.readCache();
 
@@ -24,16 +23,18 @@ let List = {
         });
     },
 
-    addList: function(list) {
+    addList (list) {
         return axios.post('lists', list);
     },
 
-    splitEmails: function(emails) {
+    splitEmails (emails) {
         return (emails || '')
-                    .split(/\r*\n/)
-                    .filter(function(line) {
-                        return line && /^.*@.*\.[A-z]{2,3}$/.test(line);
-                    });
+                .split(/\r*\n/)
+                .filter(line => line && /^.*@.*\.[A-z]{2,3}$/.test(line));
+    },
+
+    getFullName (opts = {}) {
+        return opts;
     }
 
 }

@@ -45,8 +45,7 @@
 
 			showForm () {
 				this.editing = true;
-				var self = this;
-				Vue.nextTick(() => self.$refs.itemInput.focus());
+				Vue.nextTick(() => this.$refs.itemInput.focus());
 			},
 
 			hideForm () {

@@ -31,7 +31,6 @@
 
 <script>
 
-	import User from '../models/User';
 	import List from '../models/List';
 
 	export default {

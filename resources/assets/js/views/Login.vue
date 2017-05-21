@@ -56,7 +56,7 @@
 
         methods: {
 
-            login: function() {
+            login () {
 
                 var email = this.email && this.email.trim();
                 var password = this.password;

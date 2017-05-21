@@ -1,15 +1,15 @@
 
-var User = {
+const User = {
 
-    isAuthenticated: function() {
+    isAuthenticated () {
         return this.data().token && this.data().token.length > 0;
     },
 
-    data: function() {
+    data () {
         return JSON.parse(localStorage.getItem('SOPPLIS_USER')) || {};
     },
 
-    updateUser: function(name) {
+    updateUser (name) {
         return axios.put('users', {name: name}).then(response => {
 
             if (response.data.success === true) {
@@ -20,7 +20,7 @@ var User = {
         });
     },
 
-    login: function(user) {
+    login (user) {
         return axios.post('users', user).then((response) => {
 
             if (response.data.success === true) {
@@ -31,7 +31,7 @@ var User = {
         });
     },
 
-    logout: function() {
+    logout () {
         localStorage.clear();
     }
 
