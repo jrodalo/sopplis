@@ -2,7 +2,7 @@
 	<ul class="list">
 		<li :class="{'item': true, 'item--done': item.done}" v-for="item in orderedItems" v-bind:key="item.id">
 			<span class="item__name">{{item.name}}</span>
-			<checkbox :list="list" :item="item"></checkbox>
+			<checkbox :item="item" v-on:changed="update"></checkbox>
 		</li>
 	</ul>
 </template>
@@ -12,6 +12,10 @@
 	import Item from '../models/Item';
 
 	export default {
+
+		components: {
+			checkbox: require('../components/checkbox.vue')
+		},
 
 		props: {
 			list: { required: true }
@@ -30,8 +34,11 @@
 			}
 		},
 
-		components: {
-			checkbox: require('../components/checkbox.vue')
+		methods: {
+
+			update (item) {
+				Item.updateItem(this.list, item);
+			}
 		}
 
 	};
