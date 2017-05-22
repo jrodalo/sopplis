@@ -54,10 +54,10 @@
 
 			addItem () {
 
-				var value = this.newItem && this.newItem.trim();
+				let value = this.newItem && this.newItem.trim();
 				if (!value) { return; }
 
-				var item = {name: value};
+				let item = {name: value};
 
 				Item.insertItem(this.list, item);
 

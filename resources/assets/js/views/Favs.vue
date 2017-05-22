@@ -87,7 +87,7 @@
 
 			addSelected () {
 
-				var itemsSelected = this.selected;
+				let itemsSelected = this.selected;
 
 				if ( ! itemsSelected.length) {
 					return;
@@ -102,7 +102,7 @@
 
 			removeSelected () {
 
-				var itemsSelected = this.selected;
+				let itemsSelected = this.selected;
 
 				if ( ! itemsSelected.length) {
 					return;

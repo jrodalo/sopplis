@@ -58,12 +58,12 @@
 
             login () {
 
-                var email = this.email && this.email.trim();
-                var password = this.password;
+                let email = this.email && this.email.trim();
+                let password = this.password;
 
                 if ( ! email || ! password) { return; }
 
-                User.login({email: email, password: password}).then((response) => {
+                User.login({email, password}).then((response) => {
 
                     if (response.data.success === true) {
                         const next = this.$route.query.redirect ? { path: this.$route.query.redirect } : { name: 'lists' };

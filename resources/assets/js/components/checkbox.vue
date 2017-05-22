@@ -14,7 +14,7 @@
 		},
 
 		watch: {
-			'item.done': function() {
+			'item.done' () {
 				this.$emit('changed', this.item);
 			}
 		}

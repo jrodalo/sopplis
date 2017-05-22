@@ -9,14 +9,14 @@ const Item = {
 
 	readCache (list, isFavorites) {
 
-		var type = isFavorites ? '_FAVS' : '_ITEMS';
+		let type = isFavorites ? '_FAVS' : '_ITEMS';
 
 		return JSON.parse(localStorage.getItem('SOPPLIS_' + list + type)) || [];
 	},
 
 	writeCache (list, items, isFavorites) {
 
-		var type = isFavorites ? '_FAVS' : '_ITEMS';
+		let type = isFavorites ? '_FAVS' : '_ITEMS';
 
 		localStorage.setItem('SOPPLIS_' + list + type, JSON.stringify(items));
 	},
@@ -27,9 +27,8 @@ const Item = {
 		Item.state.items = Item.readCache(list);
 
 		return axios.get('lists/' + list + '/items').then(response => {
-			var json = response.data;
-			Item.state.list = json.list;
-			Item.state.items = json.items;
+			Item.state.list = response.data.list;
+			Item.state.items = response.data.items;
 			Item.writeCache(list, Item.state.items);
 		});
 	},
@@ -69,7 +68,7 @@ const Item = {
 
 	deleteItems (list, items) {
 
-		var ids = Item.extractIds(items);
+		let ids = Item.extractIds(items);
 
 		return axios.delete('lists/' + list + '/items', {params: {items: ids}}).then(response => {
 			Item.state.items = Item.readActiveItems();
@@ -80,7 +79,7 @@ const Item = {
 
 	deleteFavorites (list, items) {
 
-		var ids = Item.extractIds(items);
+		let ids = Item.extractIds(items);
 
 		return axios.delete('lists/' + list + '/favorite', {params: {items: ids}}).then(response => {
 			Item.state.favorites = Item.state.favorites.filter(item => ! item.selected);
@@ -90,7 +89,7 @@ const Item = {
 	},
 
 	addFavorites (list, items) {
-		var ids = Item.extractIds(items);
+		let ids = Item.extractIds(items);
 		return axios.put('lists/' + list + '/favorite', {items: ids});
 	},
 

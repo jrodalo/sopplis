@@ -13,7 +13,7 @@ const User = {
         return axios.put('users', {name: name}).then(response => {
 
             if (response.data.success === true) {
-                var user = User.data();
+                let user = User.data();
                 user.name = name;
                 localStorage.setItem('SOPPLIS_USER', JSON.stringify(user));
             }
