@@ -9,6 +9,7 @@ use Auth;
 use App\Cart;
 use App\User;
 use App\Http\Requests;
+use App\Mail\CartShared;
 
 class CartController extends Controller
 {
@@ -36,15 +37,17 @@ class CartController extends Controller
             'emails.*' => 'email',
         ]);
 
+        $owner = Auth::user();
+
         $cart = new Cart;
         $cart->name = $request->name;
         $cart->slug = str_random(6);
         $cart->save();
-        $cart->users()->attach(Auth::user(), ['role' => 'owner']);
+        $cart->users()->attach($owner, ['role' => 'owner']);
 
         foreach($request->emails as $email)
         {
-            if ($email == Auth::user()->email) {
+            if ($email == $owner->email) {
                 continue;
             }
 
@@ -62,10 +65,7 @@ class CartController extends Controller
 
             $cart->users()->attach($guest, ['role' => 'guest']);
 
-            Mail::queue('emails.guests', ['user' => Auth::user(), 'guest' => $guest, 'cart' => $cart], function ($message) use ($guest) {
-                $message->to($guest->email);
-                $message->subject('Te han invitado a una lista compartida en Sopplis');
-            });
+            Mail::to($guest->email)->queue(new CartShared($cart, $owner, $guest));
         }
 
         return ['success' => true, 'cart' => $cart];
