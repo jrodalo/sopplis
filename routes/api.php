@@ -38,11 +38,3 @@ Route::group(['middleware' => ['auth:api']], function() {
 
 /* Sin autenticación */
 Route::post('/users', 'UserController@store');
-
-Route::get('/prueba', function() {
-    return [
-                ['name' => '1'],
-                ['name' => '2'],
-                ['name' => '3']
-            ];
-});
