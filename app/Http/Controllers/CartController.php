@@ -33,8 +33,6 @@ class CartController extends Controller
     {
         $this->validate($request, [
             'name' => 'required|max:100',
-            'emails' => 'array|max:5',
-            'emails.*' => 'email',
         ]);
 
         $owner = Auth::user();
@@ -44,29 +42,6 @@ class CartController extends Controller
         $cart->slug = str_random(6);
         $cart->save();
         $cart->users()->attach($owner, ['role' => 'owner']);
-
-        foreach($request->emails as $email)
-        {
-            if ($email == $owner->email) {
-                continue;
-            }
-
-            $guest = User::where('email', $email)->first();
-
-            if (is_null($guest)) {
-                $guest = new User;
-                $guest->email = $email;
-                $guest->name = strstr($email, '@', true);
-                $guest->api_token = str_random(60);
-            }
-
-            $guest->remember_token = str_random(60);
-            $guest->save();
-
-            $cart->users()->attach($guest, ['role' => 'guest']);
-
-            Mail::to($guest->email)->queue(new CartShared($cart, $owner, $guest));
-        }
 
         return ['success' => true, 'cart' => $cart];
     }

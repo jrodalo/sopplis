@@ -13,28 +13,15 @@
 				<p>
 					<label for="name">Nombre de la lista:</label>
 					<input
+							:placeholder="placeholder"
+							v-model="name"
 							type="text"
 							id="name"
 							name="name"
-							v-model="name"
 							class="form__input"
-							:placeholder="placeholder"
 							autocomplete="off"
 							maxlenght="100"
 							required>
-				</p>
-				<p>
-					<label for="emails">
-						Compartir con<span v-show="mailCount > 0"> <b>{{ mailCount }}</b> personas</span>:
-					</label>
-					<textarea
-							id="emails"
-							name="emails"
-							v-model="emails"
-							class="form__input"
-							rows="4"
-							autocapitalize="none"
-							placeholder="Escribe un email por línea (máximo 5)"></textarea>
 				</p>
 				<p><input type="submit" value="Guardar" class="form__button"></p>
 			</form>
@@ -58,14 +45,6 @@
 				placeholders: ['Lista de la compra', 'Cumpleaños de Elisa', 'Comida para fin de año', 'Fiesta de despedida'],
 				placeholder: '',
 				name: '',
-				emails: ''
-			}
-		},
-
-		computed: {
-
-			mailCount () {
-				return List.splitEmails(this.emails).length;
 			}
 		},
 
@@ -83,7 +62,7 @@
 					return;
 				}
 
-				List.addList({name: this.name, emails: List.splitEmails(this.emails)}).then((response) => {
+				List.addList({name: this.name}).then((response) => {
 					this.$router.push({ name: 'lists' });
 				}, (response) => {
 					sweetAlert('Oops...', 'No he podido crear tu lista... vuelve a intentarlo :(', 'error');

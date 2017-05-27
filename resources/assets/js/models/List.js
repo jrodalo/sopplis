@@ -25,16 +25,6 @@ const List = {
 
     addList (list) {
         return axios.post('lists', list);
-    },
-
-    splitEmails (emails) {
-        return (emails || '')
-                .split(/\r*\n/)
-                .filter(line => line && /^.*@.*\.[A-z]{2,3}$/.test(line));
-    },
-
-    getFullName (opts = {}) {
-        return opts;
     }
 
 }
