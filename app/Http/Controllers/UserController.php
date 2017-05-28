@@ -16,24 +16,6 @@ use Illuminate\Auth\AuthenticationException;
 class UserController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function readToken(Request $request)
-    {
-        $this->validate($request, [
-            'token' => 'required|max:100',
-        ]);
-
-        $user = User::where('remember_token', $request->token)->firstOrFail();
-        $user->remember_token = '';
-        $user->save();
-
-        return response()->json(['success' => true, 'name' => $user->name, 'token' => $user->api_token]);
-    }
-
-    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request

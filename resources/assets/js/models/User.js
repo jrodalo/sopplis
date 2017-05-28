@@ -21,7 +21,7 @@ const User = {
     },
 
     login (user) {
-        return axios.post('users', user).then((response) => {
+        return axios.post('sessions', user).then(response => {
 
             if (response.data.success === true) {
                 localStorage.setItem('SOPPLIS_USER', JSON.stringify({name: response.data.name, token: response.data.token}));
