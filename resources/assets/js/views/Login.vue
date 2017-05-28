@@ -1,7 +1,7 @@
 <template>
 
     <section id="login" class="page">
-        <div class="content content--centered">
+        <div class="content content--centered content--withfooter">
             <div class="form">
 
                 <img src="/images/favicon-touch.png" alt="Logo" class="logo" width="80" height="80">
@@ -33,7 +33,7 @@
 
             </div>
 
-            <div class="copyright">
+            <div class="footer footer--transparent copyright">
                 Hecho por <a href="https://twitter.com/jrodalo" rel="author">@jrodalo</a>
             </div>
         </div>
@@ -88,7 +88,7 @@
 
 <style lang="sass">
 
-    .copyright {margin: 85px 0 20px; color: #AAA; font-size: 0.8em;}
+    .copyright {color: #AAA; font-size: 0.7em;}
     .copyright a {color: inherit;}
 
 </style>
