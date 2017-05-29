@@ -2,6 +2,7 @@
 const List = {
 
     state: {
+        loading: false,
         lists: []
     },
 
@@ -15,9 +16,12 @@ const List = {
 
     readLists () {
 
+        List.state.loading = true;
+
         List.state.lists = List.readCache();
 
         return axios.get('lists').then((response) => {
+            List.state.loading = false;
             List.state.lists = response.data.lists;
             List.writeCache(List.state.lists);
         });

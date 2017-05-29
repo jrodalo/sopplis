@@ -9,7 +9,7 @@
 			<div v-show="state.items.length">
 				<list-item :list="list"></list-item>
 			</div>
-			<div class="content--centered message message--empty" v-show="!state.items.length">
+			<div class="content--centered message message--empty" v-show="!state.items.length && !state.loading">
 				<h1 class="message__title">Esta lista está vacía :(</h1>
 				<p>Añade los productos que quieres comprar pulsando el botón <b>+</b></p>
 			</div>

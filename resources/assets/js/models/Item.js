@@ -2,6 +2,7 @@
 const Item = {
 
 	state: {
+		loading: false,
 		list: {},
 		items: [],
 		favorites: []
@@ -23,10 +24,12 @@ const Item = {
 
 	readItems (list) {
 
+		Item.state.loading = true;
 		Item.state.list = {};
 		Item.state.items = Item.readCache(list);
 
 		return axios.get('lists/' + list + '/items').then(response => {
+			Item.state.loading = false;
 			Item.state.list = response.data.list;
 			Item.state.items = response.data.items;
 			Item.writeCache(list, Item.state.items);
