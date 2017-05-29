@@ -5,6 +5,7 @@
 .header-form__input:focus {outline: 0;}
 
 .form {margin: 20px;}
+.form__label {position: absolute; overflow: hidden; clip: rect(0 0 0 0); height: 1px; width: 1px; margin: -1px; padding: 0; border: 0;}
 .form__input {appearance: none; padding: 0.5em; width: 100%; border: 1px solid #CCC; border-radius: 3px; resize: vertical;}
 .form__input:focus {outline: 0; border: 1px solid $dark-color;}
 .form__button {cursor: pointer; appearance: none; width: 100%; display: block; background: $dark-color; border-radius: 3px; border: 1px solid transparent; padding: 0.7em 1em; color: #FFF; text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);}

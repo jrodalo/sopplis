@@ -9,7 +9,9 @@
                 <h2 class="subtitle">Hacer la lista de la compra en papel es cosa del pasado</h2>
 
                 <form v-on:submit.prevent="login">
-                    <p><input
+                    <p>
+                        <label class="form__label" for="email">Email:</label>
+                        <input
                             type="email"
                             id="email"
                             name="email"
@@ -19,7 +21,9 @@
                             maxlength="100"
                             v-model="email"
                             required></p>
-                    <p><input
+                    <p>
+                        <label class="form__label" for="password">Password:</label>
+                        <input
                             type="password"
                             id="password"
                             name="password"
