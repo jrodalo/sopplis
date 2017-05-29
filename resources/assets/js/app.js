@@ -6,9 +6,17 @@ window.axios = require('axios');
 window.axios.defaults.baseURL='/api/v1';
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
-if (User.isAuthenticated()) {
-    window.axios.defaults.headers.common['Authorization'] = 'Bearer ' + User.data().token;
-}
+window.axios.interceptors.request.use(config => {
+
+    if (User.isAuthenticated()) {
+        config.headers.common['Authorization'] = 'Bearer ' + User.data().token;
+    }
+
+    return config;
+
+  }, error => {
+    return Promise.reject(error);
+});
 
 window.sweetAlert = require('sweetalert');
 window.sweetAlert.setDefaults({

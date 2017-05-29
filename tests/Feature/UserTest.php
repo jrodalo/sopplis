@@ -22,7 +22,7 @@ class UserTest extends TestCase
                 'api_token' => 'valid_api_token',
             ]);
 
-        $response = $this->json('POST', '/api/v1/users', ['email' => $user->email, 'password' => 'test']);
+        $response = $this->json('POST', '/api/v1/sessions', ['email' => $user->email, 'password' => 'test']);
 
         $response
             ->assertStatus(200)
@@ -41,7 +41,7 @@ class UserTest extends TestCase
                 'api_token' => 'valid_api_token',
             ]);
 
-        $response = $this->json('POST', '/api/v1/users', ['email' => 'valid@sopplis.com', 'password' => 'invalid_password']);
+        $response = $this->json('POST', '/api/v1/sessions', ['email' => 'valid@sopplis.com', 'password' => 'invalid_password']);
 
         $response
             ->assertStatus(401)
