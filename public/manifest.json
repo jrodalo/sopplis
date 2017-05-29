@@ -1,0 +1,21 @@
+{
+  "short_name": "Sopplis",
+  "name": "Sopplis - Lista de la compra",
+  "background_color": "#F3F3F3",
+  "display": "standalone",
+  "icons": [
+    {
+      "src": "images/favicon.png",
+      "type": "image/png",
+      "sizes": "48x48"
+    },
+    {
+      "src": "images/favicon-touch.png",
+      "type": "image/png",
+      "sizes": "360x360"
+    }
+  ],
+  "orientation": "portrait",
+  "theme_color": "#436169",
+  "start_url": "/"
+}
