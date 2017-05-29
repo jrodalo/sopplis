@@ -2,16 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-
-use Auth;
-use Hash;
-use Event;
 use App\User;
-use App\Http\Requests;
-use App\Events\UserReturned;
-use App\Events\UserWasCreated;
+use Auth;
+use Event;
+use Hash;
 use Illuminate\Auth\AuthenticationException;
+use Illuminate\Http\Request;
 
 class AuthController extends Controller
 {
