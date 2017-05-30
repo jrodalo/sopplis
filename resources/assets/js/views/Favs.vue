@@ -19,7 +19,7 @@
 						>{{ item.name }}</span></li>
 				</ul>
 			</div>
-			<div class="content--centered message message--empty" v-show="!state.favorites.length">
+			<div class="content--centered message message--empty" v-show="!state.favorites.length && !state.loading">
 				<h1 class="message__title">No hay productos frecuentes</h1>
 				<p>Los productos frecuentes son aquellos que has comprado varias veces. Sigue utilizando Sopplis para que aparezcan aquí los productos que más compras.</p>
 			</div>

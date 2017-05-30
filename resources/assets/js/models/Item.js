@@ -38,9 +38,11 @@ const Item = {
 
 	readFavorites (list) {
 
+		Item.state.loading = true;
 		Item.state.favorites = Item.readCache(list, true);
 
 		return axios.get('lists/' + list + '/favorite').then(response => {
+			Item.state.loading = false;
 			Item.state.favorites = response.data.items;
 			Item.writeCache(list, Item.state.favorites, true);
 		});
