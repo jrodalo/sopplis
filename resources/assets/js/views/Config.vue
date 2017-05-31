@@ -4,7 +4,7 @@
 
 		<header class="header">
 			<div class="header__content">
-				<a v-link="{ name: 'home', params: {} }" class="header__button">«</a>
+				<router-link :to="{ name: 'lists', params: {} }" class="header__button">«</router-link>
 				<h1 class="header__title">Configuración</h1>
 			</div>
 		</header>
@@ -29,7 +29,7 @@
 		</div>
 
 		<footer class="footer">
-			<a href="#config" v-on:click.prevent="salir" class="footer__link footer__link--red">Salir de Sopplis</a>
+			<a href="#config" v-on:click.prevent="logout" class="footer__link footer__link--red">Salir de Sopplis</a>
 		</footer>
 	</section>
 
@@ -37,11 +37,11 @@
 
 <script>
 
-	import User from '../user';
+	import User from '../models/User';
 
 	export default {
 
-		data: function() {
+		data () {
 			return {
 				name: User.data().name || ''
 			}
@@ -49,7 +49,7 @@
 
 		methods: {
 
-			save: function() {
+			save () {
 				if (this.name.trim()) {
 					User.updateUser(this.name).then(() => {
 						sweetAlert({
@@ -67,9 +67,7 @@
 				}
 			},
 
-			salir: function() {
-
-				var self = this;
+			logout () {
 
 				sweetAlert({
 					  title: '¿Quieres salir de Sopplis?',
@@ -77,9 +75,9 @@
 					  showCancelButton: true,
 					  closeOnConfirm: true
 					},
-					function() {
+					() => {
 						User.logout();
-						self.$router.go({ name: 'home' });
+						this.$router.push({ name: 'login' });
 					}
 				);
 			}

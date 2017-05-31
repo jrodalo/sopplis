@@ -1,5 +1,9 @@
 <?php
 
+namespace Tests\Unit;
+
+use App\User;
+use Tests\TestCase;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
@@ -12,15 +16,17 @@ class UserTest extends TestCase
 
     public function test_se_retorna_la_api_key_cuando_se_presenta_un_usuario_valido()
     {
-        $user = factory(App\User::class)->create([
+        $user = factory(User::class)->create([
                 'email' => 'valid@sopplis.com',
                 'password' => Hash::make('test'),
                 'api_token' => 'valid_api_token',
             ]);
 
-        $this->json('POST', '/api/v1/users', ['email' => $user->email, 'password' => 'test'])
-             ->assertResponseOk()
-             ->seeJson([
+        $response = $this->json('POST', '/api/v1/sessions', ['email' => $user->email, 'password' => 'test']);
+
+        $response
+            ->assertStatus(200)
+            ->assertJson([
                     'success' => true,
                     'token' => 'valid_api_token',
                 ]);
@@ -29,15 +35,17 @@ class UserTest extends TestCase
 
     public function test_no_se_retorna_la_api_key_cuando_se_presenta_un_usuario_no_valido()
     {
-        $user = factory(App\User::class)->create([
+        $user = factory(User::class)->create([
                 'email' => 'valid@sopplis.com',
                 'password' => Hash::make('test'),
                 'api_token' => 'valid_api_token',
             ]);
 
-        $this->json('POST', '/api/v1/users', ['email' => 'valid@sopplis.com', 'password' => 'invalid_password'])
-             ->assertResponseStatus(401)
-             ->seeJson([
+        $response = $this->json('POST', '/api/v1/sessions', ['email' => 'valid@sopplis.com', 'password' => 'invalid_password']);
+
+        $response
+            ->assertStatus(401)
+            ->assertJson([
                     'success' => false,
                 ]);
     }

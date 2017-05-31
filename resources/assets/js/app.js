@@ -1,81 +1,110 @@
-import Vue from 'vue';
-import VueResource from 'vue-resource';
-import VueRouter from 'vue-router';
-import User from './user';
-import SweetAlert from 'sweetalert';
+import Vue from 'vue'
+import VueRouter from 'vue-router'
+import User from './models/User'
+
+window.axios = require('axios');
+window.axios.defaults.baseURL='/api/v1';
+window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+
+window.axios.interceptors.request.use(config => {
+
+    if (User.isAuthenticated()) {
+        config.headers.common['Authorization'] = 'Bearer ' + User.data().token;
+    }
+
+    return config;
+
+  }, error => {
+    return Promise.reject(error);
+});
+
+window.sweetAlert = require('sweetalert');
+window.sweetAlert.setDefaults({
+                confirmButtonText: 'Si',
+                cancelButtonText: 'No',
+                animation: 'slide-from-bottom',
+            });
+
 
 Vue.use(VueRouter);
-Vue.use(VueResource);
 
-var router = new VueRouter({
-	history: true
+const router = new VueRouter({
+    mode: 'history',
+    routes: [
+        {
+            path: '/',
+            name: 'login',
+            component: require('./views/Login.vue'),
+            beforeEnter: (to, from, next) => {
+                if (User.isAuthenticated()) {
+                    next({ name: 'lists' });
+                } else {
+                    next();
+                }
+            }
+        },
+
+        {
+            path: '/lists',
+            name: 'lists',
+            component: require('./views/Lists.vue'),
+            meta: { requiresAuth: true }
+        },
+
+        {
+            path: '/config',
+            name: 'config',
+            component: require('./views/Config.vue'),
+            meta: { requiresAuth: true }
+        },
+
+        {
+            path: '/new',
+            name: 'new',
+            component: require('./views/New.vue'),
+            meta: { requiresAuth: true }
+        },
+
+        {
+            path: '/lists/:list',
+            name: 'items',
+            component: require('./views/Items.vue'),
+            props: true,
+            meta: { requiresAuth: true }
+        },
+
+        {
+            path: '/lists/:list/favs',
+            name: 'favs',
+            component: require('./views/Favs.vue'),
+            props: true,
+            meta: { requiresAuth: true }
+        },
+
+        {
+            path: '*',
+            name: '404',
+            component: require('./views/error/404.vue')
+        }
+    ]
 });
 
-router.map({
+router.beforeEach((to, from, next) => {
 
-	'/': {
-		name: 'home',
-		component: require('./pages/home.vue')
-	},
-
-	'/lists': {
-		name: 'lists',
-		component: require('./pages/lists.vue'),
-		auth: true
-	},
-
-	'/lists/new': {
-		name: 'new',
-		component: require('./pages/new.vue'),
-		auth: true
-	},
-
-	'/lists/:list': {
-		name: 'items',
-		component: require('./pages/items.vue'),
-		auth: true
-	},
-
-	'/lists/:list/favs': {
-		name: 'favs',
-		component: require('./pages/favs.vue'),
-		auth: true
-	},
-
-	'/config': {
-		name: 'config',
-		component: require('./pages/config.vue'),
-		auth: true
-	},
-
-	'/error': {
-		name: 'error',
-		component: require('./pages/error/500.vue')
-	},
-
-	'*': {
-		name: '404',
-		component: require('./pages/error/404.vue')
-	}
-
+    if (to.matched.some(record => record.meta.requiresAuth)) {
+        if ( ! User.isAuthenticated()) {
+            next({
+                name: 'login',
+                query: { redirect: to.fullPath }
+            })
+        } else {
+            next()
+        }
+    } else {
+        next() // make sure to always call next()!
+    }
 });
 
-router.beforeEach(function (transition) {
-
-	if (transition.to.auth && ! User.isAuthenticated()) {
-		sweetAlert({
-					  title: '¿Quién eres?',
-					  text: 'Lo siento, no recuerdo quien eres... tienes que volver a entrar.',
-					  confirmButtonText: 'Ok',
-					  type: 'error'
-					});
-		User.logout();
-		transition.redirect('/');
-	} else {
-		transition.next();
-	}
-});
-
-var App = require('./pages/main.vue');
-
-router.start(App, '#app');
+const app = new Vue({
+  router
+}).$mount('#app')

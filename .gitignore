@@ -1,9 +1,14 @@
 /vendor
 /node_modules
+/public/hot
 /public/storage
+/storage/*.key
 Homestead.yaml
 Homestead.json
 .env*
 /public/css/*
 /public/js/*
 /public/sw.js
+/public/mix-manifest.json
+/public/images/*
+npm-debug.log
