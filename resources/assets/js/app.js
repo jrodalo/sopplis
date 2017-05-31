@@ -69,6 +69,7 @@ const router = new VueRouter({
             path: '/lists/:list',
             name: 'items',
             component: require('./views/Items.vue'),
+            props: true,
             meta: { requiresAuth: true }
         },
 
@@ -76,6 +77,7 @@ const router = new VueRouter({
             path: '/lists/:list/favs',
             name: 'favs',
             component: require('./views/Favs.vue'),
+            props: true,
             meta: { requiresAuth: true }
         },
 

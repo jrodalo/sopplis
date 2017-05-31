@@ -32,14 +32,17 @@
 
 	export default {
 
+		props: {
+			list: { required: true }
+		},
+
 		created () {
 			this.fetchData()
 		},
 
 		data () {
 			return {
-				state: Item.state,
-				list: this.$route.params.list
+				state: Item.state
 			}
 		},
 
