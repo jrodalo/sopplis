@@ -1,7 +1,7 @@
 <template>
 
     <section id="login" class="page">
-        <div class="content content--centered content--withfooter">
+        <div class="content--centered content--withfooter">
             <div class="form">
 
                 <img src="/images/favicon-touch.png" alt="Logo" class="logo" width="80" height="80">
