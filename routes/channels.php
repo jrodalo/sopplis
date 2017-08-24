@@ -1,5 +1,7 @@
 <?php
 
+use App\Cart;
+
 /*
 |--------------------------------------------------------------------------
 | Broadcast Channels
@@ -11,6 +13,6 @@
 |
 */
 
-Broadcast::channel('App.User.{id}', function ($user, $id) {
-    return (int) $user->id === (int) $id;
+Broadcast::channel('lists.{cart}', function ($user, Cart $cart) {
+    return $cart->isVisibleBy($user);
 });
