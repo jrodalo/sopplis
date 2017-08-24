@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-
-use Auth;
 use App\Cart;
-use App\Item;
+use App\Events\NewItemCreated;
 use App\Http\Requests;
+use App\Item;
+use Auth;
+use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 
 class ItemController extends Controller
@@ -59,6 +59,10 @@ class ItemController extends Controller
         $item->visible = true;
         $item->count = $item->count + 1;
         $item->save();
+
+        if ($cart->shared) {
+            broadcast(new NewItemCreated($cart, $item))->toOthers();
+        }
 
         return ['success' => true, 'item' => $item];
     }

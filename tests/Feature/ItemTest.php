@@ -2,13 +2,14 @@
 
 namespace Tests\Unit;
 
-use Tests\TestCase;
 use App\Cart;
 use App\Item;
 use App\User;
-use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
+use Illuminate\Foundation\Testing\WithoutMiddleware;
+use Illuminate\Support\Facades\Event;
+use Tests\TestCase;
 
 class ItemTest extends TestCase
 {
@@ -72,6 +73,7 @@ class ItemTest extends TestCase
 
     public function test_un_usuario_puede_crear_items_en_sus_listas()
     {
+        Event::fake();
         $user = factory(User::class)->create();
         $cart = factory(Cart::class)->create();
         $cart->users()->attach($user);
@@ -194,6 +196,7 @@ class ItemTest extends TestCase
 
     public function test_al_insertar_un_item_existente_aumenta_su_contador()
     {
+        Event::fake();
         $user = factory(User::class)->create();
         $cart = factory(Cart::class)->create();
         $cart->users()->attach($user);

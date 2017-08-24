@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import User from './models/User'
+import Echo from "laravel-echo"
 
 window.axios = require('axios');
 window.axios.defaults.baseURL='/api/v1';
@@ -16,6 +17,19 @@ window.axios.interceptors.request.use(config => {
 
   }, error => {
     return Promise.reject(error);
+});
+
+window.Pusher = require('pusher-js');
+
+window.Echo = new Echo({
+    broadcaster: 'pusher',
+    key: process.env.MIX_PUSHER_APP_KEY,
+    cluster: 'eu',
+    auth: {
+        headers: {
+            'Authorization': 'Bearer ' + User.data().token
+        }
+    }
 });
 
 window.sweetAlert = require('sweetalert');
