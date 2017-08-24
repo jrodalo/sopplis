@@ -23,7 +23,7 @@ window.Pusher = require('pusher-js');
 
 window.Echo = new Echo({
     broadcaster: 'pusher',
-    key: '03d8e7c096a805cc3183',
+    key: process.env.MIX_PUSHER_APP_KEY,
     cluster: 'eu',
     auth: {
         headers: {
