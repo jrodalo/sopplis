@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Cart;
-use App\Events\NewItemCreated;
+use App\Events\ItemCreated;
 use App\Http\Requests;
 use App\Item;
 use Auth;
@@ -61,7 +61,7 @@ class ItemController extends Controller
         $item->save();
 
         if ($cart->shared) {
-            broadcast(new NewItemCreated($cart, $item))->toOthers();
+            broadcast(new ItemCreated($cart, $item))->toOthers();
         }
 
         return ['success' => true, 'item' => $item];

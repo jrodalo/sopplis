@@ -77,7 +77,7 @@
 
             listen () {
                 Echo.private(`lists.${this.list}`)
-                    .listen('NewItemCreated', (e) => {
+                    .listen('ItemCreated', (e) => {
                         Item.state.items.push(e.item);
                     });
             },

@@ -3,7 +3,7 @@
 namespace Tests\Feature;
 
 use App\Cart;
-use App\Events\NewItemCreated;
+use App\Events\ItemCreated;
 use App\Item;
 use App\User;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
@@ -29,7 +29,7 @@ class EventsTest extends TestCase
 
         $response = $this->actingAs($user)->json('POST', "/api/v1/lists/$cart->slug/items", $item);
 
-        Event::assertDispatched(NewItemCreated::class, function ($e) use ($item) {
+        Event::assertDispatched(ItemCreated::class, function ($e) use ($item) {
             return $e->item->name === $item['name'];
         });
     }
@@ -45,7 +45,7 @@ class EventsTest extends TestCase
 
         $response = $this->actingAs($user)->json('POST', "/api/v1/lists/$cart->slug/items", $item);
 
-        Event::assertNotDispatched(NewItemCreated::class);
+        Event::assertNotDispatched(ItemCreated::class);
     }
 
 }
