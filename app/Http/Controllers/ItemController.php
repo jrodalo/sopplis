@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Cart;
+use App\Events\CartFinished;
 use App\Events\ItemCreated;
 use App\Events\ItemUpdated;
 use App\Http\Requests;
@@ -114,6 +115,10 @@ class ItemController extends Controller
              ->where('done', true)
              ->whereIn('id', explode(',', $request->items))
              ->update(['visible' => false, 'done' => false]);
+
+        if ($cart->shared) {
+            broadcast(new CartFinished($cart, $request->items, Auth::user()))->toOthers();
+        }
 
         return ['success' => true, 'message' => $this->randomSuccessMessage()];
     }
