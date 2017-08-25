@@ -79,6 +79,10 @@
                 Echo.private(`lists.${this.list}`)
                     .listen('ItemCreated', (e) => {
                         Item.state.items.push(e.item);
+                    })
+                    .listen('ItemUpdated', (e) => {
+                        let index = _.findIndex(Item.state.items, ['id', e.item.id]);
+                        Item.state.items.splice(index, 1, e.item);
                     });
             },
 

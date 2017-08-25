@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Cart;
 use App\Events\ItemCreated;
+use App\Events\ItemUpdated;
 use App\Http\Requests;
 use App\Item;
 use Auth;
@@ -84,6 +85,10 @@ class ItemController extends Controller
         $item->done = $request->done;
 
         $item->save();
+
+        if ($cart->shared) {
+            broadcast(new ItemUpdated($cart, $item))->toOthers();
+        }
 
         return ['success' => true, 'item' => $item];
     }
