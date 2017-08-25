@@ -12,7 +12,7 @@ const { mix } = require('laravel-mix');
  */
 
 mix
-    .js('resources/assets/js/app.js', 'public/js').extract(['vue', 'vue-router', 'axios', 'lodash', 'sweetalert', 'laravel-echo', 'pusher-js'])
+    .js('resources/assets/js/app.js', 'public/js').extract(['vue', 'vue-router', 'axios', 'lodash.orderby', 'sweetalert', 'laravel-echo', 'pusher-js'])
     .sass('resources/assets/sass/app.scss', 'public/css')
     .version()
     .copyDirectory('resources/assets/images', 'public/images');
