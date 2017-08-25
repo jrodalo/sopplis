@@ -10,6 +10,7 @@
 <script>
 
 	import Item from '../models/Item';
+	import orderBy from 'lodash.orderby';
 
 	export default {
 
@@ -30,7 +31,7 @@
 		computed: {
 
 			orderedItems () {
-				return _.orderBy(this.state.items, ['done', item => item.name.toLowerCase()], ['asc', 'asc']);
+				return orderBy(this.state.items, ['done', item => item.name.toLowerCase()], ['asc', 'asc']);
 			}
 		},
 
