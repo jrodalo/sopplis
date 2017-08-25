@@ -1,6 +1,6 @@
 <template>
 	<label class="checkbox">
-		<input class="checkbox__input" type="checkbox" v-model="item.done">
+		<input class="checkbox__input" type="checkbox" v-model="item.done" v-on:click="update">
 		<div class="checkbox__tick"></div>
 	</label>
 </template>
@@ -13,8 +13,9 @@
 			item: { required: true }
 		},
 
-		watch: {
-			'item.done' () {
+		methods: {
+
+			update () {
 				this.$emit('changed', this.item);
 			}
 		}

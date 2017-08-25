@@ -77,8 +77,21 @@
 
             listen () {
                 Echo.private(`lists.${this.list}`)
-                    .listen('NewItemCreated', (e) => {
+                    .listen('ItemCreated', (e) => {
                         Item.state.items.push(e.item);
+                    })
+                    .listen('ItemUpdated', (e) => {
+                        let index = _.findIndex(Item.state.items, ['id', e.item.id]);
+                        Item.state.items.splice(index, 1, e.item);
+                    })
+                    .listen('CartFinished', (e) => {
+                        Item.state.items = Item.state.items.filter(item => e.items.indexOf(item.id));
+                        sweetAlert({
+                              title: '¡Lista actualizada!',
+                              text: `Parece que ${e.user} acaba de eliminar los productos seleccionados`,
+                              confirmButtonText: 'Vale',
+                              type: 'info'
+                            });
                     });
             },
 

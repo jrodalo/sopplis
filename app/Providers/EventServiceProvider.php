@@ -13,7 +13,7 @@ class EventServiceProvider extends ServiceProvider
      * @var array
      */
     protected $listen = [
-        /*'App\Events\NewItemCreated' => [
+        /*'App\Events\ItemCreated' => [
             'App\Listeners\SendPushNotification',
         ],*/
     ];
