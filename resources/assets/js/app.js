@@ -10,7 +10,7 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 window.axios.interceptors.request.use(config => {
 
     if (User.isAuthenticated()) {
-        config.headers.common['Authorization'] = 'Bearer ' + User.data().token;
+        config.headers.common['Authorization'] = User.auth();
     }
 
     return config;
@@ -19,15 +19,13 @@ window.axios.interceptors.request.use(config => {
     return Promise.reject(error);
 });
 
-window.Pusher = require('pusher-js');
-
 window.Echo = new Echo({
     broadcaster: 'pusher',
     key: process.env.MIX_PUSHER_APP_KEY,
     cluster: 'eu',
     auth: {
         headers: {
-            'Authorization': 'Bearer ' + User.data().token
+            'Authorization': User.auth()
         }
     }
 });

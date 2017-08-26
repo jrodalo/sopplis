@@ -9,6 +9,10 @@ const User = {
         return JSON.parse(localStorage.getItem('SOPPLIS_USER')) || {};
     },
 
+    auth () {
+        return `Bearer ${User.data().token}`;
+    },
+
     updateUser (name) {
         return axios.put('users', {name: name}).then(response => {
 

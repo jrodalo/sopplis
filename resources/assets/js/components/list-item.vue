@@ -1,10 +1,12 @@
 <template>
-	<ul class="list">
+
+	<transition-group class="list" name="list" tag="ul">
 		<li :class="{'item': true, 'item--done': item.done}" v-for="item in orderedItems" v-bind:key="item.id">
 			<span class="item__name">{{item.name}}</span>
 			<checkbox :item="item" v-on:changed="update"></checkbox>
 		</li>
-	</ul>
+	</transition-group>
+
 </template>
 
 <script>
@@ -45,3 +47,16 @@
 	};
 
 </script>
+
+<style>
+
+	.list-enter-active {
+		transition: all 0.5s;
+	}
+
+	.list-enter {
+		opacity: 0;
+		background-color: yellow;
+	}
+
+</style>
