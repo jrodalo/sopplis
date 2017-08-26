@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-
-use Auth;
 use App\Cart;
-use App\Item;
+use App\Events\ItemCreated;
 use App\Http\Requests;
+use App\Item;
+use Auth;
+use Illuminate\Http\Request;
 
 class FavoriteController extends Controller
 {
@@ -45,9 +45,13 @@ class FavoriteController extends Controller
             'items' => 'required',
         ]);
 
-        $cart->items()
-             ->whereIn('id', explode(',', $request->items))
-             ->update(['visible' => true]);
+        $query = $cart->items()->whereIn('id', explode(',', $request->items));
+
+        $query->update(['visible' => true]);
+
+        if ($cart->shared) {
+            broadcast(new ItemCreated($cart, $query->get()->toArray()))->toOthers();
+        }
 
         return ['success' => true];
     }

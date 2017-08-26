@@ -17,17 +17,17 @@ class ItemCreated implements ShouldBroadcast
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
     private $cart;
-    public $item;
+    public $items;
 
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct(Cart $cart, Item $item)
+    public function __construct(Cart $cart, array $items)
     {
         $this->cart = $cart;
-        $this->item = $item;
+        $this->items = $items;
     }
 
     /**

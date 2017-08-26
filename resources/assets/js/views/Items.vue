@@ -78,7 +78,7 @@
             listen () {
                 Echo.private(`lists.${this.list}`)
                     .listen('ItemCreated', (e) => {
-                        Item.state.items.push(e.item);
+                        Item.state.items.push(...e.items);
                     })
                     .listen('ItemUpdated', (e) => {
                         let index = Item.state.items.findIndex((item) => item.id === e.item.id);

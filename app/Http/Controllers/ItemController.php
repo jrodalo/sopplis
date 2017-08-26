@@ -63,7 +63,7 @@ class ItemController extends Controller
         $item->save();
 
         if ($cart->shared) {
-            broadcast(new ItemCreated($cart, $item))->toOthers();
+            broadcast(new ItemCreated($cart, [$item]))->toOthers();
         }
 
         return ['success' => true, 'item' => $item];
