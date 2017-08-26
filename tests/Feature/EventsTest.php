@@ -31,7 +31,7 @@ class EventsTest extends TestCase
         $this->actingAs($user)->json('POST', "/api/v1/lists/$cart->slug/items", $item);
 
         Event::assertDispatched(ItemCreated::class, function ($e) use ($item) {
-            return $e->item->name === $item['name'];
+            return $e->items[0]->name === $item['name'];
         });
     }
 
