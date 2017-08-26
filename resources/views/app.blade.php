@@ -7,5 +7,6 @@
 @endsection
 
 @section('content')
+    <noscript>Para ver esta página necesitas activar Javascript en tu navegador</noscript>
 	<div id="app"><router-view></router-view></div>
 @endsection
