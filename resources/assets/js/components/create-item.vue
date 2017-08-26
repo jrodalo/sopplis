@@ -59,6 +59,11 @@
 
 				let item = {name: value};
 
+				if (this.state.items.findIndex((existing) => existing.name === item.name) >= 0) {
+					this.newItem = '';
+					return;
+				}
+
 				Item.insertItem(this.list, item);
 
 				this.newItem = '';
