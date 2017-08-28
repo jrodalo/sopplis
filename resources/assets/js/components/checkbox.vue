@@ -1,6 +1,6 @@
 <template>
 	<label class="checkbox">
-		<input class="checkbox__input" type="checkbox" v-model="item.done" v-on:click="update">
+		<input class="checkbox__input" type="checkbox" v-model="item.done" v-on:change.self="update">
 		<div class="checkbox__tick"></div>
 	</label>
 </template>
