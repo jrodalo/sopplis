@@ -15,7 +15,7 @@
 					placeholder="¿Qué necesitas comprar?"
 					maxlength="100"
 					ref="itemInput"
-					v-model="newItem"
+					v-model.trim="name"
 					v-on:blur="hideForm">
 			<router-link :to="{ name: 'favs', params: {list: list} }" class="header__button header__button--side">★</router-link>
 		</form>
@@ -35,7 +35,7 @@
 
 		data () {
 			return {
-				newItem: '',
+				name: '',
 				editing: false,
 				state: Item.state
 			};
@@ -54,19 +54,18 @@
 
 			addItem () {
 
-				let value = this.newItem && this.newItem.trim();
-				if (!value) { return; }
+				if (!this.name) { return; }
 
-				let item = {name: value};
+				let item = {name: this.name};
 
-				if (this.state.items.findIndex((existing) => existing.name === item.name) >= 0) {
-					this.newItem = '';
+				if (this.state.items.find((existing) => existing.name === item.name)) {
+					this.name = '';
 					return;
 				}
 
 				Item.insertItem(this.list, item);
 
-				this.newItem = '';
+				this.name = '';
 			}
 		}
 
