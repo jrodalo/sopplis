@@ -1,7 +1,8 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import User from './models/User'
 import Echo from "laravel-echo"
+import User from './models/User'
+import store from './store'
 
 window.axios = require('axios');
 window.axios.defaults.baseURL='/api/v1';
@@ -118,5 +119,6 @@ router.beforeEach((to, from, next) => {
 });
 
 const app = new Vue({
-  router
+    store,
+    router
 }).$mount('#app')
