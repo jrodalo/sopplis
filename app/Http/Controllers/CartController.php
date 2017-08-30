@@ -43,7 +43,7 @@ class CartController extends Controller
         $cart->save();
         $cart->users()->attach($owner, ['role' => 'owner']);
 
-        return ['success' => true, 'cart' => $cart];
+        return ['success' => true, 'list' => $cart];
     }
 
 }
