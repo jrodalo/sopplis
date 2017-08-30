@@ -44,7 +44,7 @@ class ItemController extends Controller
             return response()->json(['success' => false], 403);
         }
 
-        $this->validate($request, [
+        $request->validate([
             'name' => 'required|max:100',
         ]);
 
@@ -107,7 +107,7 @@ class ItemController extends Controller
             return response()->json(['success' => false], 403);
         }
 
-        $this->validate($request, [
+        $request->validate([
             'items' => 'required',
         ]);
 

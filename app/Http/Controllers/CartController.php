@@ -31,7 +31,7 @@ class CartController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, [
+        $request->validate([
             'name' => 'required|max:100',
         ]);
 

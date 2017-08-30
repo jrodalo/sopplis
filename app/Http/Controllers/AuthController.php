@@ -20,7 +20,7 @@ class AuthController extends Controller
      */
     public function login(Request $request)
     {
-        $this->validate($request, [
+        $request->validate([
             'email' => 'required|email',
             'password' => 'required',
         ]);
@@ -42,7 +42,7 @@ class AuthController extends Controller
      */
     public function loginWithToken(Request $request)
     {
-        $this->validate($request, [
+        $request->validate([
             'token' => 'required|max:100',
         ]);
 

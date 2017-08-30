@@ -41,7 +41,7 @@ class FavoriteController extends Controller
             return response()->json(['success' => false], 403);
         }
 
-        $this->validate($request, [
+        $request->validate([
             'items' => 'required',
         ]);
 
@@ -70,7 +70,7 @@ class FavoriteController extends Controller
             return response()->json(['success' => false], 403);
         }
 
-        $this->validate($request, [
+        $request->validate([
             'items' => 'required',
         ]);
 
