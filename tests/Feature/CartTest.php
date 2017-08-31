@@ -22,7 +22,7 @@ class CartTest extends TestCase
         $response = $this->actingAs($user)->json('POST', "/api/v1/lists", ['name' => '']);
 
         $response
-            ->assertStatus(500)
+            ->assertStatus(422)
             ->assertJsonFragment([
                 'success' => false,
             ]);
@@ -36,7 +36,7 @@ class CartTest extends TestCase
         $response = $this->actingAs($user)->json('POST', "/api/v1/lists", ['name' => str_random(150)]);
 
         $response
-            ->assertStatus(500)
+            ->assertStatus(422)
             ->assertJsonFragment([
                 'success' => false,
             ]);
