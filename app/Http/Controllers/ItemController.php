@@ -22,9 +22,7 @@ class ItemController extends Controller
      */
     public function index(Request $request, Cart $cart)
     {
-        if (Auth::user()->cant('read', $cart)) {
-            return response()->json(['success' => false], 403);
-        }
+        abort_if(Auth::user()->cant('read', $cart), 403);
 
         $items = $cart->visibleItems()->get();
 
@@ -40,11 +38,9 @@ class ItemController extends Controller
      */
     public function store(Request $request, Cart $cart)
     {
-        if (Auth::user()->cant('write', $cart)) {
-            return response()->json(['success' => false], 403);
-        }
+        abort_if(Auth::user()->cant('write', $cart), 403);
 
-        $this->validate($request, [
+        $request->validate([
             'name' => 'required|max:100',
         ]);
 
@@ -79,9 +75,7 @@ class ItemController extends Controller
      */
     public function update(Request $request, Cart $cart, Item $item)
     {
-        if (Auth::user()->cant('write', $cart)) {
-            return response()->json(['success' => false], 403);
-        }
+        abort_if(Auth::user()->cant('write', $cart), 403);
 
         $item->done = $request->done;
 
@@ -103,11 +97,9 @@ class ItemController extends Controller
      */
     public function delete(Request $request, Cart $cart)
     {
-        if (Auth::user()->cant('write', $cart)) {
-            return response()->json(['success' => false], 403);
-        }
+        abort_if(Auth::user()->cant('write', $cart), 403);
 
-        $this->validate($request, [
+        $request->validate([
             'items' => 'required',
         ]);
 

@@ -72,7 +72,9 @@
         methods: {
 
             fetchData (transition) {
-                return Item.readItems(this.list);
+                return Item.readItems(this.list).catch(() => {
+                    this.$router.push({ name: '404' });
+                });
             },
 
             listen () {
