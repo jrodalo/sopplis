@@ -32,8 +32,6 @@
 
 <script>
 
-	import List from '../models/List'
-
 	export default {
 
 		mounted () {

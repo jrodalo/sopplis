@@ -6,19 +6,19 @@
         </header>
 
         <div class="content content--withfooter">
-            <div v-show="state.items.length">
+            <div v-show="items.length">
                 <list-item :list="list"></list-item>
             </div>
-            <div class="content--centered message message--empty" v-show="!state.items.length && !state.loading">
+            <div class="content--centered message message--empty" v-show="!items.length && !loading">
                 <h1 class="message__title">Esta lista está vacía :(</h1>
                 <p>Añade los productos que quieres comprar pulsando el botón <b>+</b></p>
             </div>
         </div>
 
-        <footer class="footer" v-show="state.items.length">
+        <footer class="footer" v-show="items.length">
             <transition name="fade">
                 <a href="#active-items" :class="{'footer__link': true, 'footer__link--green': allDone}" v-on:click.prevent="finalize">
-                    {{ completedItems.length }} de {{ state.items.length }}
+                    {{ completed.length }} de {{ items.length }}
                 </a>
             </transition>
         </footer>
@@ -27,8 +27,6 @@
 </template>
 
 <script>
-
-    import Item from '../models/Item';
 
     export default {
 
@@ -48,46 +46,49 @@
 
         data () {
             return {
-                state: Item.state
+                loading: false
             }
         },
 
         components: {
             createItem: require('../components/create-item.vue'),
-            listItem: require('../components/list-item.vue'),
-            loading: require('../components/loading.vue')
+            listItem: require('../components/list-item.vue')
         },
 
         computed: {
 
-            completedItems () {
-                return Item.readCompletedItems();
+            completed () {
+                return this.$store.getters.completed;
+            },
+
+            items () {
+                return this.$store.state.items.all;
             },
 
             allDone () {
-                return this.state.items.length > 0 && (this.completedItems.length == this.state.items.length);
+                return this.$store.getters.allDone;
             }
         },
 
         methods: {
 
-            fetchData (transition) {
-                return Item.readItems(this.list).catch(() => {
-                    this.$router.push({ name: '404' });
-                });
+            fetchData () {
+                this.loading = true;
+                this.$store.dispatch('fetchItems', this.list)
+                    .then(() => this.loading = false)
+                    .catch(() => this.$router.push({ name: '404' }));
             },
 
             listen () {
                 Echo.private(`lists.${this.list}`)
                     .listen('ItemCreated', (e) => {
-                        Item.state.items.push(...e.items);
+                        this.$store.commit('ADD_ITEMS', {list: this.list, items: e.items});
                     })
                     .listen('ItemUpdated', (e) => {
-                        let index = Item.state.items.findIndex((item) => item.id === e.item.id);
-                        Item.state.items.splice(index, 1, e.item);
+                        this.$store.commit('UPDATE_ITEM', {list: this.list, item: e.item});
                     })
                     .listen('CartFinished', (e) => {
-                        Item.state.items = Item.state.items.filter(item => e.items.indexOf(item.id) < 0);
+                        this.$store.commit('CART_FINISHED', {list: this.list, items: e.items});
                         sweetAlert({
                               title: '¡Lista actualizada!',
                               text: `Parece que ${e.user} acaba de eliminar los productos seleccionados`,
@@ -112,13 +113,13 @@
                       showLoaderOnConfirm: true
                     },
                     () => {
-                        Item.deleteItems(this.list, this.completedItems).then(response => {
+                        this.$store.dispatch('deleteItems', {list: this.list}).then(response => {
                             sweetAlert({
                                 title: response.data.message || '¡Genial!',
                                 timer: 2000,
                                 type: 'success',
                                 showConfirmButton: false});
-                        }, (response) => {
+                        }, () => {
                             sweetAlert('Oops...', 'No he podido finalizar la compra... vuelve a intentarlo :(', 'error');
                         });
                     }
