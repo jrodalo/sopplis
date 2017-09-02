@@ -1,6 +1,5 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import plugins from './plugins'
 import items from './modules/items'
 import lists from './modules/lists'
 import users from './modules/users'
@@ -14,6 +13,5 @@ export default new Vuex.Store({
         lists,
         favorites,
         users
-    },
-    plugins
+    }
 })
