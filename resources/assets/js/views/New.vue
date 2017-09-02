@@ -32,8 +32,6 @@
 
 <script>
 
-	import List from '../models/List'
-
 	export default {
 
 		mounted () {
@@ -62,9 +60,9 @@
 					return;
 				}
 
-				List.addList({name: this.name}).then((response) => {
+				this.$store.dispatch('createList', {name: this.name}).then(() => {
 					this.$router.push({ name: 'lists' });
-				}, (response) => {
+				}, () => {
 					sweetAlert('Oops...', 'No he podido crear tu lista... vuelve a intentarlo :(', 'error');
 				});
 			}

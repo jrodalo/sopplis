@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import User from './models/User'
 import Echo from "laravel-echo"
+import store from './store'
 
 window.axios = require('axios');
 window.axios.defaults.baseURL='/api/v1';
@@ -9,8 +9,8 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
 window.axios.interceptors.request.use(config => {
 
-    if (User.isAuthenticated()) {
-        config.headers.common['Authorization'] = User.auth();
+    if (store.getters.isAuthenticated) {
+        config.headers.common['Authorization'] = store.getters.authentication;
     }
 
     return config;
@@ -23,11 +23,7 @@ window.Echo = new Echo({
     broadcaster: 'pusher',
     key: process.env.MIX_PUSHER_APP_KEY,
     cluster: 'eu',
-    auth: {
-        headers: {
-            'Authorization': User.auth()
-        }
-    }
+    auth: store.getters.authenticationHeaders
 });
 
 window.sweetAlert = require('sweetalert');
@@ -48,7 +44,7 @@ const router = new VueRouter({
             name: 'login',
             component: require('./views/Login.vue'),
             beforeEnter: (to, from, next) => {
-                if (User.isAuthenticated()) {
+                if (store.getters.isAuthenticated) {
                     next({ name: 'lists' });
                 } else {
                     next();
@@ -104,7 +100,7 @@ const router = new VueRouter({
 router.beforeEach((to, from, next) => {
 
     if (to.matched.some(record => record.meta.requiresAuth)) {
-        if ( ! User.isAuthenticated()) {
+        if ( ! store.getters.isAuthenticated) {
             next({
                 name: 'login',
                 query: { redirect: to.fullPath }
@@ -118,5 +114,6 @@ router.beforeEach((to, from, next) => {
 });
 
 const app = new Vue({
-  router
+    store,
+    router
 }).$mount('#app')
