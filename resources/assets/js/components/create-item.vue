@@ -2,11 +2,11 @@
 
 	<div>
 		<div class="header__content" v-show="!editing">
-			<router-link :to="{ name: 'lists' }" class="header__button">«</router-link>
+			<router-link :to="{ name: 'lists' }" class="header__button" aria-label="Volver">«</router-link>
 			<transition name="fade">
 				<h1 :class="{'header__title': true, 'hidden': ! listName}" v-text="listName"></h1>
 			</transition>
-			<a href="#" class="header__button" v-on:click.prevent="showForm">+</a>
+			<a href="#" class="header__button" v-on:click.prevent="showForm" aria-label="Añadir">+</a>
 		</div>
 
 		<form class="header-form" v-on:submit.prevent="addItem" v-show="editing">

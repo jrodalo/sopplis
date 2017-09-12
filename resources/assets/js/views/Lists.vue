@@ -3,9 +3,9 @@
 	<section id="lists" class="page">
 		<header class="header">
 			<div class="header__content">
-				<router-link :to="{name: 'config'}" class="header__button">☰</router-link>
+				<router-link :to="{name: 'config'}" class="header__button" aria-label="Configuración">☰</router-link>
 				<h1 class="header__title">Mis listas</h1>
-				<router-link :to="{name: 'new'}" class="header__button">+</router-link>
+				<router-link :to="{name: 'new'}" class="header__button" aria-label="Añadir una lista">+</router-link>
 			</div>
 		</header>
 

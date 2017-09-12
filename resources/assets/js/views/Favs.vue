@@ -3,7 +3,7 @@
 	<section id="fav-items" class="page">
 		<header class="header">
 			<div class="header__content">
-				<router-link :to="{ name: 'items' }" class="header__button">«</router-link>
+				<router-link :to="{ name: 'items' }" class="header__button" aria-label="Volver">«</router-link>
 				<h1 class="header__title">Productos frecuentes</h1>
 				<a v-show="favorites.length" v-on:click="changeMode" :class="{'header__button': true, 'header__button--pressed': mode == 'remove'}">✎</a>
 			</div>

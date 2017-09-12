@@ -15,7 +15,7 @@
             </div>
         </div>
 
-        <footer class="footer" v-show="items.length">
+        <footer class="footer" role="status" aria-live="polite" v-show="items.length">
             <transition name="fade">
                 <a href="#active-items" :class="{'footer__link': true, 'footer__link--green': allDone}" v-on:click.prevent="finalize">
                     {{ completed.length }} de {{ items.length }}
