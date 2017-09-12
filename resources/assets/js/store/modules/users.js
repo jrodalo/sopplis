@@ -1,6 +1,6 @@
 const state = {
-    data: JSON.parse(localStorage.getItem('SOPPLIS_USER') || '{}')
-}
+    data: JSON.parse(localStorage.getItem('SOPPLIS_USER') || '{}'),
+};
 
 const getters = {
     isAuthenticated: state => state.data.token && state.data.token.length > 0,
@@ -9,8 +9,8 @@ const getters = {
         return {
             headers: { 'Authorization': getters.authentication }
         }
-    }
-}
+    },
+};
 
 const mutations = {
 
@@ -22,8 +22,8 @@ const mutations = {
     LOGOUT (state) {
         state.data = {};
         localStorage.clear();
-    }
-}
+    },
+};
 
 const actions = {
 
@@ -51,12 +51,12 @@ const actions = {
                 commit('SET_USER', user);
             }
         });
-    }
-}
+    },
+};
 
 export default {
     state,
     getters,
     mutations,
-    actions
-}
+    actions,
+};

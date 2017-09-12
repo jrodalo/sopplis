@@ -111,9 +111,8 @@
 				this.$store.dispatch('removeSelected', this.list).then(response => {
 					this.mode = 'add';
 				});
-			}
-
-		}
+			},
+		},
 	};
 
 </script>

@@ -1,7 +1,7 @@
-import Vue from 'vue'
-import VueRouter from 'vue-router'
-import Echo from "laravel-echo"
-import store from './store'
+import Vue from 'vue';
+import VueRouter from 'vue-router';
+import Echo from "laravel-echo";
+import store from './store';
 
 window.axios = require('axios');
 window.axios.defaults.baseURL='/api/v1';
@@ -93,7 +93,7 @@ const router = new VueRouter({
             path: '*',
             name: '404',
             component: require('./views/error/404.vue')
-        }
+        },
     ]
 });
 
@@ -104,16 +104,16 @@ router.beforeEach((to, from, next) => {
             next({
                 name: 'login',
                 query: { redirect: to.fullPath }
-            })
+            });
         } else {
-            next()
+            next();
         }
     } else {
-        next() // make sure to always call next()!
+        next(); // make sure to always call next()!
     }
 });
 
 const app = new Vue({
     store,
-    router
-}).$mount('#app')
+    router,
+}).$mount('#app');

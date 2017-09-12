@@ -51,7 +51,7 @@
         data () {
             return {
                 email: '',
-                password: ''
+                password: '',
             }
         },
 
@@ -74,9 +74,9 @@
                         confirmButtonText: 'Vale'
                     });
                 });
-            }
-        }
-    }
+            },
+        },
+    };
 </script>
 
 <style lang="sass">

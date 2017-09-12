@@ -73,8 +73,7 @@
 
 				this.name = '';
 			}
-		}
-
+		},
 	};
 
 </script>

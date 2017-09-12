@@ -1,16 +1,14 @@
 const state = {
     all: [],
-    list: {}
-}
+    list: {},
+};
 
 const getters = {
     active: state => state.all.filter(item => ! item.done),
     completed: state => state.all.filter(item => item.done),
-    allDone: (state, getters) => state.all.length > 0 && (getters.completed.length == state.all.length),
-    itemById: (state, getters) => (id) => {
-        return state.all.find(item => item.id === id);
-    }
-}
+    allDone: (state, getters) => state.all.length > 0 && (getters.completed.length === state.all.length),
+    itemById: (state, getters) => id => state.all.find(item => item.id === id),
+};
 
 const mutations = {
 
@@ -37,12 +35,12 @@ const mutations = {
     CART_FINISHED (state, payload) {
         state.all = state.all.filter(item => payload.items.indexOf(item.id) < 0);
         localStorage.setItem(`SOPPLIS_${payload.list}_ITEMS`, JSON.stringify(state.all));
-    }
-}
+    },
+};
 
 const actions = {
 
-    fetchItems ({commit, state}, list) {
+    fetchItems ({commit}, list) {
 
         commit('SET_ITEMS', {list, items: JSON.parse(localStorage.getItem(`SOPPLIS_${list}_ITEMS`) || '[]')});
 
@@ -58,7 +56,7 @@ const actions = {
         });
     },
 
-    updateItem ({commit, state}, payload) {
+    updateItem ({commit}, payload) {
         return axios.put(`lists/${payload.list}/items/${payload.item.id}`, {done: payload.item.done}).then(response => {
             commit('UPDATE_ITEM', {list: payload.list, item: payload.item});
         });
@@ -72,13 +70,12 @@ const actions = {
             commit('SET_ITEMS', {list: payload.list, items: getters.active});
             return response;
         });
-    }
-
-}
+    },
+};
 
 export default {
     state,
     getters,
     mutations,
-    actions
-}
+    actions,
+};

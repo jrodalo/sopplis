@@ -47,12 +47,12 @@
         data () {
             return {
                 loading: false
-            }
+            };
         },
 
         components: {
             createItem: require('../components/create-item.vue'),
-            listItem: require('../components/list-item.vue')
+            listItem: require('../components/list-item.vue'),
         },
 
         computed: {
@@ -67,7 +67,7 @@
 
             allDone () {
                 return this.$store.getters.allDone;
-            }
+            },
         },
 
         methods: {
@@ -124,8 +124,8 @@
                         });
                     }
                 );
-            }
-        }
+            },
+        },
     };
 
 </script>

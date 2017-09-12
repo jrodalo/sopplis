@@ -18,7 +18,7 @@
 			update () {
 				this.$emit('changed', this.item);
 			}
-		}
+		},
 
 	};
 

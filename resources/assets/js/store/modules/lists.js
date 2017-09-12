@@ -1,15 +1,15 @@
 const state = {
-    all: []
-}
+    all: [],
+};
 
 const mutations = {
 
     SET_LISTS (state, lists) {
         state.all = lists;
         localStorage.setItem('SOPPLIS_LISTS', JSON.stringify(state.all));
-    }
+    },
 
-}
+};
 
 const actions = {
 
@@ -24,11 +24,11 @@ const actions = {
 
     createList (context, list) {
         return axios.post('lists', list);
-    }
-}
+    },
+};
 
 export default {
     state,
     mutations,
-    actions
-}
+    actions,
+};

@@ -41,17 +41,15 @@
 		data () {
 			return {
 				loading: false
-			}
+			};
 		},
 
 		computed: {
 
 			lists () {
-				return this.$store.state.lists.all
-			}
-
-		}
-
+				return this.$store.state.lists.all;
+			},
+		},
 	};
 
 </script>

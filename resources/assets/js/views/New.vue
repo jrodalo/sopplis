@@ -43,7 +43,7 @@
 				placeholders: ['Lista de la compra', 'Cumpleaños de Elisa', 'Comida para fin de año', 'Fiesta de despedida'],
 				placeholder: '',
 				name: '',
-			}
+			};
 		},
 
 		methods: {
@@ -65,8 +65,8 @@
 				}, () => {
 					sweetAlert('Oops...', 'No he podido crear tu lista... vuelve a intentarlo :(', 'error');
 				});
-			}
-		}
+			},
+		},
 	};
 
 </script>

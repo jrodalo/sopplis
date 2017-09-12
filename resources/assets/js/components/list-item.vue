@@ -35,8 +35,7 @@
 			update (item) {
 				this.$store.dispatch('updateItem', {list: this.list, item});
 			}
-		}
-
+		},
 	};
 
 </script>
