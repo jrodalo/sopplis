@@ -100,7 +100,7 @@
 
             finalize () {
 
-                if ( ! this.completedItems.length) {
+                if ( ! this.completed.length) {
                     return;
                 }
 
