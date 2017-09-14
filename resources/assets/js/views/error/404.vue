@@ -4,7 +4,7 @@
 
 		<header class="header">
 			<div class="header__content">
-				<router-link :to="{ name: 'login', params: {} }" class="header__button">«</router-link>
+				<router-link :to="{ name: 'login', params: {} }" class="header__button" aria-label="Volver">«</router-link>
 				<h1 class="header__title">Página no encontrada</h1>
 			</div>
 		</header>

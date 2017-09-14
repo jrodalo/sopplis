@@ -3,16 +3,16 @@
 	<section id="lists" class="page">
 		<header class="header">
 			<div class="header__content">
-				<router-link :to="{name: 'config'}" class="header__button">☰</router-link>
+				<router-link :to="{name: 'config'}" class="header__button" aria-label="Configuración">☰</router-link>
 				<h1 class="header__title">Mis listas</h1>
-				<router-link :to="{name: 'new'}" class="header__button">+</router-link>
+				<router-link :to="{name: 'new'}" class="header__button" aria-label="Añadir una lista">+</router-link>
 			</div>
 		</header>
 
 		<div class="content">
-			<div v-show="state.lists.length">
+			<div v-show="lists.length">
 				<ul class="list list--flex">
-					<li v-for="list in state.lists" class="item item--taller">
+					<li v-for="list in lists" class="item item--taller">
 						<router-link :to="{name: 'items', params: { list: list.slug }}" class="item__name--flex">
 							<span>{{ list.name }}</span>
 							<i v-show="list.shared" title="Lista compartida">⚭</i>
@@ -20,7 +20,7 @@
 					</li>
 				</ul>
 			</div>
-			<div class="content--centered message message--empty" v-show="!state.lists.length && !state.loading">
+			<div class="content--centered message message--empty" v-show="!lists.length && !loading">
 				<h1 class="message__title">No tienes ninguna lista :(</h1>
 				<p>Es hora de crear tu primera lista pulsando el botón <b>+</b></p>
 			</div>
@@ -31,27 +31,27 @@
 
 <script>
 
-	import List from '../models/List';
-
 	export default {
 
 		created () {
-			this.fetchData()
+			this.loading = true;
+			this.$store.dispatch('fetchLists')
+				.then(() => this.loading = false)
+				.catch(() => this.$router.push({ name: '500' }));
 		},
 
 		data () {
 			return {
-				state: List.state
-			}
+				loading: false
+			};
 		},
 
-		methods: {
+		computed: {
 
-			fetchData () {
-				return List.readLists();
-			}
-		}
-
+			lists () {
+				return this.$store.state.lists.all;
+			},
+		},
 	};
 
 </script>

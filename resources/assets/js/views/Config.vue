@@ -4,7 +4,7 @@
 
 		<header class="header">
 			<div class="header__content">
-				<router-link :to="{ name: 'lists', params: {} }" class="header__button">«</router-link>
+				<router-link :to="{ name: 'lists', params: {} }" class="header__button" aria-label="Volver">«</router-link>
 				<h1 class="header__title">Configuración</h1>
 			</div>
 		</header>
@@ -17,7 +17,7 @@
 							type="text"
 							id="name"
 							name="name"
-							v-model="name"
+							v-model.trim="name"
 							class="form__input"
 							autocomplete="off"
 							maxlength="100"
@@ -37,34 +37,33 @@
 
 <script>
 
-	import User from '../models/User';
-
 	export default {
 
 		data () {
 			return {
-				name: User.data().name || ''
+				name: this.$store.state.users.data.name || ''
 			}
 		},
 
 		methods: {
 
 			save () {
-				if (this.name.trim()) {
-					User.updateUser(this.name).then(() => {
-						sweetAlert({
-								title: '¡Bonito nombre!',
-								timer: 2000,
-								type: 'success',
-								showConfirmButton: false});
-					}).catch(() => {
-						sweetAlert({
-								title: 'Upss!',
-								text: 'No he podido cambiar tu nombre... vuelve a intentarlo en otro momento',
-								confirmButtonText: 'Ok',
-								type: 'error'});
-					});
+				if ( ! this.name) {
+					return;
 				}
+				this.$store.dispatch('updateUser', this.name).then(() => {
+					sweetAlert({
+							title: '¡Bonito nombre!',
+							timer: 2000,
+							type: 'success',
+							showConfirmButton: false});
+				}).catch(() => {
+					sweetAlert({
+							title: 'Upss!',
+							text: 'No he podido cambiar tu nombre... vuelve a intentarlo en otro momento',
+							confirmButtonText: 'Ok',
+							type: 'error'});
+				});
 			},
 
 			logout () {
@@ -76,12 +75,13 @@
 					  closeOnConfirm: true
 					},
 					() => {
-						User.logout();
-						this.$router.push({ name: 'login' });
+						this.$store.dispatch('logout').then(() => {
+							this.$router.push({ name: 'login' });
+						});
 					}
 				);
-			}
-		}
+			},
+		},
 	};
 
 </script>

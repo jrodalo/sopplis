@@ -19,9 +19,7 @@ class FavoriteController extends Controller
      */
     public function index(Request $request, Cart $cart)
     {
-        if (Auth::user()->cant('read', $cart)) {
-            return response()->json(['success' => false], 403);
-        }
+        abort_if(Auth::user()->cant('read', $cart), 403);
 
         $items = $cart->favoriteItems()->get();
 
@@ -37,11 +35,9 @@ class FavoriteController extends Controller
      */
     public function update(Request $request, Cart $cart)
     {
-        if (Auth::user()->cant('write', $cart)) {
-            return response()->json(['success' => false], 403);
-        }
+        abort_if(Auth::user()->cant('write', $cart), 403);
 
-        $this->validate($request, [
+        $request->validate([
             'items' => 'required',
         ]);
 
@@ -66,11 +62,9 @@ class FavoriteController extends Controller
      */
     public function delete(Request $request, Cart $cart)
     {
-        if (Auth::user()->cant('write', $cart)) {
-            return response()->json(['success' => false], 403);
-        }
+        abort_if(Auth::user()->cant('write', $cart), 403);
 
-        $this->validate($request, [
+        $request->validate([
             'items' => 'required',
         ]);
 

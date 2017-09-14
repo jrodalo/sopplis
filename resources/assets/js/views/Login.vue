@@ -18,7 +18,7 @@
                             class="form__input"
                             placeholder="Email"
                             maxlength="100"
-                            v-model="email"
+                            v-model.trim="email"
                             required></p>
                     <p>
                         <label class="form__label" for="password">Password:</label>
@@ -46,14 +46,12 @@
 
 <script>
 
-    import User from '../models/User'
-
     export default {
 
         data () {
             return {
                 email: '',
-                password: ''
+                password: '',
             }
         },
 
@@ -61,32 +59,24 @@
 
             login () {
 
-                let email = this.email && this.email.trim();
-                let password = this.password;
+                if ( ! this.email || ! this.password) { return; }
 
-                if ( ! email || ! password) { return; }
-
-                User.login({email, password}).then((response) => {
-
+                this.$store.dispatch('login', {email: this.email, password: this.password}).then((response) => {
                     if (response.data.success === true) {
                         const next = this.$route.query.redirect ? { path: this.$route.query.redirect } : { name: 'lists' };
                         this.$router.push(next);
                     }
-
                 }).catch((response) => {
-
                     sweetAlert({
                         title: 'Usuario no válido',
                         text: 'Parece que el usuario o contraseña que has puesto no son válidos.',
                         type: 'error',
                         confirmButtonText: 'Vale'
                     });
-
                 });
-            }
-        }
-
-    }
+            },
+        },
+    };
 </script>
 
 <style lang="sass">

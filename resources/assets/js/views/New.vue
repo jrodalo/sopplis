@@ -3,7 +3,7 @@
 	<section id="lists" class="page">
 		<header class="header">
 			<div class="header__content">
-				<router-link :to="{ name: 'lists' }" class="header__button">«</router-link>
+				<router-link :to="{ name: 'lists' }" class="header__button" aria-label="Volver">«</router-link>
 				<h1 class="header__title">Nueva lista</h1>
 			</div>
 		</header>
@@ -32,8 +32,6 @@
 
 <script>
 
-	import List from '../models/List'
-
 	export default {
 
 		mounted () {
@@ -45,7 +43,7 @@
 				placeholders: ['Lista de la compra', 'Cumpleaños de Elisa', 'Comida para fin de año', 'Fiesta de despedida'],
 				placeholder: '',
 				name: '',
-			}
+			};
 		},
 
 		methods: {
@@ -62,13 +60,13 @@
 					return;
 				}
 
-				List.addList({name: this.name}).then((response) => {
+				this.$store.dispatch('createList', {name: this.name}).then(() => {
 					this.$router.push({ name: 'lists' });
-				}, (response) => {
+				}, () => {
 					sweetAlert('Oops...', 'No he podido crear tu lista... vuelve a intentarlo :(', 'error');
 				});
-			}
-		}
+			},
+		},
 	};
 
 </script>

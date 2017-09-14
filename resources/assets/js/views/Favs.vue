@@ -3,29 +3,29 @@
 	<section id="fav-items" class="page">
 		<header class="header">
 			<div class="header__content">
-				<router-link :to="{ name: 'items' }" class="header__button">«</router-link>
+				<router-link :to="{ name: 'items' }" class="header__button" aria-label="Volver">«</router-link>
 				<h1 class="header__title">Productos frecuentes</h1>
-				<a v-show="state.favorites.length" v-on:click="changeMode" :class="{'header__button': true, 'header__button--pressed': mode == 'remove'}">✎</a>
+				<a v-show="favorites.length" v-on:click="changeMode" :class="{'header__button': true, 'header__button--pressed': mode == 'remove'}">✎</a>
 			</div>
 		</header>
 
 		<div class="content content--withfooter">
-			<div v-show="state.favorites.length" :class="{remove: mode == 'remove', add: mode == 'add'}">
+			<div v-show="favorites.length" :class="{remove: mode == 'remove', add: mode == 'add'}">
 				<ul class="list list--flex">
 					<li
-						v-for="item in state.favorites"
+						v-for="item in favorites"
 						v-on:click="select(item)"
 						:class="{'item': true, 'item--fav': true, 'item--selected': item.selected}"
 						>{{ item.name }}</span></li>
 				</ul>
 			</div>
-			<div class="content--centered message message--empty" v-show="!state.favorites.length && !state.loading">
+			<div class="content--centered message message--empty" v-show="!favorites.length && !loading">
 				<h1 class="message__title">No hay productos frecuentes</h1>
 				<p>Los productos frecuentes son aquellos que has comprado varias veces. Sigue utilizando Sopplis para que aparezcan aquí los productos que más compras.</p>
 			</div>
 		</div>
 
-		<footer class="footer" v-show="state.favorites.length">
+		<footer class="footer" v-show="favorites.length">
 			<div v-show="mode=='add'">
 				<a href="#fav-items" class="footer__link" v-on:click.prevent="addSelected">
 					<span v-show="selected.length">Añadir {{ selected.length}} productos</span>
@@ -46,8 +46,6 @@
 
 <script>
 
-	import Item from '../models/Item';
-
 	export default {
 
 		props: {
@@ -60,25 +58,30 @@
 
 		data () {
 			return {
-				state: Item.state,
+				loading: false,
 				mode: 'add'
 			}
 		},
 
 		computed: {
 
+			favorites () {
+                return this.$store.state.favorites.all;
+            },
+
 			selected () {
-				return this.state.favorites.filter(function(item) {
-					return item.selected;
-				});
+				return this.$store.getters.selected;
 			}
 		},
 
 		methods: {
 
 			fetchData () {
-				return Item.readFavorites(this.list);
-			},
+                this.loading = true;
+                this.$store.dispatch('fetchFavorites', this.list)
+                    .then(() => this.loading = false)
+                    .catch(() => this.$router.push({ name: '404' }));
+            },
 
 			changeMode () {
 				this.mode = (this.mode == 'add') ? 'remove' : 'add';
@@ -90,35 +93,26 @@
 
 			addSelected () {
 
-				let itemsSelected = this.selected;
-
-				if ( ! itemsSelected.length) {
+				if ( ! this.selected.length) {
 					return;
 				}
 
-				Item.addFavorites(this.list, itemsSelected).then(response => {
-					this.$router.push({ name: 'items', params: {list: this.list} })
-				}, response => {
-
+				this.$store.dispatch('insertSelected', this.list).then(response => {
+					this.$router.push({ name: 'items', params: {list: this.list} });
 				});
 			},
 
 			removeSelected () {
 
-				let itemsSelected = this.selected;
-
-				if ( ! itemsSelected.length) {
+				if ( ! this.selected.length) {
 					return;
 				}
 
-				Item.deleteFavorites(this.list, itemsSelected).then(response => {
+				this.$store.dispatch('removeSelected', this.list).then(response => {
 					this.mode = 'add';
-				}, response => {
-
 				});
-			}
-
-		}
+			},
+		},
 	};
 
 </script>

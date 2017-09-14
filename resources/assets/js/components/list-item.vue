@@ -11,7 +11,6 @@
 
 <script>
 
-	import Item from '../models/Item';
 	import orderBy from 'lodash.orderby';
 
 	export default {
@@ -24,26 +23,19 @@
 			list: { required: true }
 		},
 
-		data () {
-			return {
-				state: Item.state
-			}
-		},
-
 		computed: {
 
 			orderedItems () {
-				return orderBy(this.state.items, ['done', item => item.name.toLowerCase()], ['asc', 'asc']);
+				return orderBy(this.$store.state.items.all, ['done', item => item.name.toLowerCase()], ['asc', 'asc']);
 			}
 		},
 
 		methods: {
 
 			update (item) {
-				Item.updateItem(this.list, item);
+				this.$store.dispatch('updateItem', {list: this.list, item});
 			}
-		}
-
+		},
 	};
 
 </script>

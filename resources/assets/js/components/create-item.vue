@@ -2,11 +2,11 @@
 
 	<div>
 		<div class="header__content" v-show="!editing">
-			<router-link :to="{ name: 'lists' }" class="header__button">«</router-link>
+			<router-link :to="{ name: 'lists' }" class="header__button" aria-label="Volver">«</router-link>
 			<transition name="fade">
-				<h1 :class="{'header__title': true, 'hidden': ! state.list.name}" v-text="state.list.name"></h1>
+				<h1 :class="{'header__title': true, 'hidden': ! listName}" v-text="listName"></h1>
 			</transition>
-			<a href="#" class="header__button" v-on:click.prevent="showForm">+</a>
+			<a href="#" class="header__button" v-on:click.prevent="showForm" aria-label="Añadir">+</a>
 		</div>
 
 		<form class="header-form" v-on:submit.prevent="addItem" v-show="editing">
@@ -25,21 +25,27 @@
 <script>
 
 	import Vue from 'vue';
-	import Item from '../models/Item';
 
 	export default {
 
 		props: {
-			list: { required: true }
-		},
+      		list: { required: true }
+    	},
 
 		data () {
 			return {
 				name: '',
-				editing: false,
-				state: Item.state
+				editing: false
 			};
 		},
+
+        computed: {
+
+            listName () {
+                return this.$store.state.items.list.name;
+            }
+
+        },
 
 		methods: {
 
@@ -58,17 +64,16 @@
 
 				let item = {name: this.name};
 
-				if (this.state.items.find((existing) => existing.name === item.name)) {
+				if (this.$store.state.items.all.find((existing) => existing.name === item.name)) {
 					this.name = '';
 					return;
 				}
 
-				Item.insertItem(this.list, item);
+				this.$store.dispatch('insertItem', {list: this.list, item});
 
 				this.name = '';
 			}
-		}
-
+		},
 	};
 
 </script>

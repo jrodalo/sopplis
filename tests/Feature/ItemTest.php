@@ -284,4 +284,34 @@ class ItemTest extends TestCase
 
         $this->assertDatabaseHas('items', ['id' => $item->id, 'visible' => false, 'done' => false]);
     }
+
+    public function test_no_se_pueden_crear_items_sin_nombre()
+    {
+        $user = factory(User::class)->create();
+        $cart = factory(Cart::class)->create();
+        $cart->users()->attach($user);
+
+        $response = $this->actingAs($user)->json('POST', "/api/v1/lists/$cart->slug/items", ['name' => '']);
+
+        $response
+            ->assertStatus(422)
+            ->assertJsonFragment([
+                'success' => false,
+            ]);
+    }
+
+    public function test_no_se_pueden_crear_items_con_nombres_largos()
+    {
+        $user = factory(User::class)->create();
+        $cart = factory(Cart::class)->create();
+        $cart->users()->attach($user);
+
+        $response = $this->actingAs($user)->json('POST', "/api/v1/lists/$cart->slug/items", ['name' => str_random(150)]);
+
+        $response
+            ->assertStatus(422)
+            ->assertJsonFragment([
+                'success' => false,
+            ]);
+    }
 }
