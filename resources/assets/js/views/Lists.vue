@@ -35,7 +35,9 @@
 
 		created () {
 			this.loading = true;
-			this.$store.dispatch('fetchLists').then(() => this.loading = false);
+			this.$store.dispatch('fetchLists')
+				.then(() => this.loading = false)
+				.catch(() => this.$router.push({ name: '500' }));
 		},
 
 		data () {

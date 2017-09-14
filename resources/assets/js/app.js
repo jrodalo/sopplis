@@ -90,6 +90,12 @@ const router = new VueRouter({
         },
 
         {
+            path: 'error',
+            name: '500',
+            component: require('./views/error/500.vue')
+        },
+
+        {
             path: '*',
             name: '404',
             component: require('./views/error/404.vue')
