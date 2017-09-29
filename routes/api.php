@@ -19,9 +19,9 @@ Route::group(['prefix' => 'v1', 'middleware' => 'auth:api'], function() {
     Route::delete('/lists/{cart}/items', 'ItemController@delete');
     Route::put('/lists/{cart}/items/{item}', 'ItemController@update');
 
-    Route::get('/lists/{cart}/favorite', 'FavoriteController@index');
-    Route::put('/lists/{cart}/favorite', 'FavoriteController@update');
-    Route::delete('/lists/{cart}/favorite', 'FavoriteController@delete');
+    Route::get('/lists/{cart}/favorites', 'FavoriteController@index');
+    Route::put('/lists/{cart}/favorites', 'FavoriteController@update');
+    Route::delete('/lists/{cart}/favorites', 'FavoriteController@delete');
 
     Route::put('/users', 'UserController@update');
 

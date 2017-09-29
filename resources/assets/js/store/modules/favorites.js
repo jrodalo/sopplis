@@ -21,7 +21,7 @@ const actions = {
 
         commit('SET_FAVORITES', {list, items: JSON.parse(localStorage.getItem(`SOPPLIS_${list}_FAVS`) || '[]')});
 
-        return axios.get(`lists/${list}/favorite`).then((response) => {
+        return axios.get(`lists/${list}/favorites`).then((response) => {
             commit('SET_FAVORITES', {list, items: response.data.items});
         });
     },
@@ -30,15 +30,15 @@ const actions = {
 
         let ids = getters.selected.map(item => item.id).join(',');
 
-        return axios.put(`lists/${list}/favorite`, {items: ids});
+        return axios.put(`lists/${list}/favorites`, {items: ids});
     },
 
     removeSelected ({commit, getters}, list) {
 
         let ids = getters.selected.map(item => item.id).join(',');
 
-        return axios.delete(`lists/${list}/favorite`, {params: {items: ids}}).then(response => {
             commit('SET_FAVORITES', {list, items: getters.unselected});
+        return axios.delete(`lists/${list}/favorites`, {params: {items: ids}}).then(response => {
         });
     },
 };
