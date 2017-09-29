@@ -23,7 +23,7 @@ window.Echo = new Echo({
     broadcaster: 'pusher',
     key: process.env.MIX_PUSHER_APP_KEY,
     cluster: 'eu',
-    auth: store.getters.authenticationHeaders
+    auth: store.getters.authenticationHeaders,
 });
 
 window.sweetAlert = require('sweetalert');
@@ -49,28 +49,28 @@ const router = new VueRouter({
                 } else {
                     next();
                 }
-            }
+            },
         },
 
         {
             path: '/lists',
             name: 'lists',
             component: require('./views/Lists.vue'),
-            meta: { requiresAuth: true }
+            meta: { requiresAuth: true },
         },
 
         {
             path: '/config',
             name: 'config',
             component: require('./views/Config.vue'),
-            meta: { requiresAuth: true }
+            meta: { requiresAuth: true },
         },
 
         {
             path: '/new',
             name: 'new',
             component: require('./views/New.vue'),
-            meta: { requiresAuth: true }
+            meta: { requiresAuth: true },
         },
 
         {
@@ -78,7 +78,7 @@ const router = new VueRouter({
             name: 'items',
             component: require('./views/Items.vue'),
             props: true,
-            meta: { requiresAuth: true }
+            meta: { requiresAuth: true },
         },
 
         {
@@ -86,21 +86,21 @@ const router = new VueRouter({
             name: 'favs',
             component: require('./views/Favs.vue'),
             props: true,
-            meta: { requiresAuth: true }
+            meta: { requiresAuth: true },
         },
 
         {
             path: 'error',
             name: '500',
-            component: require('./views/error/500.vue')
+            component: require('./views/error/500.vue'),
         },
 
         {
             path: '*',
             name: '404',
-            component: require('./views/error/404.vue')
+            component: require('./views/error/404.vue'),
         },
-    ]
+    ],
 });
 
 router.beforeEach((to, from, next) => {
