@@ -14,7 +14,7 @@
 					<label for="name">Nombre de la lista:</label>
 					<input
 							:placeholder="placeholder"
-							v-model="name"
+							v-model.trim="name"
 							type="text"
 							id="name"
 							name="name"

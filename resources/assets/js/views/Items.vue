@@ -6,19 +6,19 @@
         </header>
 
         <div class="content content--withfooter">
-            <div v-show="items.length">
+            <div v-show="allItems.length">
                 <list-item :list="list"></list-item>
             </div>
-            <div class="content--centered message message--empty" v-show="!items.length && !loading">
+            <div class="content--centered message message--empty" v-show="!allItems.length && !loading">
                 <h1 class="message__title">Esta lista está vacía :(</h1>
                 <p>Añade los productos que quieres comprar pulsando el botón <b>+</b></p>
             </div>
         </div>
 
-        <footer class="footer" role="status" aria-live="polite" v-show="items.length">
+        <footer class="footer" role="status" aria-live="polite" v-show="allItems.length">
             <transition name="fade">
-                <a href="#active-items" :class="{'footer__link': true, 'footer__link--green': allDone}" v-on:click.prevent="finalize">
-                    {{ completed.length }} de {{ items.length }}
+                <a href="#active-items" :class="{'footer__link': true, 'footer__link--green': isAllDone}" v-on:click.prevent="finalize">
+                    {{ completedItems.length }} de {{ allItems.length }}
                 </a>
             </transition>
         </footer>
@@ -57,16 +57,16 @@
 
         computed: {
 
-            completed () {
-                return this.$store.getters.completed;
+            completedItems () {
+                return this.$store.getters.completedItems;
             },
 
-            items () {
-                return this.$store.state.items.all;
+            allItems () {
+                return this.$store.getters.allItems;
             },
 
-            allDone () {
-                return this.$store.getters.allDone;
+            isAllDone () {
+                return this.$store.getters.isAllDone;
             },
         },
 
@@ -100,7 +100,7 @@
 
             finalize () {
 
-                if ( ! this.completed.length) {
+                if ( ! this.completedItems.length) {
                     return;
                 }
 

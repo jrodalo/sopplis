@@ -3,8 +3,9 @@ const state = {
 };
 
 const getters = {
-    selected: state => state.all.filter(item => item.selected),
-    unselected: state => state.all.filter(item => ! item.selected),
+    allFavorites: state => state.all,
+    selectedFavorites: state => state.all.filter(item => item.selected),
+    unselectedFavorites: state => state.all.filter(item => ! item.selected),
 };
 
 const mutations = {
@@ -28,17 +29,17 @@ const actions = {
 
     insertSelected ({getters}, list) {
 
-        let ids = getters.selected.map(item => item.id).join(',');
+        let ids = getters.selectedFavorites.map(item => item.id).join(',');
 
         return axios.put(`lists/${list}/favorites`, {items: ids});
     },
 
     removeSelected ({commit, getters}, list) {
 
-        let ids = getters.selected.map(item => item.id).join(',');
+        let ids = getters.selectedFavorites.map(item => item.id).join(',');
 
-            commit('SET_FAVORITES', {list, items: getters.unselected});
         return axios.delete(`lists/${list}/favorites`, {params: {items: ids}}).then(response => {
+            commit('SET_FAVORITES', {list, items: getters.unselectedFavorites});
         });
     },
 };
