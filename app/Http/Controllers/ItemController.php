@@ -123,10 +123,12 @@ class ItemController extends Controller
     public static function randomSuccessMessage()
     {
         return Collection::make([
-            '¡Genial!',
-            '¡Perfecto!',
+            '¡Hasta la próxima!',
+            '¡Buena compra!',
             '¡Por fin! :)',
+            '¡Perfecto!',
             '¡A casa!',
+            '¡Genial!',
         ])->random();
     }
 
