@@ -5,6 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
         <meta name="apple-mobile-web-app-title" content="Sopplis">
         <meta name="theme-color" content="#436169">
+        <meta name="version" content="{{ env('APP_VERSION') }}">
         <link rel="stylesheet" href="{{ mix('css/app.css') }}">
         <link rel="shortcut icon" href="/images/favicon.png">
         <link rel="apple-touch-icon" href="/images/favicon-touch.png">
@@ -16,10 +17,5 @@
     @yield('content')
     @yield('scripts')
 
-    <script>
-        //if ('serviceWorker' in navigator) {
-         //   navigator.serviceWorker.register('/sw.js');
-        //}
-    </script>
 </body>
 </html>
