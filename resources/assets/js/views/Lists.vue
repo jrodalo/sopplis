@@ -10,9 +10,9 @@
 		</header>
 
 		<div class="content">
-			<div v-show="lists.length">
+			<div v-show="allLists.length">
 				<ul class="list list--flex">
-					<li v-for="list in lists" class="item item--taller">
+					<li v-for="list in allLists" class="item item--taller">
 						<router-link :to="{name: 'items', params: { list: list.slug }}" class="item__name--flex">
 							<span>{{ list.name }}</span>
 							<i v-show="list.shared" title="Lista compartida">⚭</i>
@@ -20,7 +20,7 @@
 					</li>
 				</ul>
 			</div>
-			<div class="content--centered message message--empty" v-show="!lists.length && !loading">
+			<div class="content--centered message message--empty" v-show="!allLists.length && !loading">
 				<h1 class="message__title">No tienes ninguna lista :(</h1>
 				<p>Es hora de crear tu primera lista pulsando el botón <b>+</b></p>
 			</div>
@@ -48,8 +48,8 @@
 
 		computed: {
 
-			lists () {
-				return this.$store.state.lists.all;
+			allLists () {
+				return this.$store.getters.allLists;
 			},
 		},
 	};

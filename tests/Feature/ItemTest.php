@@ -182,7 +182,7 @@ class ItemTest extends TestCase
             'visible' => false,
         ]);
 
-        $response = $this->actingAs($user)->json('GET', "/api/v1/lists/$cart->slug/favorite");
+        $response = $this->actingAs($user)->json('GET', "/api/v1/lists/$cart->slug/favorites");
 
         $response
             ->assertStatus(200)

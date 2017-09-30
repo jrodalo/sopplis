@@ -5,37 +5,37 @@
 			<div class="header__content">
 				<router-link :to="{ name: 'items' }" class="header__button" aria-label="Volver">«</router-link>
 				<h1 class="header__title">Productos frecuentes</h1>
-				<a v-show="favorites.length" v-on:click="changeMode" :class="{'header__button': true, 'header__button--pressed': mode == 'remove'}">✎</a>
+				<a v-show="allFavorites.length" v-on:click="changeMode" :class="{'header__button': true, 'header__button--pressed': mode == 'remove'}">✎</a>
 			</div>
 		</header>
 
 		<div class="content content--withfooter">
-			<div v-show="favorites.length" :class="{remove: mode == 'remove', add: mode == 'add'}">
+			<div v-show="allFavorites.length" :class="{remove: mode == 'remove', add: mode == 'add'}">
 				<ul class="list list--flex">
 					<li
-						v-for="item in favorites"
+						v-for="item in allFavorites"
 						v-on:click="select(item)"
 						:class="{'item': true, 'item--fav': true, 'item--selected': item.selected}"
 						>{{ item.name }}</span></li>
 				</ul>
 			</div>
-			<div class="content--centered message message--empty" v-show="!favorites.length && !loading">
+			<div class="content--centered message message--empty" v-show="!allFavorites.length && !loading">
 				<h1 class="message__title">No hay productos frecuentes</h1>
 				<p>Los productos frecuentes son aquellos que has comprado varias veces. Sigue utilizando Sopplis para que aparezcan aquí los productos que más compras.</p>
 			</div>
 		</div>
 
-		<footer class="footer" v-show="favorites.length">
+		<footer class="footer" v-show="allFavorites.length">
 			<div v-show="mode=='add'">
 				<a href="#fav-items" class="footer__link" v-on:click.prevent="addSelected">
-					<span v-show="selected.length">Añadir {{ selected.length}} productos</span>
-					<span v-show="!selected.length">Selecciona los que quieras añadir</span>
+					<span v-show="selectedFavorites.length">Añadir {{ selectedFavorites.length}} productos</span>
+					<span v-show="!selectedFavorites.length">Selecciona los que quieras añadir</span>
 				</a>
 			</div>
 			<div v-show="mode!='add'">
 				<a href="#fav-items" class="footer__link footer__link--red" v-on:click.prevent="removeSelected">
-					<span v-show="selected.length">Eliminar {{ selected.length}} productos</span>
-					<span v-show="!selected.length">Selecciona los que quieras eliminar</span>
+					<span v-show="selectedFavorites.length">Eliminar {{ selectedFavorites.length}} productos</span>
+					<span v-show="!selectedFavorites.length">Selecciona los que quieras eliminar</span>
 				</a>
 			</div>
 		</footer>
@@ -65,12 +65,12 @@
 
 		computed: {
 
-			favorites () {
-                return this.$store.state.favorites.all;
+			allFavorites () {
+                return this.$store.getters.allFavorites;
             },
 
-			selected () {
-				return this.$store.getters.selected;
+			selectedFavorites () {
+				return this.$store.getters.selectedFavorites;
 			}
 		},
 
@@ -93,7 +93,7 @@
 
 			addSelected () {
 
-				if ( ! this.selected.length) {
+				if ( ! this.selectedFavorites.length) {
 					return;
 				}
 
@@ -104,7 +104,7 @@
 
 			removeSelected () {
 
-				if ( ! this.selected.length) {
+				if ( ! this.selectedFavorites.length) {
 					return;
 				}
 

@@ -2,6 +2,10 @@ const state = {
     all: [],
 };
 
+const getters = {
+    allLists: state => state.all,
+};
+
 const mutations = {
 
     SET_LISTS (state, lists) {
@@ -29,6 +33,7 @@ const actions = {
 
 export default {
     state,
+    getters,
     mutations,
     actions,
 };

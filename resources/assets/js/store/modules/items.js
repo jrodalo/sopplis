@@ -4,9 +4,10 @@ const state = {
 };
 
 const getters = {
-    active: state => state.all.filter(item => ! item.done),
-    completed: state => state.all.filter(item => item.done),
-    allDone: (state, getters) => state.all.length > 0 && (getters.completed.length === state.all.length),
+    allItems: state => state.all,
+    activeItems: state => state.all.filter(item => ! item.done),
+    completedItems: state => state.all.filter(item => item.done),
+    isAllDone: (state, getters) => state.all.length > 0 && (getters.completedItems.length === state.all.length),
     itemById: (state, getters) => id => state.all.find(item => item.id === id),
 };
 
@@ -64,10 +65,10 @@ const actions = {
 
     deleteItems ({commit, getters}, payload) {
 
-        let ids = getters.completed.map(item => item.id).join(',');
+        let ids = getters.completedItems.map(item => item.id).join(',');
 
         return axios.delete(`lists/${payload.list}/items`, {params: {items: ids}}).then(response => {
-            commit('SET_ITEMS', {list: payload.list, items: getters.active});
+            commit('SET_ITEMS', {list: payload.list, items: getters.activeItems});
             return response;
         });
     },
