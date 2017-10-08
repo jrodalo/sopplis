@@ -5,6 +5,7 @@ namespace Tests\Feature;
 use App\Cart;
 use App\Events\ItemCreated;
 use App\Events\ItemUpdated;
+use App\Http\Requests\WebhookRequest;
 use App\Item;
 use App\User;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
@@ -32,6 +33,27 @@ class EventsTest extends TestCase
 
         Event::assertDispatched(ItemCreated::class, function ($e) use ($item) {
             return $e->items[0]->name === $item['name'];
+        });
+    }
+
+    public function test_se_genera_evento_al_crear_items_en_lista_compartida_desde_webhook()
+    {
+        Event::fake();
+
+        $user = factory(User::class)->create();
+        $other_user = factory(User::class)->create();
+        $cart = factory(Cart::class)->create();
+        $cart->users()->attach($user);
+        $cart->users()->attach($other_user);
+
+        $response = $this->post('/webhooks/lists', [
+            WebhookRequest::RECIPIENT_FIELD => "list_$cart->slug@sopplis.com",
+            WebhookRequest::SENDER_FIELD => $other_user->email,
+            WebhookRequest::BODY_FIELD => 'test',
+        ]);
+
+        Event::assertDispatched(ItemCreated::class, function ($e) {
+            return $e->items[0]->name === 'test';
         });
     }
 
