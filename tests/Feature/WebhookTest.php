@@ -3,6 +3,7 @@
 namespace Tests\Unit;
 
 use App\Cart;
+use App\Http\Requests\WebhookRequest;
 use App\Item;
 use App\User;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
@@ -22,9 +23,9 @@ class WebhookTest extends TestCase
         $cart->users()->attach($user);
 
         $response = $this->post('/webhooks/lists', [
-            'recipient' => "list_$cart->slug@sopplis.com",
-            'sender' => $user->email,
-            'body-plain' => 'test',
+            WebhookRequest::RECIPIENT_FIELD => "list_$cart->slug@sopplis.com",
+            WebhookRequest::SENDER_FIELD => $user->email,
+            WebhookRequest::BODY_FIELD => 'test',
         ]);
 
         $response
@@ -40,9 +41,9 @@ class WebhookTest extends TestCase
         $cart->users()->attach($user);
 
         $response = $this->post('/webhooks/lists', [
-            'recipient' => "list_$cart->slug@sopplis.com",
-            'sender' => $other_user->email,
-            'body-plain' => 'test',
+            WebhookRequest::RECIPIENT_FIELD => "list_$cart->slug@sopplis.com",
+            WebhookRequest::SENDER_FIELD => $other_user->email,
+            WebhookRequest::BODY_FIELD => 'test',
         ]);
 
         $response->assertStatus(406);
@@ -51,12 +52,11 @@ class WebhookTest extends TestCase
     public function test_debe_validar_los_datos_de_entrada()
     {
         $response = $this->post('/webhooks/lists', [
-            'recipient' => 'notvalidemail',
-            'sender' => 'notvalidemail',
+            WebhookRequest::RECIPIENT_FIELD => 'notvalidemail',
+            WebhookRequest::SENDER_FIELD => 'notvalidemail',
         ]);
 
         $response->assertStatus(406);
     }
-
 
 }

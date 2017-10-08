@@ -44,7 +44,7 @@ class WebhookController extends Controller
             return $item;
         });
 
-        if ($cart->shared && $items->isNotEmpty()) {
+        if ($items->isNotEmpty() && $cart->shared) {
             broadcast(new ItemCreated($cart, $items->all()));
         }
 
