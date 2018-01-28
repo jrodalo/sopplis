@@ -82,4 +82,18 @@ class Cart extends Model
         return $this->belongsToMany('App\User');
     }
 
+    public function findOrNew($name)
+    {
+        $item = $this->items()->where('name', 'LIKE', trim($name))->first();
+
+        if (is_null($item)) {
+            $item = new Item;
+            $item->cart_id = $this->id;
+            $item->count = 0;
+        }
+
+        return $item;
+    }
+
+
 }

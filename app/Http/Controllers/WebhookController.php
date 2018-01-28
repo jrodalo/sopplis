@@ -27,15 +27,7 @@ class WebhookController extends Controller
         abort_if(is_null($cart) || $user->cant('write', $cart), 406);
 
         $items = $request->getItems()->map(function($itemName, $key) use ($cart) {
-
-            $item = $cart->items()->where('name', 'LIKE', trim($itemName))->first();
-
-            if (is_null($item)) {
-                $item = new Item;
-                $item->cart_id = $cart->id;
-                $item->count = 0;
-            }
-
+            $item = $cart->findOrNew(trim($itemName));
             $item->name = trim($itemName);
             $item->done = false;
             $item->visible = true;
