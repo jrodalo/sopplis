@@ -44,14 +44,7 @@ class ItemController extends Controller
             'name' => 'required|max:100',
         ]);
 
-        $item = $cart->items()->where('name', 'LIKE', trim($request->name))->first();
-
-        if (is_null($item)) {
-            $item = new Item;
-            $item->cart_id = $cart->id;
-            $item->count = 0;
-        }
-
+        $item = $cart->findOrNew(trim($request->name));
         $item->name = trim($request->name);
         $item->done = false;
         $item->visible = true;

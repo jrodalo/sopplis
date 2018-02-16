@@ -161,6 +161,19 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Release Stage
+    |--------------------------------------------------------------------------
+    |
+    | Set the release stage to use when sending notifications to Bugsnag.
+    |
+    | Leaving this unset will default to using the application environment.
+    |
+    */
+
+    'release_stage' => env('BUGSNAG_RELEASE_STAGE'),
+
+    /*
+    |--------------------------------------------------------------------------
     | Notify Release Stages
     |--------------------------------------------------------------------------
     |
@@ -215,4 +228,39 @@ return [
 
     'user' => env('BUGSNAG_USER', true),
 
+    /*
+    |--------------------------------------------------------------------------
+    | Logger Notify Level
+    |--------------------------------------------------------------------------
+    |
+    | This sets the level at which a logged message will trigger a notification
+    | to Bugsnag.  By default this level will be 'notice'.
+    |
+    | Must be one of the Psr\Log\LogLevel levels from the Psr specification.
+    |
+    */
+
+    'logger_notify_level' => env('BUGSNAG_LOGGER_LEVEL'),
+
+    /*
+    |--------------------------------------------------------------------------
+    | Auto Capture Sessions
+    |--------------------------------------------------------------------------
+    |
+    | Enable this to start tracking sessions and deliver them to Bugsnag.
+    |
+    */
+
+    'auto_capture_sessions' => env('BUGSNAG_CAPTURE_SESSIONS', false),
+
+    /*
+    |--------------------------------------------------------------------------
+    | Sessions Endpoint
+    |--------------------------------------------------------------------------
+    |
+    | Sets a url to send tracked sessions to.
+    |
+    */
+
+    'session_endpoint' => env('BUGSNAG_SESSION_ENDPOINT'),
 ];
