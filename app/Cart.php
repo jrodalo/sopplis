@@ -71,7 +71,7 @@ class Cart extends Model
      */
     public function items()
     {
-        return $this->hasMany('App\Item');
+        return $this->hasMany(\App\Item::class);
     }
 
     /**
@@ -79,7 +79,7 @@ class Cart extends Model
      */
     public function users()
     {
-        return $this->belongsToMany('App\User');
+        return $this->belongsToMany(\App\User::class);
     }
 
     public function findOrNew($name)
