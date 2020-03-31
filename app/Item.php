@@ -25,9 +25,10 @@ class Item extends Model
     ];
 
     /**
-     * Appends the selected attribute used by favorite page
+     * Appends the selected attribute used by favorite page.
      */
     protected $appends = ['selected'];
+
     public function getSelectedAttribute()
     {
         return false;
@@ -40,5 +41,4 @@ class Item extends Model
     {
         return $this->belongsTo('App\Cart');
     }
-
 }

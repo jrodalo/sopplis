@@ -33,7 +33,7 @@ class Cart extends Model
     }
 
     /**
-     * Checks if given user can access this cart
+     * Checks if given user can access this cart.
      */
     public function isVisibleBy(User $user)
     {
@@ -41,7 +41,7 @@ class Cart extends Model
     }
 
     /**
-     * Get just the visible items
+     * Get just the visible items.
      */
     public function scopeVisibleItems()
     {
@@ -49,7 +49,7 @@ class Cart extends Model
     }
 
     /**
-     * Get just the favorite items
+     * Get just the favorite items.
      */
     public function scopeFavoriteItems()
     {
@@ -94,6 +94,4 @@ class Cart extends Model
 
         return $item;
     }
-
-
 }

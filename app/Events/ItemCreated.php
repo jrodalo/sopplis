@@ -37,7 +37,6 @@ class ItemCreated implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        return new PrivateChannel('lists.' . $this->cart->slug);
+        return new PrivateChannel('lists.'.$this->cart->slug);
     }
-
 }

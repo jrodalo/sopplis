@@ -9,8 +9,7 @@ use Illuminate\Http\Request;
 */
 
 /* Con autenticación */
-Route::group(['prefix' => 'v1', 'middleware' => 'auth:api'], function() {
-
+Route::group(['prefix' => 'v1', 'middleware' => 'auth:api'], function () {
     Route::get('/lists', 'CartController@index');
     Route::post('/lists', 'CartController@store');
 
@@ -24,12 +23,9 @@ Route::group(['prefix' => 'v1', 'middleware' => 'auth:api'], function() {
     Route::delete('/lists/{cart}/favorites', 'FavoriteController@delete');
 
     Route::put('/users', 'UserController@update');
-
 });
 
 /* Sin autenticación */
-Route::group(['prefix' => 'v1'], function() {
-
+Route::group(['prefix' => 'v1'], function () {
     Route::post('/sessions', 'AuthController@login');
-
 });

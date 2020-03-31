@@ -20,7 +20,6 @@ class CartPolicy
         //
     }
 
-
     /**
      * Determine if the given user can read the given cart.
      *
@@ -33,7 +32,6 @@ class CartPolicy
         return $cart->isVisibleBy($user);
     }
 
-
     /**
      * Determine if the given user can write the given cart.
      *
@@ -45,5 +43,4 @@ class CartPolicy
     {
         return $cart->isVisibleBy($user);
     }
-
 }

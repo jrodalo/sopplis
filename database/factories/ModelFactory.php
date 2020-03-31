@@ -31,9 +31,8 @@ $factory->define(App\Cart::class, function (Faker $faker) {
 $factory->define(App\Item::class, function (Faker $faker) {
     return [
         'name' => $faker->name,
-        'count' => $faker->numberBetween(1,100),
-        'visible' => $faker->numberBetween(0,1),
-        'done' => $faker->numberBetween(0,1),
+        'count' => $faker->numberBetween(1, 100),
+        'visible' => $faker->numberBetween(0, 1),
+        'done' => $faker->numberBetween(0, 1),
     ];
 });
-

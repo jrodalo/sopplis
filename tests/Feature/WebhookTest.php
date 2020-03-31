@@ -58,5 +58,4 @@ class WebhookTest extends TestCase
 
         $response->assertStatus(406);
     }
-
 }

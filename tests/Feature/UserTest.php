@@ -3,11 +3,11 @@
 namespace Tests\Unit;
 
 use App\User;
-use Tests\TestCase;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
+use Illuminate\Foundation\Testing\WithoutMiddleware;
+use Illuminate\Support\Facades\Hash;
+use Tests\TestCase;
 
 class UserTest extends TestCase
 {
@@ -31,7 +31,6 @@ class UserTest extends TestCase
                     'token' => 'valid_api_token',
                 ]);
     }
-
 
     public function test_no_se_retorna_la_api_key_cuando_se_presenta_un_usuario_no_valido()
     {

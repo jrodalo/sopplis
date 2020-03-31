@@ -39,9 +39,8 @@ class CartFinished implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        return new PrivateChannel('lists.' . $this->cart->slug);
+        return new PrivateChannel('lists.'.$this->cart->slug);
     }
-
 
     /**
      * Get the data to broadcast.
@@ -52,8 +51,7 @@ class CartFinished implements ShouldBroadcast
     {
         return [
             'items' => $this->items,
-            'user' => $this->user->name
+            'user' => $this->user->name,
         ];
     }
-
 }

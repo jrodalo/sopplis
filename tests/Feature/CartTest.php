@@ -19,7 +19,7 @@ class CartTest extends TestCase
     {
         $user = factory(User::class)->create();
 
-        $response = $this->actingAs($user)->json('POST', "/api/v1/lists", ['name' => '']);
+        $response = $this->actingAs($user)->json('POST', '/api/v1/lists', ['name' => '']);
 
         $response
             ->assertStatus(422)
@@ -27,13 +27,12 @@ class CartTest extends TestCase
                 'success' => false,
             ]);
     }
-
 
     public function test_no_se_pueden_crear_listas_con_nombres_largos()
     {
         $user = factory(User::class)->create();
 
-        $response = $this->actingAs($user)->json('POST', "/api/v1/lists", ['name' => str_random(150)]);
+        $response = $this->actingAs($user)->json('POST', '/api/v1/lists', ['name' => str_random(150)]);
 
         $response
             ->assertStatus(422)
@@ -41,5 +40,4 @@ class CartTest extends TestCase
                 'success' => false,
             ]);
     }
-
 }

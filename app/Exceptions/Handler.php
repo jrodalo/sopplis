@@ -46,27 +46,23 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
-        if ($request->wantsJson())
-        {
+        if ($request->wantsJson()) {
             $response = [
-                'success' => false
+                'success' => false,
             ];
             $status = $this->isHttpException($exception) ? $exception->getStatusCode() : 500;
 
-            if ($exception instanceof ModelNotFoundException)
-            {
+            if ($exception instanceof ModelNotFoundException) {
                 $response['message'] = 'Record not found';
                 $status = 404;
             }
 
-            if ($exception instanceof ValidationException)
-            {
+            if ($exception instanceof ValidationException) {
                 $response['message'] = $exception->validator->messages();
                 $status = 422;
             }
 
-            if ($exception instanceof AuthenticationException)
-            {
+            if ($exception instanceof AuthenticationException) {
                 $response['message'] = 'Usuario o password no validos';
                 $status = 401;
             }
@@ -76,5 +72,4 @@ class Handler extends ExceptionHandler
 
         return parent::render($request, $exception);
     }
-
 }

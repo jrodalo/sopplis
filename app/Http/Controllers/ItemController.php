@@ -109,7 +109,7 @@ class ItemController extends Controller
     }
 
     /**
-     * Get a random success message
+     * Get a random success message.
      *
      * @return string
      */
@@ -124,5 +124,4 @@ class ItemController extends Controller
             '¡Genial!',
         ])->random();
     }
-
 }

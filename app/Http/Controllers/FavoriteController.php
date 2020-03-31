@@ -52,7 +52,6 @@ class FavoriteController extends Controller
         return ['success' => true];
     }
 
-
     /**
      * Remove the specified resource in storage.
      *
@@ -74,5 +73,4 @@ class FavoriteController extends Controller
 
         return ['success' => true];
     }
-
 }
