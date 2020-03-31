@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Cart;
+use App\Models\Cart;
 use App\Events\ItemCreated;
 use App\Http\Requests\WebhookRequest;
-use App\Item;
-use App\User;
+use App\Models\Item;
+use App\Models\User;
 
 class WebhookController extends Controller
 {

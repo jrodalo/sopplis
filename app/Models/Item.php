@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -39,6 +39,6 @@ class Item extends Model
      */
     public function cart()
     {
-        return $this->belongsTo(\App\Cart::class);
+        return $this->belongsTo(\App\Models\Cart::class);
     }
 }

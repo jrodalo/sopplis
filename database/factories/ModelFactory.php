@@ -13,7 +13,7 @@ use Faker\Generator as Faker;
 |
 */
 
-$factory->define(App\User::class, function (Faker $faker) {
+$factory->define(App\Models\User::class, function (Faker $faker) {
     return [
         'name' => $faker->name,
         'email' => $faker->safeEmail,
@@ -21,14 +21,14 @@ $factory->define(App\User::class, function (Faker $faker) {
     ];
 });
 
-$factory->define(App\Cart::class, function (Faker $faker) {
+$factory->define(App\Models\Cart::class, function (Faker $faker) {
     return [
         'name' => $faker->name,
         'slug' => str_random(10),
     ];
 });
 
-$factory->define(App\Item::class, function (Faker $faker) {
+$factory->define(App\Models\Item::class, function (Faker $faker) {
     return [
         'name' => $faker->name,
         'count' => $faker->numberBetween(1, 100),

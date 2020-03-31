@@ -2,8 +2,8 @@
 
 namespace App\Http\Requests;
 
-use App\Cart;
-use App\User;
+use App\Models\Cart;
+use App\Models\User;
 use Illuminate\Foundation\Http\FormRequest;
 use Validator;
 

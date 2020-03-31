@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -71,7 +71,7 @@ class Cart extends Model
      */
     public function items()
     {
-        return $this->hasMany(\App\Item::class);
+        return $this->hasMany(\App\Models\Item::class);
     }
 
     /**
@@ -79,7 +79,7 @@ class Cart extends Model
      */
     public function users()
     {
-        return $this->belongsToMany(\App\User::class);
+        return $this->belongsToMany(\App\Models\User::class);
     }
 
     public function findOrNew($name)

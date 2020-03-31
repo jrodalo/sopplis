@@ -2,8 +2,8 @@
 
 namespace App\Policies;
 
-use App\Cart;
-use App\User;
+use App\Models\Cart;
+use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class CartPolicy

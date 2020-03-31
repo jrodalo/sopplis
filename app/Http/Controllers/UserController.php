@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Events\UserReturned;
 use App\Events\UserWasCreated;
 use App\Http\Requests;
-use App\User;
+use App\Models\User;
 use Auth;
 use Event;
 use Hash;

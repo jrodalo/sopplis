@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Cart;
+use App\Models\Cart;
 use App\Events\CartFinished;
 use App\Events\ItemCreated;
 use App\Events\ItemUpdated;
 use App\Http\Requests;
-use App\Item;
+use App\Models\Item;
 use Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
@@ -17,7 +17,7 @@ class ItemController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @param  App\Cart  $cart
+     * @param  App\Models\Cart  $cart
      * @return \Illuminate\Http\Response
      */
     public function index(Request $request, Cart $cart)
@@ -33,7 +33,7 @@ class ItemController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  App\Cart  $cart
+     * @param  App\Models\Cart  $cart
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request, Cart $cart)
@@ -62,8 +62,8 @@ class ItemController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  App\Cart  $cart
-     * @param  App\Item  $item
+     * @param  App\Models\Cart  $cart
+     * @param  App\Models\Item  $item
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Cart $cart, Item $item)
@@ -85,7 +85,7 @@ class ItemController extends Controller
      * Remove the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  App\Cart  $cart
+     * @param  App\Models\Cart  $cart
      * @return \Illuminate\Http\Response
      */
     public function delete(Request $request, Cart $cart)

@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Cart;
+use App\Models\Cart;
 use App\Http\Requests;
 use App\Mail\CartShared;
-use App\User;
+use App\Models\User;
 use Auth;
 use Illuminate\Http\Request;
 use Mail;

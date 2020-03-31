@@ -2,12 +2,12 @@
 
 namespace Tests\Feature;
 
-use App\Cart;
+use App\Models\Cart;
 use App\Events\ItemCreated;
 use App\Events\ItemUpdated;
 use App\Http\Requests\WebhookRequest;
-use App\Item;
-use App\User;
+use App\Models\Item;
+use App\Models\User;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
