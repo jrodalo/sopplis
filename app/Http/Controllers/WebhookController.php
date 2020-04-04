@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Cart;
 use App\Events\ItemCreated;
 use App\Http\Requests\WebhookRequest;
+use App\Models\Cart;
 use App\Models\Item;
 use App\Models\User;
 

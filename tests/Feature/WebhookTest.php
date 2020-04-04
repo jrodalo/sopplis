@@ -2,8 +2,8 @@
 
 namespace Tests\Unit;
 
-use App\Models\Cart;
 use App\Http\Requests\WebhookRequest;
+use App\Models\Cart;
 use App\Models\Item;
 use App\Models\User;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
