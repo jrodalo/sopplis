@@ -2,10 +2,10 @@
 
 namespace Tests\Feature;
 
-use App\Models\Cart;
 use App\Events\ItemCreated;
 use App\Events\ItemUpdated;
 use App\Http\Requests\WebhookRequest;
+use App\Models\Cart;
 use App\Models\Item;
 use App\Models\User;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
