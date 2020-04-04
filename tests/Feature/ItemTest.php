@@ -2,9 +2,9 @@
 
 namespace Tests\Unit;
 
-use App\Cart;
-use App\Item;
-use App\User;
+use App\Models\Cart;
+use App\Models\Item;
+use App\Models\User;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
@@ -78,13 +78,13 @@ class ItemTest extends TestCase
         $cart = factory(Cart::class)->create();
         $cart->users()->attach($user);
 
-    	$response = $this->actingAs($user)->json('POST', "/api/v1/lists/$cart->slug/items", ['name' => 'test']);
+        $response = $this->actingAs($user)->json('POST', "/api/v1/lists/$cart->slug/items", ['name' => 'test']);
 
         $response
             ->assertStatus(200)
             ->assertJson([
                 'success' => true,
-        	]);
+            ]);
     }
 
     public function test_un_usuario_no_puede_crear_items_en_otras_listas()
@@ -187,7 +187,7 @@ class ItemTest extends TestCase
         $response
             ->assertStatus(200)
             ->assertJsonFragment([
-               'name' => 'test fav'
+               'name' => 'test fav',
             ])
             ->assertJsonMissing([
                  'name' => 'test normal',
@@ -216,7 +216,6 @@ class ItemTest extends TestCase
             ]);
     }
 
-
     public function test_un_usuario_puede_eliminar_items_en_sus_listas()
     {
         $user = factory(User::class)->create();
@@ -237,7 +236,6 @@ class ItemTest extends TestCase
                 'success' => true,
             ]);
     }
-
 
     public function test_un_usuario_no_puede_eliminar_items_en_otras_listas()
     {
@@ -261,7 +259,6 @@ class ItemTest extends TestCase
             ]);
     }
 
-
     public function test_al_eliminar_items_completados_dejan_de_estar_visibles()
     {
         $user = factory(User::class)->create();
@@ -279,7 +276,7 @@ class ItemTest extends TestCase
         $response
             ->assertStatus(200)
             ->assertJson([
-                'success' => true
+                'success' => true,
             ]);
 
         $this->assertDatabaseHas('items', ['id' => $item->id, 'visible' => false, 'done' => false]);

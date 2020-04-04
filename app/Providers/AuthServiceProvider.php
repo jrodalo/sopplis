@@ -2,10 +2,10 @@
 
 namespace App\Providers;
 
-use App\Cart;
+use App\Models\Cart;
 use App\Policies\CartPolicy;
-use Illuminate\Support\Facades\Gate;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
+use Illuminate\Support\Facades\Gate;
 
 class AuthServiceProvider extends ServiceProvider
 {

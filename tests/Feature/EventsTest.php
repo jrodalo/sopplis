@@ -2,12 +2,12 @@
 
 namespace Tests\Feature;
 
-use App\Cart;
+use App\Models\Cart;
 use App\Events\ItemCreated;
 use App\Events\ItemUpdated;
 use App\Http\Requests\WebhookRequest;
-use App\Item;
-use App\User;
+use App\Models\Item;
+use App\Models\User;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
@@ -71,7 +71,6 @@ class EventsTest extends TestCase
         Event::assertNotDispatched(ItemCreated::class);
     }
 
-
     public function test_se_genera_evento_al_modificar_items_en_lista_compartida()
     {
         Event::fake();
@@ -95,7 +94,6 @@ class EventsTest extends TestCase
         });
     }
 
-
     public function test_no_se_genera_evento_al_modificar_items_en_lista_privada()
     {
         Event::fake();
@@ -114,5 +112,4 @@ class EventsTest extends TestCase
 
         Event::assertNotDispatched(ItemUpdated::class);
     }
-
 }

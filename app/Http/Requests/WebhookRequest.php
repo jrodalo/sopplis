@@ -2,10 +2,10 @@
 
 namespace App\Http\Requests;
 
-use Validator;
-use App\Cart;
-use App\User;
+use App\Models\Cart;
+use App\Models\User;
 use Illuminate\Foundation\Http\FormRequest;
+use Validator;
 
 class WebhookRequest extends FormRequest
 {
@@ -16,8 +16,8 @@ class WebhookRequest extends FormRequest
     public function notValid()
     {
         $validator = Validator::make($this->all(), [
-            WebhookRequest::RECIPIENT_FIELD => 'required|email',
-            WebhookRequest::SENDER_FIELD => 'required|email',
+            self::RECIPIENT_FIELD => 'required|email',
+            self::SENDER_FIELD => 'required|email',
         ]);
 
         return $validator->fails();
@@ -65,5 +65,4 @@ class WebhookRequest extends FormRequest
 
         ];
     }
-
 }

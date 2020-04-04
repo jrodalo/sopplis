@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\User;
+use App\Models\User;
 use Auth;
 use Event;
 use Hash;
@@ -11,9 +11,8 @@ use Illuminate\Http\Request;
 
 class AuthController extends Controller
 {
-
     /**
-     * Comprueba el usuario y contraseña del usuario
+     * Comprueba el usuario y contraseña del usuario.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
@@ -27,8 +26,7 @@ class AuthController extends Controller
 
         $user = User::where('email', $request->email)->first();
 
-        if (is_null($user) || ! Hash::check($request->password, $user->password))
-        {
+        if (is_null($user) || ! Hash::check($request->password, $user->password)) {
             throw new AuthenticationException();
         }
 

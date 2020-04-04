@@ -2,14 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-
-use Mail;
-use Auth;
-use App\Cart;
-use App\User;
+use App\Models\Cart;
 use App\Http\Requests;
 use App\Mail\CartShared;
+use App\Models\User;
+use Auth;
+use Illuminate\Http\Request;
+use Mail;
 
 class CartController extends Controller
 {
@@ -45,5 +44,4 @@ class CartController extends Controller
 
         return ['success' => true, 'list' => $cart];
     }
-
 }

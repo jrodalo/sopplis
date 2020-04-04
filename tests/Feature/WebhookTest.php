@@ -2,10 +2,10 @@
 
 namespace Tests\Unit;
 
-use App\Cart;
+use App\Models\Cart;
 use App\Http\Requests\WebhookRequest;
-use App\Item;
-use App\User;
+use App\Models\Item;
+use App\Models\User;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
@@ -58,5 +58,4 @@ class WebhookTest extends TestCase
 
         $response->assertStatus(406);
     }
-
 }

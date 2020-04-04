@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Cart;
+use App\Models\Cart;
 use App\Events\ItemCreated;
 use App\Http\Requests;
-use App\Item;
+use App\Models\Item;
 use Auth;
 use Illuminate\Http\Request;
 
@@ -14,7 +14,7 @@ class FavoriteController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @param  App\Cart  $cart
+     * @param  App\Models\Cart  $cart
      * @return \Illuminate\Http\Response
      */
     public function index(Request $request, Cart $cart)
@@ -30,7 +30,7 @@ class FavoriteController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  App\Cart  $cart
+     * @param  App\Models\Cart  $cart
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Cart $cart)
@@ -52,12 +52,11 @@ class FavoriteController extends Controller
         return ['success' => true];
     }
 
-
     /**
      * Remove the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  App\Cart  $cart
+     * @param  App\Models\Cart  $cart
      * @return \Illuminate\Http\Response
      */
     public function delete(Request $request, Cart $cart)
@@ -74,5 +73,4 @@ class FavoriteController extends Controller
 
         return ['success' => true];
     }
-
 }

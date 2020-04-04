@@ -2,8 +2,8 @@
 
 namespace App\Events;
 
-use App\Cart;
-use App\Item;
+use App\Models\Cart;
+use App\Models\Item;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Broadcasting\PresenceChannel;
@@ -37,7 +37,6 @@ class ItemCreated implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        return new PrivateChannel('lists.' . $this->cart->slug);
+        return new PrivateChannel('lists.'.$this->cart->slug);
     }
-
 }

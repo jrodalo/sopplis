@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -33,7 +33,7 @@ class Cart extends Model
     }
 
     /**
-     * Checks if given user can access this cart
+     * Checks if given user can access this cart.
      */
     public function isVisibleBy(User $user)
     {
@@ -41,7 +41,7 @@ class Cart extends Model
     }
 
     /**
-     * Get just the visible items
+     * Get just the visible items.
      */
     public function scopeVisibleItems()
     {
@@ -49,7 +49,7 @@ class Cart extends Model
     }
 
     /**
-     * Get just the favorite items
+     * Get just the favorite items.
      */
     public function scopeFavoriteItems()
     {
@@ -71,7 +71,7 @@ class Cart extends Model
      */
     public function items()
     {
-        return $this->hasMany('App\Item');
+        return $this->hasMany(\App\Models\Item::class);
     }
 
     /**
@@ -79,7 +79,7 @@ class Cart extends Model
      */
     public function users()
     {
-        return $this->belongsToMany('App\User');
+        return $this->belongsToMany(\App\Models\User::class);
     }
 
     public function findOrNew($name)
@@ -94,6 +94,4 @@ class Cart extends Model
 
         return $item;
     }
-
-
 }

@@ -2,8 +2,8 @@
 
 namespace App\Events;
 
-use App\Cart;
-use App\User;
+use App\Models\Cart;
+use App\Models\User;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Broadcasting\PresenceChannel;
@@ -39,9 +39,8 @@ class CartFinished implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        return new PrivateChannel('lists.' . $this->cart->slug);
+        return new PrivateChannel('lists.'.$this->cart->slug);
     }
-
 
     /**
      * Get the data to broadcast.
@@ -52,8 +51,7 @@ class CartFinished implements ShouldBroadcast
     {
         return [
             'items' => $this->items,
-            'user' => $this->user->name
+            'user' => $this->user->name,
         ];
     }
-
 }

@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Cart;
+use App\Models\Cart;
 use App\Events\ItemCreated;
 use App\Http\Requests\WebhookRequest;
-use App\Item;
-use App\User;
+use App\Models\Item;
+use App\Models\User;
 
 class WebhookController extends Controller
 {
@@ -26,13 +26,14 @@ class WebhookController extends Controller
         $cart = $user->carts()->where('slug', $request->getCartSlug())->first();
         abort_if(is_null($cart) || $user->cant('write', $cart), 406);
 
-        $items = $request->getItems()->map(function($itemName, $key) use ($cart) {
+        $items = $request->getItems()->map(function ($itemName, $key) use ($cart) {
             $item = $cart->findOrNew(trim($itemName));
             $item->name = trim($itemName);
             $item->done = false;
             $item->visible = true;
             $item->count = $item->count + 1;
             $item->save();
+
             return $item;
         });
 
@@ -42,5 +43,4 @@ class WebhookController extends Controller
 
         return ['success' => true];
     }
-
 }

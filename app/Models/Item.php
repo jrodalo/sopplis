@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -25,9 +25,10 @@ class Item extends Model
     ];
 
     /**
-     * Appends the selected attribute used by favorite page
+     * Appends the selected attribute used by favorite page.
      */
     protected $appends = ['selected'];
+
     public function getSelectedAttribute()
     {
         return false;
@@ -38,7 +39,6 @@ class Item extends Model
      */
     public function cart()
     {
-        return $this->belongsTo('App\Cart');
+        return $this->belongsTo(\App\Models\Cart::class);
     }
-
 }
