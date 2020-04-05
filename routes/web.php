@@ -1,5 +1,7 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -11,8 +13,5 @@
 |
 */
 
+Route::get('/{any}', 'VueController@index')->where('any', '.*');
 Route::post('/webhooks/lists', 'WebhookController@store');
-
-Route::get('/{vue_capture?}', function () {
-    return view('app');
-})->where('vue_capture', '(.*)'); // '(?!_debugbar)(.*)'

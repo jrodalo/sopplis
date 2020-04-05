@@ -11,6 +11,7 @@ use Event;
 use Hash;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class UserController extends Controller
 {
@@ -34,7 +35,7 @@ class UserController extends Controller
             $user->email = $request->email;
             $user->password = Hash::make($request->password);
             $user->name = strstr($request->email, '@', true);
-            $user->api_token = str_random(60);
+            $user->api_token = Str::random(60);
             $user->save();
         } else {
             if (! Hash::check($request->password, $user->password)) {

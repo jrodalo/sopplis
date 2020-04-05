@@ -16,7 +16,7 @@
 	export default {
 
 		components: {
-			checkbox: require('../components/checkbox.vue')
+			checkbox: require('../components/checkbox.vue').default
 		},
 
 		props: {

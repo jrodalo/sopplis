@@ -19,10 +19,11 @@ window.axios.interceptors.request.use(config => {
     return Promise.reject(error);
 });
 
+window.Pusher = require('pusher-js');
 window.Echo = new Echo({
     broadcaster: 'pusher',
     key: process.env.MIX_PUSHER_APP_KEY,
-    cluster: 'eu',
+    cluster: process.env.MIX_PUSHER_APP_CLUSTER,
     auth: store.getters.authenticationHeaders,
 });
 
@@ -42,7 +43,7 @@ const router = new VueRouter({
         {
             path: '/',
             name: 'login',
-            component: require('./views/Login.vue'),
+            component: require('./views/Login.vue').default,
             beforeEnter: (to, from, next) => {
                 if (store.getters.isAuthenticated) {
                     next({ name: 'lists' });
@@ -55,28 +56,28 @@ const router = new VueRouter({
         {
             path: '/lists',
             name: 'lists',
-            component: require('./views/Lists.vue'),
+            component: require('./views/Lists.vue').default,
             meta: { requiresAuth: true },
         },
 
         {
             path: '/config',
             name: 'config',
-            component: require('./views/Config.vue'),
+            component: require('./views/Config.vue').default,
             meta: { requiresAuth: true },
         },
 
         {
             path: '/new',
             name: 'new',
-            component: require('./views/New.vue'),
+            component: require('./views/New.vue').default,
             meta: { requiresAuth: true },
         },
 
         {
             path: '/lists/:list',
             name: 'items',
-            component: require('./views/Items.vue'),
+            component: require('./views/Items.vue').default,
             props: true,
             meta: { requiresAuth: true },
         },
@@ -84,7 +85,7 @@ const router = new VueRouter({
         {
             path: '/lists/:list/favs',
             name: 'favs',
-            component: require('./views/Favs.vue'),
+            component: require('./views/Favs.vue').default,
             props: true,
             meta: { requiresAuth: true },
         },
@@ -92,13 +93,13 @@ const router = new VueRouter({
         {
             path: 'error',
             name: '500',
-            component: require('./views/error/500.vue'),
+            component: require('./views/error/500.vue').default,
         },
 
         {
             path: '*',
             name: '404',
-            component: require('./views/error/404.vue'),
+            component: require('./views/error/404.vue').default,
         },
     ],
 });
