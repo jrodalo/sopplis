@@ -5,6 +5,7 @@ namespace App\Http\Requests;
 use App\Models\Cart;
 use App\Models\User;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Str;
 use Validator;
 
 class WebhookRequest extends FormRequest
@@ -26,8 +27,8 @@ class WebhookRequest extends FormRequest
     public function getCartSlug()
     {
         $recipient = $this->input(self::RECIPIENT_FIELD);
-        $cart_slug = str_before($recipient, '@');
-        $cart_slug = str_after($cart_slug, 'list_');
+        $cart_slug = Str::before($recipient, '@');
+        $cart_slug = Str::after($cart_slug, 'list_');
 
         return $cart_slug;
     }

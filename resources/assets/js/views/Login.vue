@@ -80,8 +80,10 @@
 </script>
 
 <style lang="sass">
+    .copyright
+        color: #AAA
+        font-size: 0.7em
 
-    .copyright {color: #AAA; font-size: 0.7em;}
-    .copyright a {color: inherit;}
-
+    .copyright a
+        color: inherit
 </style>

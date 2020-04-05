@@ -1,6 +1,7 @@
 <?php
 
 use Faker\Generator as Faker;
+use Illuminate\Support\Str;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,14 +18,15 @@ $factory->define(App\Models\User::class, function (Faker $faker) {
     return [
         'name' => $faker->name,
         'email' => $faker->safeEmail,
-        'api_token' => str_random(60),
+        'password' => $faker->password,
+        'api_token' => Str::random(60),
     ];
 });
 
 $factory->define(App\Models\Cart::class, function (Faker $faker) {
     return [
         'name' => $faker->name,
-        'slug' => str_random(10),
+        'slug' => Str::random(10),
     ];
 });
 

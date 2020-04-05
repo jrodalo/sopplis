@@ -1,6 +1,6 @@
 
 // Actualizar la versión para refrescar la caché
-const cacheVersion = 'v1';
+const cacheVersion = 'v2';
 
 // Instala el Worker y inicializa la caché
 self.addEventListener('install', event => {

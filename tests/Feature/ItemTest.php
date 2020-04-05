@@ -9,6 +9,7 @@ use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Support\Facades\Event;
+use Illuminate\Support\Str;
 use Tests\TestCase;
 
 class ItemTest extends TestCase
@@ -303,7 +304,7 @@ class ItemTest extends TestCase
         $cart = factory(Cart::class)->create();
         $cart->users()->attach($user);
 
-        $response = $this->actingAs($user)->json('POST', "/api/v1/lists/$cart->slug/items", ['name' => str_random(150)]);
+        $response = $this->actingAs($user)->json('POST', "/api/v1/lists/$cart->slug/items", ['name' => Str::random(150)]);
 
         $response
             ->assertStatus(422)

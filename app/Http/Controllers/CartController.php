@@ -8,6 +8,7 @@ use App\Models\Cart;
 use App\Models\User;
 use Auth;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 use Mail;
 
 class CartController extends Controller
@@ -38,7 +39,7 @@ class CartController extends Controller
 
         $cart = new Cart;
         $cart->name = $request->name;
-        $cart->slug = str_random(6);
+        $cart->slug = Str::random(6);
         $cart->save();
         $cart->users()->attach($owner, ['role' => 'owner']);
 

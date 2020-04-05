@@ -51,8 +51,8 @@
         },
 
         components: {
-            createItem: require('../components/create-item.vue'),
-            listItem: require('../components/list-item.vue'),
+            createItem: require('../components/create-item.vue').default,
+            listItem: require('../components/list-item.vue').default,
         },
 
         computed: {

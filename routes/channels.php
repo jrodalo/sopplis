@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\Cart;
+use Illuminate\Support\Facades\Broadcast;
 
 /*
 |--------------------------------------------------------------------------
