@@ -16,7 +16,7 @@
 						v-for="item in allFavorites"
 						v-on:click="select(item)"
 						:class="{'item': true, 'item--fav': true, 'item--selected': item.selected}"
-						>{{ item.name }}</span></li>
+						><span>{{ item.name }}</span></li>
 				</ul>
 			</div>
 			<div class="content--centered message message--empty" v-show="!allFavorites.length && !loading">
