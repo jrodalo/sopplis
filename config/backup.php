@@ -54,14 +54,14 @@ return [
              *       ],
              * ],
              *
-             * If you are using only InnoDB tables on a MySQL server, you can 
+             * If you are using only InnoDB tables on a MySQL server, you can
              * also supply the useSingleTransaction option to avoid table locking.
              *
              * E.g.
              * 'mysql' => [
              *       ...
              *      'dump' => [
-             *           'useSingleTransaction' => true,             
+             *           'useSingleTransaction' => true,
              *       ],
              * ],
              *
@@ -119,7 +119,7 @@ return [
             \Spatie\Backup\Notifications\Notifications\BackupHasFailed::class => ['mail'],
             \Spatie\Backup\Notifications\Notifications\UnhealthyBackupWasFound::class => ['mail'],
             \Spatie\Backup\Notifications\Notifications\CleanupHasFailed::class => ['mail'],
-            \Spatie\Backup\Notifications\Notifications\BackupWasSuccessful::class => ['mail'],
+            \Spatie\Backup\Notifications\Notifications\BackupWasSuccessful::class => [],
             \Spatie\Backup\Notifications\Notifications\HealthyBackupWasFound::class => ['mail'],
             \Spatie\Backup\Notifications\Notifications\CleanupWasSuccessful::class => ['mail'],
         ],
