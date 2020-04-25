@@ -13,7 +13,7 @@ class AddPasswordToUsersTable extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->string('password')->after('email');
+            $table->string('password')->nullable()->after('email');
         });
     }
 
