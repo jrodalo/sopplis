@@ -3,15 +3,14 @@
 namespace Tests\Unit;
 
 use App\Models\User;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Support\Facades\Hash;
 use Tests\TestCase;
 
 class UserTest extends TestCase
 {
-    use DatabaseTransactions;
+    use RefreshDatabase;
     use WithoutMiddleware;
 
     public function test_se_retorna_la_api_key_cuando_se_presenta_un_usuario_valido()

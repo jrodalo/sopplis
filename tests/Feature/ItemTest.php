@@ -5,8 +5,7 @@ namespace Tests\Unit;
 use App\Models\Cart;
 use App\Models\Item;
 use App\Models\User;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Str;
@@ -14,7 +13,7 @@ use Tests\TestCase;
 
 class ItemTest extends TestCase
 {
-    use DatabaseTransactions;
+    use RefreshDatabase;
 
     public function test_un_usuario_no_validado_no_puede_leer_items()
     {

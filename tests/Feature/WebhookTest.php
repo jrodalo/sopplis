@@ -6,15 +6,14 @@ use App\Http\Requests\WebhookRequest;
 use App\Models\Cart;
 use App\Models\Item;
 use App\Models\User;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Support\Facades\Event;
 use Tests\TestCase;
 
 class WebhookTest extends TestCase
 {
-    use DatabaseTransactions;
+    use RefreshDatabase;
 
     public function test_un_usuario_puede_enviar_items_en_sus_listas()
     {

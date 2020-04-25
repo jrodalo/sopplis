@@ -2,19 +2,14 @@
 
 namespace Tests\Unit;
 
-use App\Models\Cart;
-use App\Models\Item;
 use App\Models\User;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
-use Illuminate\Foundation\Testing\WithoutMiddleware;
-use Illuminate\Support\Facades\Event;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Str;
 use Tests\TestCase;
 
 class CartTest extends TestCase
 {
-    use DatabaseTransactions;
+    use RefreshDatabase;
 
     public function test_no_se_pueden_crear_listas_sin_nombre()
     {
