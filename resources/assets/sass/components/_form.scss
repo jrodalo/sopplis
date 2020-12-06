@@ -1,6 +1,6 @@
 
 .header-form {display: flex;}
-.header-form__input {border: 0; font-size: 1em; padding: 0 10px; background: $light-color; color: darken($dark-color, 40%); flex: 1; border-radius: 0;}
+.header-form__input {border: 0; font-size: 1em; padding: 0 10px; background: $dark-color; color: darken($dark-color, 40%); flex: 1; border-radius: 0;}
 .header-form__input::placeholder {color: #FFF; opacity: 1; text-align: center;}
 .header-form__input:focus {outline: 0;}
 

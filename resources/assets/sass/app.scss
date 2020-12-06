@@ -16,7 +16,7 @@ input, textarea {font-family:inherit; font-size:inherit;}
 
 html, body, .layout, .page {height: 100%;}
 
-body {background: $back-color; color: #242424; font: 1em/1.4 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";}
+body {min-height: 100vh; background: $back-color; color: #242424; font: 1em/1.4 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";}
 a {text-decoration: none; color: darken($dark-color, 40%);}
 a:focus {outline: 0;}
 p {margin: 1em 0;}
@@ -24,14 +24,14 @@ p {margin: 1em 0;}
 .layout {background: $back-color;}
 .page {display: flex; flex-direction: column;}
 
-.header, .footer {position: fixed; z-index: 1; width: 100%; height: 45px; background: $dark-color;}
-.header {box-shadow: 0 -1px 10px rgba(darken($dark-color, 50%), 0.4);}
+.header, .footer {position: fixed; z-index: 1; width: 100%; background: $dark-color;}
+.header {box-shadow: 0 -1px 10px rgba(darken($dark-color, 50%), 0.4); padding-top: env(safe-area-inset-top);}
 .header__title {flex: 1; color: #FFF; text-align: center; font-size: 1em; font-weight: 400; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; padding: 0 5px;}
-.header__button {width: 45px; height: 45px; font-size: 1.5em; line-height: 45px; text-align: center; background: lighten($light-color, 12); color: darken($dark-color, 40%);}
-.header__button--pressed {box-shadow: inset 0 0 10px 0 #779EA9;}
+.header__button {width: 45px; height: 45px; font-size: 1.5em; line-height: 45px; text-align: center; color: darken($dark-color, 40%);}
+.header__button--pressed {background: $light-color; box-shadow: inset 0 0 10px 0 #779EA9;}
 .header__content {display: flex; align-items: center;}
 
-.content {margin: 45px 0 0; overflow-y: auto; -webkit-overflow-scrolling: touch;}
+.content {margin: 45px 0 0; overflow-y: auto; padding-top: env(safe-area-inset-top); padding-bottom: env(safe-area-inset-bottom); -webkit-overflow-scrolling: touch;}
 .content--withfooter {margin: 45px 0;}
 .content--centered {text-align: center; width: 100%; max-width: 450px; margin-left: auto; margin-right: auto;}
 
@@ -41,14 +41,14 @@ p {margin: 1em 0;}
 
 .footer {bottom: 0; text-align: center; box-shadow: 0 0 5px rgba(darken($dark-color, 50%), 0.4);}
 .footer--transparent {background: none; box-shadow: none;}
-.footer__link {display: block; line-height: 45px; color: #FFF; text-decoration: none;}
+.footer__link {display: block; line-height: 45px; color: #FFF; text-decoration: none; padding-bottom: env(safe-area-inset-bottom);}
 .footer__link--green {background: #429242;}
 .footer__link--red {background: #D04B4B;}
 
 .hidden {opacity: 0;}
 
 .logo {border-radius: 10px;}
-.title {}
+
 .subtitle {font-size: 0.95em; font-weight: normal; margin: 0 0 30px; color: #666;}
 
 .fade-transition {transition: all 0.2s linear;}
