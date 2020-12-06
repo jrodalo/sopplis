@@ -91,7 +91,7 @@ const router = new VueRouter({
         },
 
         {
-            path: 'error',
+            path: '/error',
             name: '500',
             component: require('./views/error/500.vue').default,
         },
