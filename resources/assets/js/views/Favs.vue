@@ -14,6 +14,7 @@
 				<ul class="list list--flex">
 					<li
 						v-for="item in allFavorites"
+						v-bind:key="item.id"
 						v-on:click="select(item)"
 						:class="{'item': true, 'item--fav': true, 'item--selected': item.selected}"
 						><span>{{ item.name }}</span></li>

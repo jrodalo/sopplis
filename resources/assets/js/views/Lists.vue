@@ -12,7 +12,7 @@
 		<div class="content">
 			<div v-show="allLists.length">
 				<ul class="list list--flex">
-					<li v-for="list in allLists" class="item item--taller">
+					<li v-for="list in allLists" v-bind:key="list.id" class="item item--taller">
 						<router-link :to="{name: 'items', params: { list: list.slug }}" class="item__name--flex">
 							<span>{{ list.name }}</span>
 							<i v-show="list.shared" title="Lista compartida">⚭</i>
