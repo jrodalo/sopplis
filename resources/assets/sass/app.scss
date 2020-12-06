@@ -26,7 +26,7 @@ p {margin: 1em 0;}
 
 .header, .footer {position: fixed; z-index: 1; width: 100%; background: $dark-color;}
 .header {box-shadow: 0 -1px 10px rgba(darken($dark-color, 50%), 0.4); padding-top: env(safe-area-inset-top);}
-.header__title {flex: 1; color: #FFF; text-align: center; font-size: 1em; font-weight: 400; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; padding: 0 5px;}
+.header__title {flex: 1; color: #FFF; text-align: center; font-size: 1em; font-weight: 700; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; padding: 0 5px;}
 .header__button {width: 45px; height: 45px; font-size: 1.5em; line-height: 45px; text-align: center; color: darken($dark-color, 40%);}
 .header__button--pressed {background: $light-color; box-shadow: inset 0 0 10px 0 #779EA9;}
 .header__content {display: flex; align-items: center;}
