@@ -17,8 +17,8 @@ class ItemTest extends TestCase
 
     public function test_un_usuario_no_validado_no_puede_leer_items()
     {
-        $cart = factory(Cart::class)->create();
-        $item = factory(Item::class)->create([
+        $cart = Cart::factory()->create();
+        $item = Item::factory()->create([
             'cart_id' => $cart->id,
             'name' => 'test',
             'visible' => true,
@@ -32,10 +32,10 @@ class ItemTest extends TestCase
 
     public function test_un_usuario_puede_ver_los_items_de_sus_listas()
     {
-        $user = factory(User::class)->create();
-        $cart = factory(Cart::class)->create();
+        $user = User::factory()->create();
+        $cart = Cart::factory()->create();
         $cart->users()->attach($user);
-        $item = factory(Item::class)->create([
+        $item = Item::factory()->create([
             'cart_id' => $cart->id,
             'name' => 'test',
             'visible' => true,
@@ -52,11 +52,11 @@ class ItemTest extends TestCase
 
     public function test_un_usuario_no_puede_ver_los_items_de_otros_usuarios()
     {
-        $user = factory(User::class)->create();
-        $other_user = factory(User::class)->create();
-        $cart = factory(Cart::class)->create();
+        $user = User::factory()->create();
+        $other_user = User::factory()->create();
+        $cart = Cart::factory()->create();
         $cart->users()->attach($user);
-        $item = factory(Item::class)->create([
+        $item = Item::factory()->create([
             'cart_id' => $cart->id,
             'name' => 'test',
             'visible' => true,
@@ -74,8 +74,8 @@ class ItemTest extends TestCase
     public function test_un_usuario_puede_crear_items_en_sus_listas()
     {
         Event::fake();
-        $user = factory(User::class)->create();
-        $cart = factory(Cart::class)->create();
+        $user = User::factory()->create();
+        $cart = Cart::factory()->create();
         $cart->users()->attach($user);
 
         $response = $this->actingAs($user)->json('POST', "/api/v1/lists/$cart->slug/items", ['name' => 'test']);
@@ -89,9 +89,9 @@ class ItemTest extends TestCase
 
     public function test_un_usuario_no_puede_crear_items_en_otras_listas()
     {
-        $user = factory(User::class)->create();
-        $other_user = factory(User::class)->create();
-        $cart = factory(Cart::class)->create();
+        $user = User::factory()->create();
+        $other_user = User::factory()->create();
+        $cart = Cart::factory()->create();
         $cart->users()->attach($user);
 
         $response = $this->actingAs($other_user)->json('POST', "/api/v1/lists/$cart->slug/items", ['name' => 'test']);
@@ -102,10 +102,10 @@ class ItemTest extends TestCase
 
     public function test_un_usuario_puede_modificar_items_en_sus_listas()
     {
-        $user = factory(User::class)->create();
-        $cart = factory(Cart::class)->create();
+        $user = User::factory()->create();
+        $cart = Cart::factory()->create();
         $cart->users()->attach($user);
-        $item = factory(Item::class)->create([
+        $item = Item::factory()->create([
             'cart_id' => $cart->id,
             'name' => 'test',
             'done' => false,
@@ -124,11 +124,11 @@ class ItemTest extends TestCase
 
     public function test_un_usuario_no_puede_modificar_items_en_otras_listas()
     {
-        $user = factory(User::class)->create();
-        $other_user = factory(User::class)->create();
-        $cart = factory(Cart::class)->create();
+        $user = User::factory()->create();
+        $other_user = User::factory()->create();
+        $cart = Cart::factory()->create();
         $cart->users()->attach($user);
-        $item = factory(Item::class)->create([
+        $item = Item::factory()->create([
             'cart_id' => $cart->id,
             'name' => 'test',
             'done' => false,
@@ -146,10 +146,10 @@ class ItemTest extends TestCase
 
     public function test_un_usuario_solo_puede_ver_los_items_visibles()
     {
-        $user = factory(User::class)->create();
-        $cart = factory(Cart::class)->create();
+        $user = User::factory()->create();
+        $cart = Cart::factory()->create();
         $cart->users()->attach($user);
-        $item = factory(Item::class)->create([
+        $item = Item::factory()->create([
             'cart_id' => $cart->id,
             'name' => 'test',
             'visible' => false,
@@ -166,16 +166,16 @@ class ItemTest extends TestCase
 
     public function test_un_producto_es_favorito_cuando_se_ha_comprado_mas_de_dos_veces()
     {
-        $user = factory(User::class)->create();
-        $cart = factory(Cart::class)->create();
+        $user = User::factory()->create();
+        $cart = Cart::factory()->create();
         $cart->users()->attach($user);
-        $item = factory(Item::class)->create([
+        $item = Item::factory()->create([
             'cart_id' => $cart->id,
             'name' => 'test normal',
             'count' => 2,
             'visible' => true,
         ]);
-        $item = factory(Item::class)->create([
+        $item = Item::factory()->create([
             'cart_id' => $cart->id,
             'name' => 'test fav',
             'count' => 3,
@@ -197,10 +197,10 @@ class ItemTest extends TestCase
     public function test_al_insertar_un_item_existente_aumenta_su_contador()
     {
         Event::fake();
-        $user = factory(User::class)->create();
-        $cart = factory(Cart::class)->create();
+        $user = User::factory()->create();
+        $cart = Cart::factory()->create();
         $cart->users()->attach($user);
-        $item = factory(Item::class)->create([
+        $item = Item::factory()->create([
             'cart_id' => $cart->id,
             'name' => 'test',
             'count' => 1,
@@ -218,10 +218,10 @@ class ItemTest extends TestCase
 
     public function test_un_usuario_puede_eliminar_items_en_sus_listas()
     {
-        $user = factory(User::class)->create();
-        $cart = factory(Cart::class)->create();
+        $user = User::factory()->create();
+        $cart = Cart::factory()->create();
         $cart->users()->attach($user);
-        $item = factory(Item::class)->create([
+        $item = Item::factory()->create([
             'cart_id' => $cart->id,
             'name' => 'test',
             'done' => true,
@@ -239,11 +239,11 @@ class ItemTest extends TestCase
 
     public function test_un_usuario_no_puede_eliminar_items_en_otras_listas()
     {
-        $user = factory(User::class)->create();
-        $other_user = factory(User::class)->create();
-        $cart = factory(Cart::class)->create();
+        $user = User::factory()->create();
+        $other_user = User::factory()->create();
+        $cart = Cart::factory()->create();
         $cart->users()->attach($user);
-        $item = factory(Item::class)->create([
+        $item = Item::factory()->create([
             'cart_id' => $cart->id,
             'name' => 'test',
             'done' => false,
@@ -261,10 +261,10 @@ class ItemTest extends TestCase
 
     public function test_al_eliminar_items_completados_dejan_de_estar_visibles()
     {
-        $user = factory(User::class)->create();
-        $cart = factory(Cart::class)->create();
+        $user = User::factory()->create();
+        $cart = Cart::factory()->create();
         $cart->users()->attach($user);
-        $item = factory(Item::class)->create([
+        $item = Item::factory()->create([
             'cart_id' => $cart->id,
             'name' => 'test',
             'done' => true,
@@ -284,8 +284,8 @@ class ItemTest extends TestCase
 
     public function test_no_se_pueden_crear_items_sin_nombre()
     {
-        $user = factory(User::class)->create();
-        $cart = factory(Cart::class)->create();
+        $user = User::factory()->create();
+        $cart = Cart::factory()->create();
         $cart->users()->attach($user);
 
         $response = $this->actingAs($user)->json('POST', "/api/v1/lists/$cart->slug/items", ['name' => '']);
@@ -299,8 +299,8 @@ class ItemTest extends TestCase
 
     public function test_no_se_pueden_crear_items_con_nombres_largos()
     {
-        $user = factory(User::class)->create();
-        $cart = factory(Cart::class)->create();
+        $user = User::factory()->create();
+        $cart = Cart::factory()->create();
         $cart->users()->attach($user);
 
         $response = $this->actingAs($user)->json('POST', "/api/v1/lists/$cart->slug/items", ['name' => Str::random(150)]);

@@ -17,8 +17,8 @@ class WebhookTest extends TestCase
 
     public function test_un_usuario_puede_enviar_items_en_sus_listas()
     {
-        $user = factory(User::class)->create();
-        $cart = factory(Cart::class)->create();
+        $user = User::factory()->create();
+        $cart = Cart::factory()->create();
         $cart->users()->attach($user);
 
         $response = $this->post('/webhooks/lists', [
@@ -34,9 +34,9 @@ class WebhookTest extends TestCase
 
     public function test_un_usuario_no_puede_enviar_items_a_las_listas_de_otros_usuarios()
     {
-        $user = factory(User::class)->create();
-        $other_user = factory(User::class)->create();
-        $cart = factory(Cart::class)->create();
+        $user = User::factory()->create();
+        $other_user = User::factory()->create();
+        $cart = Cart::factory()->create();
         $cart->users()->attach($user);
 
         $response = $this->post('/webhooks/lists', [

@@ -13,7 +13,7 @@ class CartTest extends TestCase
 
     public function test_no_se_pueden_crear_listas_sin_nombre()
     {
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
 
         $response = $this->actingAs($user)->json('POST', '/api/v1/lists', ['name' => '']);
 
@@ -26,7 +26,7 @@ class CartTest extends TestCase
 
     public function test_no_se_pueden_crear_listas_con_nombres_largos()
     {
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
 
         $response = $this->actingAs($user)->json('POST', '/api/v1/lists', ['name' => Str::random(150)]);
 

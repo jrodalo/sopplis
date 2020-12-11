@@ -15,7 +15,7 @@ class UserTest extends TestCase
 
     public function test_se_retorna_la_api_key_cuando_se_presenta_un_usuario_valido()
     {
-        $user = factory(User::class)->create([
+        $user = User::factory()->create([
                 'email' => 'valid@sopplis.com',
                 'password' => Hash::make('test'),
                 'api_token' => 'valid_api_token',
@@ -33,7 +33,7 @@ class UserTest extends TestCase
 
     public function test_no_se_retorna_la_api_key_cuando_se_presenta_un_usuario_no_valido()
     {
-        $user = factory(User::class)->create([
+        $user = User::factory()->create([
                 'email' => 'valid@sopplis.com',
                 'password' => Hash::make('test'),
                 'api_token' => 'valid_api_token',

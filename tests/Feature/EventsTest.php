@@ -21,9 +21,9 @@ class EventsTest extends TestCase
     {
         Event::fake();
 
-        $user = factory(User::class)->create();
-        $other_user = factory(User::class)->create();
-        $cart = factory(Cart::class)->create();
+        $user = User::factory()->create();
+        $other_user = User::factory()->create();
+        $cart = Cart::factory()->create();
         $cart->users()->attach($user);
         $cart->users()->attach($other_user);
         $item = ['name' => 'test'];
@@ -39,9 +39,9 @@ class EventsTest extends TestCase
     {
         Event::fake();
 
-        $user = factory(User::class)->create();
-        $other_user = factory(User::class)->create();
-        $cart = factory(Cart::class)->create();
+        $user = User::factory()->create();
+        $other_user = User::factory()->create();
+        $cart = Cart::factory()->create();
         $cart->users()->attach($user);
         $cart->users()->attach($other_user);
 
@@ -60,8 +60,8 @@ class EventsTest extends TestCase
     {
         Event::fake();
 
-        $user = factory(User::class)->create();
-        $cart = factory(Cart::class)->create();
+        $user = User::factory()->create();
+        $cart = Cart::factory()->create();
         $cart->users()->attach($user);
         $item = ['name' => 'test'];
 
@@ -74,12 +74,12 @@ class EventsTest extends TestCase
     {
         Event::fake();
 
-        $user = factory(User::class)->create();
-        $other_user = factory(User::class)->create();
-        $cart = factory(Cart::class)->create();
+        $user = User::factory()->create();
+        $other_user = User::factory()->create();
+        $cart = Cart::factory()->create();
         $cart->users()->attach($user);
         $cart->users()->attach($other_user);
-        $item = factory(Item::class)->create([
+        $item = Item::factory()->create([
             'cart_id' => $cart->id,
             'name' => 'test',
             'done' => false,
@@ -97,10 +97,10 @@ class EventsTest extends TestCase
     {
         Event::fake();
 
-        $user = factory(User::class)->create();
-        $cart = factory(Cart::class)->create();
+        $user = User::factory()->create();
+        $cart = Cart::factory()->create();
         $cart->users()->attach($user);
-        $item = factory(Item::class)->create([
+        $item = Item::factory()->create([
             'cart_id' => $cart->id,
             'name' => 'test',
             'done' => false,
