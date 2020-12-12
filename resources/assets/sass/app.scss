@@ -24,26 +24,26 @@ p {margin: 1em 0;}
 .layout {background: $back-color;}
 .page {display: flex; flex-direction: column;}
 
-.header, .footer {position: fixed; z-index: 1; width: 100%; background: $dark-color;}
-.header {box-shadow: 0 -1px 10px rgba(darken($dark-color, 50%), 0.4); padding-top: env(safe-area-inset-top);}
+.header, .footer {position: fixed; z-index: 1; width: 100%;}
+.header {background: $dark-color; box-shadow: 0 -1px 10px rgba(darken($dark-color, 50%), 0.4); padding-top: env(safe-area-inset-top);}
 .header__title {flex: 1; color: #FFF; text-align: center; font-size: 1em; font-weight: 700; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; padding: 0 5px;}
-.header__button {width: 45px; height: 45px; font-size: 1.5em; line-height: 45px; text-align: center; color: darken($dark-color, 40%);}
+.header__button {width: 45px; height: 45px; font-size: 1.5em; font-weight: 700; line-height: 45px; text-align: center; color: darken($dark-color, 40%);}
 .header__button--pressed {background: $light-color; box-shadow: inset 0 0 10px 0 #779EA9;}
 .header__content {display: flex; align-items: center;}
 
 .content {margin: 45px 0 0; overflow-y: auto; padding-top: env(safe-area-inset-top); padding-bottom: env(safe-area-inset-bottom); -webkit-overflow-scrolling: touch;}
-.content--withfooter {margin: 45px 0;}
+.content--withfooter {margin: 45px 0 50px;}
 .content--centered {text-align: center; width: 100%; max-width: 450px; margin-left: auto; margin-right: auto;}
 
 .message {padding: 0 20px; margin-top: 100px;}
 .message--empty {color: darken($back-color, 35%);}
 .message__title {font-size: 1.1em;}
 
-.footer {bottom: 0; text-align: center; box-shadow: 0 0 5px rgba(darken($dark-color, 50%), 0.4);}
+.footer {bottom: 0; text-align: center; padding-bottom: env(safe-area-inset-bottom, 40px);}
 .footer--transparent {background: none; box-shadow: none;}
-.footer__link {display: block; line-height: 45px; color: #FFF; text-decoration: none; padding-bottom: env(safe-area-inset-bottom);}
-.footer__link--green {background: #429242;}
-.footer__link--red {background: #D04B4B;}
+.footer__link {background: rgba($dark-color, 85%); display: block; line-height: 45px; color: #FFF; text-decoration: none; margin: 0 10px; border-radius: 5px; box-shadow: 0 5px 15px -1px rgba(0, 0, 0, 0.35); backdrop-filter: blur(2px);}
+.footer__link--green {background: rgba(#429242, 85%);}
+.footer__link--red {background: rgba(#D04B4B, 85%);}
 
 .hidden {opacity: 0;}
 
