@@ -2,9 +2,10 @@
 
 namespace Database\Seeders;
 
+use App\Models\Item;
 use Illuminate\Database\Seeder;
 
-class DatabaseSeeder extends Seeder
+class ItemSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -13,9 +14,6 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        $this->call([
-            UserSeeder::class,
-            ItemSeeder::class
-        ]);
+        Item::factory()->count(15)->favorite()->create();
     }
 }

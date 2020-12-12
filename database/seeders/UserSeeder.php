@@ -2,9 +2,11 @@
 
 namespace Database\Seeders;
 
+use Hash;
+use App\Models\User;
 use Illuminate\Database\Seeder;
 
-class DatabaseSeeder extends Seeder
+class UserSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -13,9 +15,9 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        $this->call([
-            UserSeeder::class,
-            ItemSeeder::class
+        User::factory()->create([
+            'email' => 'test@sopplis.com',
+            'password' => Hash::make('test-1234'),
         ]);
     }
 }

@@ -22,10 +22,27 @@ class ItemFactory extends Factory
     public function definition()
     {
         return [
-            'name' => $this->faker->name,
+            'cart_id' => 1,
+            'name' => $this->faker->word,
             'count' => $this->faker->numberBetween(1, 100),
             'visible' => $this->faker->numberBetween(0, 1),
             'done' => $this->faker->numberBetween(0, 1),
         ];
+    }
+
+    /**
+     * Indicate that the item is a favorite.
+     *
+     * @return \Illuminate\Database\Eloquent\Factories\Factory
+     */
+    public function favorite()
+    {
+        return $this->state(function (array $attributes) {
+            return [
+                'count' => $this->faker->numberBetween(10, 100),
+                'visible' => 0,
+                'done' => 0
+            ];
+        });
     }
 }
