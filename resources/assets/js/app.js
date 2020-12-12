@@ -19,6 +19,15 @@ window.axios.interceptors.request.use(config => {
     return Promise.reject(error);
 });
 
+window.axios.interceptors.response.use(response => response, error => {
+
+    if (location.pathname != '/' && error.response.status === 401) {
+        store.dispatch('logout').then(() => { location.href = "/"; });
+    }
+
+    return Promise.reject(error.response);
+});
+
 window.Pusher = require('pusher-js');
 window.Echo = new Echo({
     broadcaster: 'pusher',
